@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/utils/colors.dart';
+import 'package:pet_paradise/screens/splash_screen.dart';
 import 'package:pet_paradise/utils/strings.dart';
 
 main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyPetParadiseApp());
 }
 
@@ -13,16 +14,8 @@ class MyPetParadiseApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: MyStrings.APP_TITTLE,
-      theme: ThemeData(primarySwatch: Colors.pink),
-      home: Scaffold(
-        body: Center(
-          child: MaterialButton(
-            onPressed: (){},
-            color: MyColors.green,
-            child: Text("Hello"),
-          ),
-        ),
-      ),
+      theme: ThemeData(primarySwatch: Colors.green),
+      home: SplashScreen(),
     );
   }
 }
