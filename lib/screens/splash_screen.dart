@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack,overlays: [SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,overlays: [SystemUiOverlay.bottom]);
     Timer(Duration(seconds: 3) , (){
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) =>MainDashboard()));
     });
@@ -26,12 +26,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     MyAppSize.config(MediaQuery.of(context));
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-              "Orientation is ${MyAppSize.orientation} , Height ${MyAppSize.height} , Width ${MyAppSize.width}")
-        ],
+      body:Center(
+        child: Image(image: AssetImage("assets/images/logo_with_text.png"),),
       ),
     );
   }
