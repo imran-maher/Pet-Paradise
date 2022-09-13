@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "312408969872",
+    "project_id": "pet-paradise-61cf7",
+    "storage_bucket": "pet-paradise-61cf7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312408969872:android:c835dec2f5b20037b0be15",
+        "android_client_info": {
+          "package_name": "com.gmail.maherimran034.petparadise.pet_paradise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312408969872-nrholp1uavtpvfhbb54a4hqdtutkuiov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb31mm7gS-RFj0DzEF4N9IgIf0H9DQeW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "312408969872-nrholp1uavtpvfhbb54a4hqdtutkuiov.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

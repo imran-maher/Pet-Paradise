@@ -25,27 +25,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
 //TODO : Mobile
 Widget mobile(BuildContext) {
-  return Container(
-    decoration: BoxDecoration(
-      image: DecorationImage(
-        fit: BoxFit.cover,
-        image: AssetImage(
-          "assets/images/backgrounds/login_bg.png",
-        ),
-      ),
-    ),
-    child: Padding(
-      padding: EdgeInsets.only(
-          left: MyAppSize.width! * 0.05, right: MyAppSize.width! * 0.05),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Image(
-              height: 163,
-              width: 135,
-              image: AssetImage("assets/images/logo.png"))
-        ],
-      ),
+  return Padding(
+    padding: EdgeInsets.only(
+        left: MyAppSize.width! * 0.05, right: MyAppSize.width! * 0.05),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Image(
+            height: 163,
+            width: 135,
+            image: AssetImage("assets/images/logo.png"))
+      ],
     ),
   );
 }

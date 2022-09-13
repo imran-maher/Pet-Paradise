@@ -1,9 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/screens/splash_screen.dart';
 import 'package:pet_paradise/utils/strings.dart';
 
-main() {
+import 'firebase_options.dart';
+
+main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyPetParadiseApp());
 }
 
