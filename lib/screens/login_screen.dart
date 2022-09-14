@@ -34,7 +34,12 @@ Widget mobile(BuildContext) {
         Image(
             height: 163,
             width: 135,
-            image: AssetImage("assets/images/logo.png"))
+            image: AssetImage("assets/images/logo.png")),
+        SizedBox(height: 20,),
+        TextField(decoration: InputDecoration(hintText: "Email" , ),keyboardType: TextInputType.emailAddress,),
+        SizedBox(height: 20,),
+        TextField(decoration: InputDecoration(hintText: "Password" , ),keyboardType: TextInputType.text,obscureText: true,),
+        SizedBox(height: 20,),
       ],
     ),
   );

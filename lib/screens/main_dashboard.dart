@@ -43,18 +43,20 @@ goToLoginScreen(BuildContext context) {
 
 //TODO : Mobile UI
 Widget mobile(BuildContext context) {
-  return Container(
-    decoration: BoxDecoration(
-      image: DecorationImage(
-        fit: BoxFit.cover,
-        image: AssetImage("assets/images/backgrounds/main_dashboard_bg.png"),
-      ),
-    ),
-    child: Padding(
+  // return Container(
+  //   decoration: BoxDecoration(
+  //     image: DecorationImage(
+  //       fit: BoxFit.cover,
+  //       image: AssetImage("assets/images/backgrounds/bg1.jpg"),
+  //     ),
+  //   ),
+  //   child:
+  return Padding(
       padding: EdgeInsets.only(
           left: MyAppSize.width! * 0.05, right: MyAppSize.width! * 0.05),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             height: 15,
@@ -128,7 +130,7 @@ Widget mobile(BuildContext context) {
           )
         ],
       ),
-    ),
+
   );
 }
 
