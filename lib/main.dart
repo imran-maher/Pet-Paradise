@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/screens/splash_screen.dart';
+import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/strings.dart';
-
 import 'firebase_options.dart';
 
 main() async{
@@ -20,7 +20,7 @@ class MyPetParadiseApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: MyStrings.APP_TITTLE,
-      theme: ThemeData(primarySwatch: Colors.green),
+      theme: ThemeData(primarySwatch: Colors.lightGreen),
       home: SplashScreen(),
     );
   }
