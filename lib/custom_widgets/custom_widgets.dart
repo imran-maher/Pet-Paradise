@@ -2,6 +2,7 @@
 
 //TODO : My Custom Button Widget
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/utils/size_config.dart';
 
 import '../utils/colors.dart';
 
@@ -53,3 +54,24 @@ Widget loginAndSignUpButton(
     color: MyColors.LIGHT_GREEN,
   );
 }
+
+//TODO : Main Dashboard Card
+
+Widget dashboardCard({required Function onTap , required String logoImgPath , required String title}){
+  return GestureDetector(onTap: onTap(),
+    child: Container(
+      height: 250,
+      width: MyAppSize.width! * 44,
+      child: Card(
+        child: Column(mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+                Image(image: AssetImage(logoImgPath)),
+            Text(title),
+        ],),
+      ),
+    ),
+  );
+}
+
+
