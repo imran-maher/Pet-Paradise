@@ -2,25 +2,24 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pet_paradise/screens/choice_dashboard.dart';
-import 'package:pet_paradise/screens/main_dashboard.dart';
+import 'package:pet_paradise/pages/main_dashboard_page.dart';
 import 'package:pet_paradise/utils/size_config.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashPage extends StatefulWidget {
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,overlays: []);
     Timer(Duration(seconds: 3) , (){
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) =>MainDashboard()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) =>MainDashboardPage()));
     });
   }
   @override

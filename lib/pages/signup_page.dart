@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/controllers/firebase_auth_controller.dart';
 
 import '../controllers/responsive_controller.dart';
 import '../custom_widgets/custom_widgets.dart';
 import '../utils/colors.dart';
 import '../utils/size_config.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+//Text Editing Controller
+TextEditingController signUpNameController = TextEditingController();
+TextEditingController signUpEmailController = TextEditingController();
+TextEditingController signUpPasswordController = TextEditingController();
+TextEditingController signUpRePasswordController = TextEditingController();
+
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     MyAppSize.config(MediaQuery.of(context));
@@ -102,6 +109,7 @@ Widget mobile(BuildContext context) {
                         Container(
                           height: 50,
                           child: TextField(
+                            controller: signUpNameController,
                             keyboardType: TextInputType.text,
                             decoration: textFieldDecoration(
                                 hint: "Enter Name", icon: Icons.person),
@@ -114,6 +122,8 @@ Widget mobile(BuildContext context) {
                         Container(
                           height: 50,
                           child: TextField(
+
+                            controller: signUpEmailController,
                             keyboardType: TextInputType.emailAddress,
                             decoration: textFieldDecoration(
                                 hint: "Enter Email", icon: Icons.voicemail),
@@ -125,8 +135,9 @@ Widget mobile(BuildContext context) {
                         Container(
                           height: 50,
                           child: TextField(
+                            controller: signUpPasswordController,
                             obscureText: true,
-                            keyboardType: TextInputType.emailAddress,
+                            keyboardType: TextInputType.text,
                             decoration: textFieldDecoration(
                                 hint: "Enter Password", icon: Icons.lock_open),
                           ),
@@ -137,8 +148,9 @@ Widget mobile(BuildContext context) {
                         Container(
                           height: 50,
                           child: TextField(
+                            controller: signUpRePasswordController,
                             obscureText: true,
-                            keyboardType: TextInputType.emailAddress,
+                            keyboardType: TextInputType.text,
                             decoration: textFieldDecoration(
                                 hint: "Re-enter Password",
                                 icon: Icons.lock_open),
@@ -155,7 +167,10 @@ Widget mobile(BuildContext context) {
                               height: 39,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
-                              onPressed: () {},
+                              onPressed: () {
+                                LoginWithEmailAndPassword signUp = LoginWithEmailAndPassword.init(email: signUpEmailController.text, password: signUpPasswordController.text);
+                                signUp.signUp(context);
+                              },
                               textColor: Colors.black,
                               child: Text("Sign Up"),
                               color: MyColors.LIGHT_GREEN,

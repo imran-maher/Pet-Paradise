@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
-import 'package:pet_paradise/screens/login_screen.dart';
+import 'package:pet_paradise/pages/login_page.dart';
 
 
 
@@ -11,14 +11,14 @@ import '../utils/size_config.dart';
 String dropDownValue = "English";
 double buttonSpace = 20;
 
-class MainDashboard extends StatefulWidget {
-  const MainDashboard({Key? key}) : super(key: key);
+class ChoicePage extends StatefulWidget {
+  const ChoicePage({Key? key}) : super(key: key);
 
   @override
-  State<MainDashboard> createState() => _MainDashboardState();
+  State<ChoicePage> createState() => _ChoicePageState();
 }
 
-class _MainDashboardState extends State<MainDashboard> {
+class _ChoicePageState extends State<ChoicePage> {
   @override
   Widget build(BuildContext context) {
     MyAppSize.config(MediaQuery.of(context));
