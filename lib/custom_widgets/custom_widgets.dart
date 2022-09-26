@@ -32,6 +32,7 @@ Widget MyButton(
 InputDecoration textFieldDecoration(
     {required String hint, required IconData icon}) {
   return InputDecoration(
+
     hintText: hint,
     prefixIcon: Icon(icon),
     border: OutlineInputBorder(

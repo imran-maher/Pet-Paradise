@@ -7,8 +7,8 @@ import 'package:pet_paradise/utils/colors.dart';
 class LoginPageProvider with ChangeNotifier {
   late final loginSuccess;
 
-  late final bool emailFieldIsEmpty;
-  late final bool passwordFieldIsEmpty;
+   bool emailFieldIsEmpty = true ;
+   bool passwordFieldIsEmpty = true;
   late final String email;
   late final String password;
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -39,7 +39,7 @@ class LoginPageProvider with ChangeNotifier {
         SnackBar snackBar = SnackBar(
           content: Text("Login Success with ${user.email}"),
           backgroundColor: MyColors.LIGHT_GREEN,
-          duration: Duration(seconds: 10),
+          duration: Duration(seconds: 3),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         notifyListeners();

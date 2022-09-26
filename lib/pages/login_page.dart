@@ -102,10 +102,7 @@ Widget mobile(BuildContext context) {
                   builder: (context, provider, child) {
                     return Card(
                       elevation: 5,
-                      shadowColor: provider.emailFieldIsEmpty ||
-                              provider.passwordFieldIsEmpty
-                          ? Colors.red
-                          : MyColors.LIGHT_GREEN,
+                      shadowColor: MyColors.LIGHT_GREEN,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -131,7 +128,8 @@ Widget mobile(BuildContext context) {
                             //TODO : Email Field
                             Container(
                               height: 50,
-                              child: TextField(
+                              child: TextFormField(
+
                                 controller: loginEmailController,
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: textFieldDecoration(
