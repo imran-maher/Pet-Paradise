@@ -7,6 +7,7 @@ class MyColors{
   static const Color RED = Color(0xffAB1818);
   static const Color HINT_COLOR = Color(0xff906F6F);
   static const Color DARK_BROWN = Color(0xff380909);
+  static const Color ORANGE = Color(0xffC09031);
 
 
 }

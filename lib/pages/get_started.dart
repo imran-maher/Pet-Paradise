@@ -19,9 +19,14 @@ class GetStartedPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        leading: Icon(
-          Icons.arrow_back,
-          color: MyColors.LIGHT_GREEN,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back,
+            color: MyColors.LIGHT_GREEN,
+          ),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -47,28 +52,20 @@ Widget mobile(BuildContext context, {required GetStartedPageData pageData}) {
         ),
       ),
       Padding(
-        padding:  EdgeInsets.only(bottom: 60),
+        padding: EdgeInsets.only(bottom: 60),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              pageData.pageTitle,
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: MyColors.DARK_BROWN),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: 20,
-            ),
             Padding(
               padding: EdgeInsets.only(
                   left: MyAppSize.width! * 0.1, right: MyAppSize.width! * 0.1),
               child: Text(
-                pageData.pageSubTitle,
-                style: TextStyle(color: MyColors.HINT_COLOR, fontWeight: FontWeight.bold, fontSize: 20),
+                pageData.pageTitle,
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: MyColors.DARK_BROWN),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -80,12 +77,23 @@ Widget mobile(BuildContext context, {required GetStartedPageData pageData}) {
               width: MyAppSize.width,
               child: CircleAvatar(
                 backgroundColor: MyColors.LIGHT_GREEN,
-                backgroundImage: NetworkImage(
-                  pageData.imageUrl),
+                backgroundImage: NetworkImage(pageData.imageUrl),
               ),
             ),
             SizedBox(
-              height: 40,
+              height: 20,
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  left: MyAppSize.width! * 0.1, right: MyAppSize.width! * 0.1),
+              child: Text(
+                pageData.pageSubTitle,
+                style: TextStyle(
+                    color: MyColors.HINT_COLOR,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 14),
+                textAlign: TextAlign.center,
+              ),
             ),
           ],
         ),
