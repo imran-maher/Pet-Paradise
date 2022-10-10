@@ -77,26 +77,17 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
 //TODO : Mobile UI
 
 Widget mobile(BuildContext context) {
-  return Stack(
-    alignment: Alignment.topRight,
-    children: [
-      Image(
-        image: AssetImage("assets/images/rectDesign.png"),
-        alignment: Alignment.topCenter,
-      ),
+  return
       CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: [
           myDashboardAppBar(title: "Hello User!"),
           SliverPadding(
-              padding: EdgeInsets.only(
-                  left: MyAppSize.width! * 0.05,
-                  right: MyAppSize.width! * 0.05),
-              sliver: myDashboardGrid()),
+            padding: EdgeInsets.only(left: MyAppSize.width! * 0.05 ,right:MyAppSize.width! * 0.05,bottom: MyAppSize.height! * 0.05 ),
+            sliver: myDashboardGrid(),
+          )
         ],
-      ),
-    ],
-  );
+      );
 }
 
 //TODO : Tablet UI
@@ -113,27 +104,13 @@ Widget web(BuildContext context) {
 SliverAppBar myDashboardAppBar({required String title}) {
   return SliverAppBar(
     pinned: true,
-    floating: false,
-    elevation: 0,
-    expandedHeight: 200,
-    backgroundColor: Colors.white10,
+    elevation: 10,
+    expandedHeight: 250,
+    backgroundColor:MyColors.YELLOW,
     leading: Icon(Icons.arrow_back, color: MyColors.LIGHT_GREEN),
     flexibleSpace: FlexibleSpaceBar(
-      stretchModes: [StretchMode.zoomBackground, StretchMode.blurBackground],
-      title: Text(
-        "$title",
-        style: TextStyle(
-            fontSize: 17,
-            color: MyColors.DARK_GREEN,
-            fontWeight: FontWeight.bold),
-      ),
-      titlePadding: EdgeInsets.all(16),
-      centerTitle: true,
-      background: Stack(
-        alignment: Alignment.center,
-        children: [],
-      ),
-      collapseMode: CollapseMode.parallax,
+      background: Column(children: [],),
+      collapseMode: CollapseMode.pin,
     ),
   );
 }

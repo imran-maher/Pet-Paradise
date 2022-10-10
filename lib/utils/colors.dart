@@ -8,6 +8,7 @@ class MyColors{
   static const Color HINT_COLOR = Color(0xff906F6F);
   static const Color DARK_BROWN = Color(0xff380909);
   static const Color ORANGE = Color(0xffC09031);
+  static const Color YELLOW = Color(0xffF6DE02);
 
 
 }

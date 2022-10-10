@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pet_paradise/module/get_started_page_data.dart';
-import 'package:pet_paradise/pages/get_started.dart';
-import 'package:pet_paradise/pages/main_dashboard_page.dart';
 import 'package:pet_paradise/utils/size_config.dart';
+
+
+import 'choice_page.dart';
+
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     Timer(Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (BuildContext context) => MainDashboardPage()));
+          builder: (BuildContext context) => ChoicePage()));
     });
   }
 
