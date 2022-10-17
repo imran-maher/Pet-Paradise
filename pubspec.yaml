@@ -40,6 +40,8 @@ dependencies:
   firebase_auth: ^3.8.0
   provider: ^6.0.3
   cloud_firestore: ^3.4.9
+  google_maps_flutter: ^2.2.1
+  location: ^4.4.0
 
 dev_dependencies:
   flutter_test:

@@ -9,9 +9,9 @@ import '../utils/size_config.dart';
 class MainDashboardPage extends StatefulWidget {
   const MainDashboardPage({Key? key}) : super(key: key);
 
-  static const TRAINER = "Trainers";
-  static const VET = "Veterinarians";
-  static const BREEDER = "Breeders";
+  static const TRAINER = "Trainer";
+  static const VET = "Veterinarian";
+  static const BREEDER = "Breeder";
   static const PET_PANDA = "Pet Panda";
   static const ADOPT_A_PET = "Adopt A Pet";
   static const BLOGS_AND_ARTICLES = "Blogs & Articles";
