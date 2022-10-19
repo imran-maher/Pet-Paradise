@@ -21,7 +21,7 @@ class ServiceProvider {
   late final List<String> _supportedSpecies;
   late final String _description;
   late final ScheduleOfServiceProvider _scheduleOfServiceProvider;
-  late final LocationData _locationData;
+  late final LocationData? _locationData;
 
   /// Constructor for ServiceProvider Class
   ServiceProvider(
@@ -34,8 +34,7 @@ class ServiceProvider {
       double? numberOfStars,
       required List<String> supportedSpecies,
       required String description,
-      required ScheduleOfServiceProvider scheduleOfServiceProvider,
-      required LocationData locationData}) {
+      required ScheduleOfServiceProvider scheduleOfServiceProvider, LocationData? locationData}) {
     _serviceProviderType = serviceProviderType;
     _id = id;
     _name = name;
@@ -71,7 +70,7 @@ class ServiceProvider {
 
   String get description => _description;
   ScheduleOfServiceProvider get scheduleOfServiceProvider => _scheduleOfServiceProvider;
-  LocationData get locationData => _locationData;
+  LocationData? get locationData => _locationData;
 
   ///Setters
   set experience(String? experience) => (experience != null)
