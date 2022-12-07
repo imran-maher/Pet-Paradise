@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 
-import 'package:pet_paradise/pages/main_dashboard_page.dart';
 import 'package:pet_paradise/utils/size_config.dart';
+
+import 'choice_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -21,14 +22,17 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (BuildContext context) => MainDashboardPage()));
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
+        return ChoicePage();
+      }));
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    MyAppSize.config(MediaQuery.of(context));
+    MediaQueryData data = MediaQuery.of(context);
+    MyAppSize.config(data);
     return Scaffold(
       body: Center(
         child: Image(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
 import 'package:pet_paradise/module/get_started_page_data.dart';
-import 'package:pet_paradise/pages/blogs_dashboard.dart';
+
 import 'package:pet_paradise/pages/main_dashboard_page.dart';
 import 'package:pet_paradise/utils/colors.dart';
 
@@ -106,9 +106,7 @@ Widget mobile(BuildContext context, {required GetStartedPageData pageData}) {
           alignment: Alignment.bottomCenter,
           child: MaterialButton(
             onPressed: () {
-              if(pageData.pageTitle == MainDashboardPage.BLOGS_AND_ARTICLES){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BlogsDashboard()));
-              }
+
             },
             color: MyColors.LIGHT_GREEN,
             height: 39,

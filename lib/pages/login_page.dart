@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
+import 'package:pet_paradise/pages/main_dashboard_page.dart';
 import 'package:pet_paradise/pages/reset_password_page.dart';
 import 'package:pet_paradise/pages/signup_page.dart';
-import 'package:pet_paradise/provider/login_page_provider.dart';
 
 import 'package:pet_paradise/utils/colors.dart';
-import 'package:provider/provider.dart';
 
 import '../utils/size_config.dart';
 
@@ -40,7 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
           elevation: 0,
           leading: Icon(
             Icons.arrow_back,
-
             color: MyColors.LIGHT_GREEN,
           ),
         ),
@@ -97,171 +95,168 @@ Widget mobile(BuildContext context) {
                 height: 20,
               ),
               //Login Card
-              ChangeNotifierProvider<LoginPageProvider>(
-                create: (context) => LoginPageProvider(),
-                child: Consumer<LoginPageProvider>(
-                  builder: (context, provider, child) {
-                    return Card(
-                      elevation: 5,
-                      shadowColor: MyColors.LIGHT_GREEN,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          left: MyAppSize.width! * 0.025,
-                          right: MyAppSize.width! * 0.025,
-                          top: 20,
-                          bottom: 30,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              "Login",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 27),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            //TODO : Email Field
-                            Container(
-                              height: 50,
-                              child: TextFormField(
-
-                                controller: loginEmailController,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: textFieldDecoration(
-                                    hint: "Enter Email", icon: Icons.voicemail),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            //TODO:Password Field
-                            Container(
-                              height: 50,
-                              child: TextField(
-                                controller: loginPasswordController,
-                                obscureText: true,
-                                keyboardType: TextInputType.text,
-                                decoration: textFieldDecoration(
-                                  hint: "Enter Password",
-                                  icon: Icons.lock_open_rounded,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            //TODO: Forgot Password
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ResetPasswordPage()));
-                              },
-                              child: Text(
-                                "Forgot Password?",
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                    color: MyColors.RED),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                MaterialButton(
-                                  minWidth: 139,
-                                  height: 39,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
-                                  onPressed: () {
-                                    provider.loginWithEmailAndPassword(
-                                        context: context,
-                                        email: loginEmailController.text,
-                                        password: loginPasswordController.text);
-                                  },
-                                  textColor: Colors.black,
-                                  child: Text("Login"),
-                                  color: MyColors.LIGHT_GREEN,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              "Login With",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Image(
-                                    image:
-                                        AssetImage("assets/images/google.png"),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                GestureDetector(
-                                  onTap: () {},
-                                  child: Image(
-                                    image: AssetImage(
-                                        "assets/images/facebook.png"),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Don't have an account?"),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SignUpPage()));
-                                  },
-                                  child: Text(
-                                    " SingUp",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline,
-                                        color: MyColors.LIGHT_GREEN),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  },
+              Card(
+                elevation: 5,
+                shadowColor: MyColors.LIGHT_GREEN,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              )
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: MyAppSize.width! * 0.025,
+                    right: MyAppSize.width! * 0.025,
+                    top: 20,
+                    bottom: 30,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        "Login",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 27),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      //TODO : Email Field
+                      Container(
+                        height: 50,
+                        child: TextFormField(
+                          controller: loginEmailController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: textFieldDecoration(
+                              hint: "Enter Email", icon: Icons.voicemail),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      //TODO:Password Field
+                      Container(
+                        height: 50,
+                        child: TextField(
+                          controller: loginPasswordController,
+                          obscureText: true,
+                          keyboardType: TextInputType.text,
+                          decoration: textFieldDecoration(
+                            hint: "Enter Password",
+                            icon: Icons.lock_open_rounded,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      //TODO: Forgot Password
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ResetPasswordPage()));
+                        },
+                        child: Text(
+                          "Forgot Password?",
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: MyColors.RED),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          MaterialButton(
+                            minWidth: 139,
+                            height: 39,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            onPressed: () {
+                              if(loginEmailController.text.isNotEmpty && loginPasswordController.text.isNotEmpty){
+                                final email = "test@xyz.com";
+                                final pass = "test_password";
+                                if(loginEmailController.text == email && loginPasswordController.text == pass){
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainDashboardPage()));
+                                }else{
+                                  SnackBar snackBar = SnackBar(content: Text("Please Enter correct Login Credentials"));
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                }
+                              }else{
+                                SnackBar snackBar = SnackBar(content: Text("Some Fields Are Empty"));
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              }
+                            },
+                            textColor: Colors.black,
+                            child: Text("Login"),
+                            color: MyColors.LIGHT_GREEN,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        "Login With",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () {},
+                            child: Image(
+                              image: AssetImage("assets/images/google.png"),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Image(
+                              image: AssetImage("assets/images/facebook.png"),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Don't have an account?"),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignUpPage()));
+                            },
+                            child: Text(
+                              " SingUp",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline,
+                                  color: MyColors.LIGHT_GREEN),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
