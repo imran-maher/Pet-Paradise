@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../controllers/form_validation_controller.dart';
 import '../controllers/responsive_controller.dart';
 import '../custom_widgets/custom_widgets.dart';
@@ -38,7 +38,6 @@ class _SignUpPageState extends State<SignUpPage> {
   //TODO : Form UI
   Widget formUI(BuildContext context) {
     return Form(
-
       key: _formKey,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -140,8 +139,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 height: 39,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
-                onPressed: () {
-
+                onPressed: () async {
+                  String msg = await signUp(
+                      email: signUpEmailController.text,
+                      password: signUpRePasswordController.text);
+                  SnackBar snackBar = SnackBar(content: Text(msg));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
                 textColor: Colors.black,
                 child: Text("Sign Up"),
@@ -174,6 +177,25 @@ class _SignUpPageState extends State<SignUpPage> {
         ],
       ),
     );
+  }
+
+  //TODO : SignUp
+  Future<String> signUp(
+      {required String email, required String password}) async {
+    print("User Creating.........");
+    String response = "";
+    try {
+     FirebaseAuth auth = FirebaseAuth.instance;
+     UserCredential userCredential =await auth.createUserWithEmailAndPassword(email: email, password: password);
+     User? user = userCredential.user;
+     if(user != null){
+       user.sendEmailVerification();
+       response = "Account Created and Check Your Email To Verify ";
+     }
+    } on FirebaseAuthException catch (e) {
+      response = e.code;
+    } catch (e) {}
+    return response;
   }
 
   //TODO : Mobile
