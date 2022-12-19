@@ -10,7 +10,8 @@ Widget MyButton(
     {required void onPressed()?,
     required String title,
     required Color color,
-    required Color textColor}) {
+    required Color textColor,
+double? fontSize}) {
   return Container(
     height: 55,
     decoration:
@@ -23,7 +24,7 @@ Widget MyButton(
       child: Text(
         title,
         style: TextStyle(
-            color: textColor, fontSize: 18, fontWeight: FontWeight.w700),
+            color: textColor, fontSize:fontSize == null ? 18 : fontSize, fontWeight: FontWeight.w700),
       ),
     ),
   );

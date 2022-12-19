@@ -35,7 +35,7 @@ class _SignUpPageState extends State<SignUpPage> {
     ));
   }
 
-  //TODO : Form UI
+//SignUp Form UI
   Widget formUI(BuildContext context) {
     return Form(
       key: _formKey,
@@ -53,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(
             height: 20,
           ),
-          //TODO : Name Field
+          //Name Field
           Container(
             height: 50,
             child: TextFormField(
@@ -72,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(
             height: 10,
           ),
-          //TODO:Email Field
+          //E-mail Field
           Container(
             height: 50,
             child: TextFormField(
@@ -91,7 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(
             height: 15,
           ),
-          //TODO : Password Field
+          //Password Field
           Container(
             height: 50,
             child: TextFormField(
@@ -111,7 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(
             height: 15,
           ),
-          //TODO : Re-Enter Password
+          //Re-Enter Password Field
           Container(
             height: 50,
             child: TextFormField(
@@ -131,6 +131,8 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(
             height: 15,
           ),
+
+          //SignUp Button
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -140,9 +142,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 onPressed: () async {
-                  String msg = await firebase_auth.signUp(
+                  String msg = await firebase_auth.signUp(context: context,
                       email: signUpEmailController.text,
-                      password: signUpRePasswordController.text);
+                      password: signUpPasswordController.text);
                   SnackBar snackBar = SnackBar(content: Text(msg));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
@@ -178,9 +180,6 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
-
-
-
 
   //TODO : Mobile
   Widget mobile(BuildContext context) {

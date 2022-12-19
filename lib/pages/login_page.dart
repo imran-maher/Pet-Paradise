@@ -1,6 +1,4 @@
-
-
-
+import 'package:pet_paradise/custom_widgets/dailogs.dart';
 
 import '../controllers/firebase_auth_controller.dart' as firebase_auth;
 import 'package:flutter/material.dart';
@@ -82,8 +80,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 180,
                       child: Image(
                           image: AssetImage(
-                            "assets/images/logo.png",
-                          ))),
+                        "assets/images/logo.png",
+                      ))),
                 ),
                 //Text Descriptions
                 Text(
@@ -184,24 +182,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               onPressed: () async {
-                                var state = true;
-                                String msg = await firebase_auth
-                                    .login(
+                                CustomProgressIndicatorDialog(context: context);
+                                String msg = await firebase_auth.login(
+                                    context: context,
                                     email: loginEmailController.text,
-                                    password: loginPasswordController.text)
-                                    .whenComplete(() {
-                                    state = false;
-
-
-                                });
-                                setState(() {
-
-                                  progressIndicator = true;
-                                });
-
+                                    password: loginPasswordController.text);
 
                                 SnackBar snackBar =
-                                SnackBar(content: Text(msg));
+                                    SnackBar(content: Text(msg));
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
                               },
@@ -270,17 +258,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-
               ],
             ),
           ),
-
         ),
-        progressIndicator ? Container(child: CircularProgressIndicator(),
-          alignment: Alignment.center,
-          height: MyAppSize.height,
-          width: MyAppSize.width,
-          color: Colors.transparent,): Container(),
       ],
     );
   }
