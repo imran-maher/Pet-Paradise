@@ -1,4 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
+
+
+
+import '../controllers/firebase_auth_controller.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
@@ -23,6 +27,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool progressIndicator = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -49,28 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
           web: web(context),
         ));
   }
-  //TODO : Login
-  Future<String> login({required String email , required String password})async{
-    String response = "";
-    try{
-      FirebaseAuth auth = FirebaseAuth.instance;
-      UserCredential userCredential = await auth.signInWithEmailAndPassword(email: email, password: password);
-      User? user = userCredential.user;
-      if(user != null){
-        if(user.emailVerified){
-          response = "Login Success , UUID : ${user.uid}";
-        }else{
-          response = "Your Email is Not Verified , Kindly Verify and Login Again";
-        }
-      }
 
-    }on  FirebaseAuthException catch(e){
-      response = e.code;
-    }catch (e){
-      response = e.toString();
-    }
-    return response;
-  }
   //TODO : Mobile
   Widget mobile(BuildContext context) {
     return Stack(
@@ -198,10 +183,27 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 39,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
-                              onPressed: () async{
-                              String msg =await login(email: loginEmailController.text, password: loginPasswordController.text);
-                              SnackBar snackBar = SnackBar(content: Text(msg));
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              onPressed: () async {
+                                var state = true;
+                                String msg = await firebase_auth
+                                    .login(
+                                    email: loginEmailController.text,
+                                    password: loginPasswordController.text)
+                                    .whenComplete(() {
+                                    state = false;
+
+
+                                });
+                                setState(() {
+
+                                  progressIndicator = true;
+                                });
+
+
+                                SnackBar snackBar =
+                                SnackBar(content: Text(msg));
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
                               },
                               textColor: Colors.black,
                               child: Text("Login"),
@@ -268,10 +270,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
+
               ],
             ),
           ),
+
         ),
+        progressIndicator ? Container(child: CircularProgressIndicator(),
+          alignment: Alignment.center,
+          height: MyAppSize.height,
+          width: MyAppSize.width,
+          color: Colors.transparent,): Container(),
       ],
     );
   }
@@ -290,5 +299,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-

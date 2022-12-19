@@ -9,6 +9,7 @@ class MyColors{
   static const Color DARK_BROWN = Color(0xff380909);
   static const Color ORANGE = Color(0xffC09031);
   static const Color YELLOW = Color(0xffF6DE02);
+  static const Color TRANSPARENT = Color(0xffffff);
 
 
 }

@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import '../controllers/firebase_auth_controller.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import '../controllers/form_validation_controller.dart';
 import '../controllers/responsive_controller.dart';
@@ -140,7 +140,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 onPressed: () async {
-                  String msg = await signUp(
+                  String msg = await firebase_auth.signUp(
                       email: signUpEmailController.text,
                       password: signUpRePasswordController.text);
                   SnackBar snackBar = SnackBar(content: Text(msg));
@@ -179,24 +179,8 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  //TODO : SignUp
-  Future<String> signUp(
-      {required String email, required String password}) async {
-    print("User Creating.........");
-    String response = "";
-    try {
-     FirebaseAuth auth = FirebaseAuth.instance;
-     UserCredential userCredential =await auth.createUserWithEmailAndPassword(email: email, password: password);
-     User? user = userCredential.user;
-     if(user != null){
-       user.sendEmailVerification();
-       response = "Account Created and Check Your Email To Verify ";
-     }
-    } on FirebaseAuthException catch (e) {
-      response = e.code;
-    } catch (e) {}
-    return response;
-  }
+
+
 
   //TODO : Mobile
   Widget mobile(BuildContext context) {
