@@ -11,20 +11,23 @@ Widget MyButton(
     required String title,
     required Color color,
     required Color textColor,
-double? fontSize}) {
+    double? fontSize,
+    Color? splashColor,
+    double? height,
+double? borderRadius}) {
   return Container(
-    height: 55,
-    decoration:
-        BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+    height: height == null ? 48 : height,
     child: MaterialButton(
       onPressed: onPressed,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius==null ? 10 : borderRadius)),
       color: color,
-      splashColor: MyColors.DARK_GREEN,
+      splashColor: splashColor == null ? MyColors.DARK_GREEN : splashColor,
       child: Text(
         title,
         style: TextStyle(
-            color: textColor, fontSize:fontSize == null ? 18 : fontSize, fontWeight: FontWeight.w700),
+            color: textColor,
+            fontSize: fontSize == null ? 18 : fontSize,
+            fontWeight: FontWeight.w700),
       ),
     ),
   );
@@ -32,20 +35,19 @@ double? fontSize}) {
 
 //TODO : InputDecoration for Login and Sign up TextFields
 InputDecoration textFieldDecoration(
-    {required String hint, required IconData icon}) {
+    {required String hint,  IconData? icon , double? borderRadius}) {
   return InputDecoration(
-
     hintText: hint,
     prefixIcon: Icon(icon),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(5),
+      borderRadius: BorderRadius.circular(borderRadius == null ? 5 : borderRadius),
     ),
   );
 }
 
 //TODO : Login and SignUp Button
 Widget loginAndSignUpButton(
-    {required Function  onPressed, required String title}) {
+    {required Function onPressed, required String title}) {
   return MaterialButton(
     onPressed: onPressed(),
     textColor: Colors.black,
@@ -58,21 +60,25 @@ Widget loginAndSignUpButton(
 
 //TODO : Main Dashboard Card
 
-Widget dashboardCard({required Function onTap , required String logoImgPath , required String title}){
-  return GestureDetector(onTap: onTap(),
+Widget dashboardCard(
+    {required Function onTap,
+    required String logoImgPath,
+    required String title}) {
+  return GestureDetector(
+    onTap: onTap(),
     child: Container(
       height: 250,
       width: MyAppSize.width! * 44,
       child: Card(
-        child: Column(mainAxisAlignment: MainAxisAlignment.start,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-                Image(image: AssetImage(logoImgPath)),
+            Image(image: AssetImage(logoImgPath)),
             Text(title),
-        ],),
+          ],
+        ),
       ),
     ),
   );
 }
-
-
