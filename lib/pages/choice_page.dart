@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
 import 'package:pet_paradise/seller/pages/seller_startup_page.dart';
-
-
-
 import '../custom_widgets/custom_widgets.dart';
 import '../utils/colors.dart';
 import '../utils/size_config.dart';
@@ -86,7 +83,7 @@ Widget mobile(BuildContext context) {
           //TODO : Seller
           MyButton(
             onPressed: (){
-          Navigator.of(context) .push(MaterialPageRoute( builder: (context) => SellerStartupPage()));
+          Navigator.of(context) .push(MaterialPageRoute( builder: (context) => SellerStartUpPage()));
           },
             title: "Seller",
             color: MyColors.LIGHT_GREEN40,
