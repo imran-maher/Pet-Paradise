@@ -141,22 +141,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 20,
                         ),
                         //TODO: Forgot Password
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ResetPasswordPage()));
-                          },
-                          child: Text(
-                            "Forgot Password?",
-                            textAlign: TextAlign.end,
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: MyColors.RED),
-                          ),
-                        ),
+                        clickAbleText(
+                            text: "Forgot Password?",
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ResetPasswordPage()));
+                            },
+                            textColor: MyColors.RED,
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.end),
                         SizedBox(
                           height: 15,
                         ),
@@ -224,21 +216,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("Don't have an account?"),
-                            GestureDetector(
+                            clickAbleText(
+                              text: "SignUp",
                               onTap: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => SignUpPage()));
                               },
-                              child: Text(
-                                " SingUp",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.underline,
-                                    color: MyColors.LIGHT_GREEN),
-                              ),
-                            )
+                              underLine: true,textColor: MyColors.LIGHT_GREEN,fontWeight: FontWeight.bold
+                            ),
                           ],
                         )
                       ],

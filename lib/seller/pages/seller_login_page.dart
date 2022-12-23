@@ -31,9 +31,7 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
       children: [
         backgroundWidget(),
         SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(
-                right: MyAppSize.width! * 0.07, left: MyAppSize.width! * 0.07),
+          child: leftAndRightPadding(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -52,10 +50,11 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
                 ///Edit Text Fields
                 // Email / Mobile Number Text Field
                 Container(
-                  height: 48,
+                  height: 55,
                   child: TextField(
-                    decoration: textFieldDecorationWithIcon(
-                        hint: "Email/Mobile ", borderRadius: 40),
+
+                    decoration: textFieldDecorationWithOutIcon(
+                        hint: "Email/Mobile ", borderRadius: 30),
                     keyboardType: TextInputType.text,
                   ),
                 ),
@@ -63,20 +62,34 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
                 SizedBox(height: MyAppSize.height! * 0.02),
                 //Password Text Field
                 Container(
-                  height: 48,
+                  height: 55,
                   child: TextField(
-                    decoration:
-                        textFieldDecorationWithIcon(hint: "Password", borderRadius: 40),
+                    decoration: textFieldDecorationWithOutIcon(
+                        hint: "Password", borderRadius: 30),
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
                     textAlign: TextAlign.start,
                   ),
                 ),
-                SizedBox(height: MyAppSize.height! * 0.35,),
-                Padding(padding: EdgeInsets.only(left: 35),child: GestureDetector(child: Text("Forgot Password?",style: TextStyle(color: MyColors.RED),))),
-                SizedBox(height: MyAppSize.height! * 0.02,),
-                MyButton(onPressed: (){}, title: "Login", color: MyColors.LIGHT_GREEN, textColor: Colors.white , borderRadius: 35,height: 45,fontSize: 13,splashColor: MyColors.YELLOW),
-
+                SizedBox(
+                  height: MyAppSize.height! * 0.35,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 35),
+                  child: clickAbleText(text: "Forgot Password?", onTap: (){},textColor: MyColors.RED,fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: MyAppSize.height! * 0.02,
+                ),
+                MyButton(
+                    onPressed: () {},
+                    title: "Login",
+                    color: MyColors.LIGHT_GREEN,
+                    textColor: Colors.white,
+                    borderRadius: 35,
+                    height: 45,
+                    fontSize: 13,
+                    splashColor: MyColors.YELLOW),
               ],
             ),
           ),

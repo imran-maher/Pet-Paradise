@@ -49,15 +49,17 @@ InputDecoration textFieldDecorationWithIcon(
     ),
   );
 }
+
 /// InputDecoration for Login and Sign up TextFields
 InputDecoration textFieldDecorationWithOutIcon(
     {required String hint, double? borderRadius}) {
   return InputDecoration(
     hintText: hint,
+    hintStyle: TextStyle(fontSize: 12 ,),
     counter: Offstage(),
     border: OutlineInputBorder(
       borderRadius:
-      BorderRadius.circular(borderRadius == null ? 5 : borderRadius),
+          BorderRadius.circular(borderRadius == null ? 5 : borderRadius),
     ),
   );
 }
@@ -134,5 +136,71 @@ Padding leftAndRightPadding({required Widget child}) {
     padding: EdgeInsets.only(
         right: MyAppSize.width! * 0.05, left: MyAppSize.width! * 0.05),
     child: child,
+  );
+}
+
+///Code Verification TextField
+Widget codeVerificationTextField(
+    {required BuildContext context,
+    required TextEditingController controller,
+    double? width,
+    required int digitNumber}) {
+  return Container(
+      width: width == null ? MyAppSize.width! * 0.14 : width,
+      height: 55,
+      child: TextField(
+          decoration: textFieldDecorationWithOutIcon(
+            hint: "",
+            borderRadius: 10,
+          ),
+          textAlign: TextAlign.center,
+          maxLength: 1,
+          showCursor: false,
+          autofocus: true,
+          keyboardType: TextInputType.number,
+          onChanged: (str) {
+            if (digitNumber > 1 && digitNumber < 6) {
+              if (str.length == 1) {
+                FocusScope.of(context).nextFocus();
+              } else if (str.length == 0) {
+                FocusScope.of(context).previousFocus();
+              }
+            } else if (digitNumber == 1) {
+              if (str.length == 1) {
+                FocusScope.of(context).nextFocus();
+              }
+            } else {
+              if (str.length == 0) {
+                FocusScope.of(context).previousFocus();
+              } else {
+                FocusScope.of(context).unfocus();
+              }
+            }
+          }));
+}
+
+///Clickable Text
+Widget clickAbleText({
+  required String text,
+  required void onTap(),
+  bool? underLine,
+  double? textSize,
+  Color? textColor,
+  TextAlign? textAlign,
+  FontWeight? fontWeight,
+}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Text(
+      text,
+      style: TextStyle(
+        color: textColor == null ? Colors.black : textColor,
+        decoration:
+            underLine == null ? TextDecoration.none : TextDecoration.underline,
+        fontWeight: fontWeight == null ? FontWeight.normal : fontWeight,
+        fontSize: textSize == null ? 13 : textSize,
+      ),
+      textAlign: textAlign == null ? TextAlign.start : textAlign,
+    ),
   );
 }

@@ -52,9 +52,9 @@ class _SellerSignUpMobileNumberPageState
                   height: 40,
                 ),
                 Container(
-                    height: 48,
+                    height: 55,
                     child: TextField(
-                      decoration: textFieldDecorationWithIcon(
+                      decoration: textFieldDecorationWithOutIcon(
                         hint: "Enter Mobile Number",
                         borderRadius: 30,
                       ),
@@ -75,7 +75,8 @@ class _SellerSignUpMobileNumberPageState
                     textColor: Colors.white,
                     borderRadius: 30,
                     height: 48,
-                    splashColor: MyColors.YELLOW),
+                    splashColor: MyColors.YELLOW,fontSize: 13),
+
               ],
             ),
           ),

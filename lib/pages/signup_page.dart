@@ -28,13 +28,13 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     MyAppSize.config(MediaQuery.of(context));
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: transparentAppBar(context: context),
+        extendBodyBehindAppBar: true,
+        appBar: transparentAppBar(context: context),
         body: Responsive(
-      mobile: mobile(context),
-      tablet: tablet(context),
-      web: web(context),
-    ));
+          mobile: mobile(context),
+          tablet: tablet(context),
+          web: web(context),
+        ));
   }
 
 //SignUp Form UI
@@ -67,8 +67,8 @@ class _SignUpPageState extends State<SignUpPage> {
               },
               controller: signUpNameController,
               keyboardType: TextInputType.text,
-              decoration:
-                  textFieldDecorationWithIcon(hint: "Enter Name", icon: Icons.person),
+              decoration: textFieldDecorationWithIcon(
+                  hint: "Enter Name", icon: Icons.person),
             ),
           ),
           SizedBox(
@@ -144,7 +144,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 onPressed: () async {
-                  String msg = await firebase_auth.signUp(context: context,
+                  String msg = await firebase_auth.signUp(
+                      context: context,
                       email: signUpEmailController.text,
                       password: signUpPasswordController.text);
                   SnackBar snackBar = SnackBar(content: Text(msg));
@@ -164,18 +165,14 @@ class _SignUpPageState extends State<SignUpPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("Already have an account?"),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  " Login",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
-                      color: MyColors.LIGHT_GREEN),
-                ),
-              )
+              clickAbleText(
+                  text: "Login",
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  textColor: MyColors.LIGHT_GREEN,
+                  fontWeight: FontWeight.bold,
+                  underLine: true)
             ],
           )
         ],
