@@ -87,7 +87,7 @@ Widget mobile(BuildContext context) {
             TextField(
               controller: resetPasswordEmailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: textFieldDecoration(
+              decoration: textFieldDecorationWithIcon(
                   hint: "Enter Your Email", icon: Icons.voicemail),
             ),
             SizedBox(

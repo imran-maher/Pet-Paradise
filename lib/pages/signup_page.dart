@@ -28,6 +28,8 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     MyAppSize.config(MediaQuery.of(context));
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: transparentAppBar(context: context),
         body: Responsive(
       mobile: mobile(context),
       tablet: tablet(context),
@@ -66,7 +68,7 @@ class _SignUpPageState extends State<SignUpPage> {
               controller: signUpNameController,
               keyboardType: TextInputType.text,
               decoration:
-                  textFieldDecoration(hint: "Enter Name", icon: Icons.person),
+                  textFieldDecorationWithIcon(hint: "Enter Name", icon: Icons.person),
             ),
           ),
           SizedBox(
@@ -78,7 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
             child: TextFormField(
               controller: signUpEmailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: textFieldDecoration(
+              decoration: textFieldDecorationWithIcon(
                   hint: "Enter Email", icon: Icons.voicemail),
               validator: (arg) {
                 if (arg != null) {
@@ -104,7 +106,7 @@ class _SignUpPageState extends State<SignUpPage> {
               controller: signUpPasswordController,
               obscureText: true,
               keyboardType: TextInputType.text,
-              decoration: textFieldDecoration(
+              decoration: textFieldDecorationWithIcon(
                   hint: "Enter Password", icon: Icons.lock_open),
             ),
           ),
@@ -118,7 +120,7 @@ class _SignUpPageState extends State<SignUpPage> {
               controller: signUpRePasswordController,
               obscureText: true,
               keyboardType: TextInputType.text,
-              decoration: textFieldDecoration(
+              decoration: textFieldDecorationWithIcon(
                   hint: "Re-enter Password", icon: Icons.lock_open),
               validator: (arg) {
                 if (arg != null) {
@@ -185,65 +187,57 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget mobile(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          width: MyAppSize.width,
-          child: Image(
-            image: AssetImage("assets/images/rectDesign.png"),
-            alignment: Alignment.topRight,
-          ),
-        ),
+        backgroundWidget(),
         SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
                 left: MyAppSize.width! * 0.05, right: MyAppSize.width! * 0.05),
-            child: SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  //Logo Image
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Container(
-                        height: 180,
-                        width: 180,
-                        child: Image(
-                            image: AssetImage(
-                          "assets/images/logo.png",
-                        ))),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                //Logo Image
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Container(
+                      height: 180,
+                      width: 180,
+                      child: Image(
+                          image: AssetImage(
+                        "assets/images/logo.png",
+                      ))),
+                ),
+                //Text Descriptions
+                Text(
+                  "Welcome\nTo Pet Paradise~",
+                  style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  " A dream-filled Paradise",
+                  style: TextStyle(fontSize: 16),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                //Login Card
+                Card(
+                  elevation: 5,
+                  shadowColor: MyColors.LIGHT_GREEN,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  //Text Descriptions
-                  Text(
-                    "Welcome\nTo Pet Paradise~",
-                    style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    " A dream-filled Paradise",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  //Login Card
-                  Card(
-                    elevation: 5,
-                    shadowColor: MyColors.LIGHT_GREEN,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Padding(
-                        padding: EdgeInsets.only(
-                          left: MyAppSize.width! * 0.025,
-                          right: MyAppSize.width! * 0.025,
-                          top: 20,
-                          bottom: 30,
-                        ),
-                        child: formUI(context)),
-                  )
-                ],
-              ),
+                  child: Padding(
+                      padding: EdgeInsets.only(
+                        left: MyAppSize.width! * 0.025,
+                        right: MyAppSize.width! * 0.025,
+                        top: 20,
+                        bottom: 30,
+                      ),
+                      child: formUI(context)),
+                )
+              ],
             ),
           ),
         ),

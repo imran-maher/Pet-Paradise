@@ -16,19 +16,7 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            color: MyColors.LIGHT_GREEN,
-          ),
-        ),
-      ),
+      appBar: transparentAppBar(context: context),
       body: Responsive(
         mobile: mobile(context),
         web: web(context),
@@ -41,13 +29,7 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
   Widget mobile(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          width: MyAppSize.width,
-          child: Image(
-            image: AssetImage("assets/images/rectDesign.png"),
-            alignment: Alignment.topRight,
-          ),
-        ),
+        backgroundWidget(),
         SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
@@ -72,7 +54,7 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
                 Container(
                   height: 48,
                   child: TextField(
-                    decoration: textFieldDecoration(
+                    decoration: textFieldDecorationWithIcon(
                         hint: "Email/Mobile ", borderRadius: 40),
                     keyboardType: TextInputType.text,
                   ),
@@ -84,7 +66,7 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
                   height: 48,
                   child: TextField(
                     decoration:
-                        textFieldDecoration(hint: "Password", borderRadius: 40),
+                        textFieldDecorationWithIcon(hint: "Password", borderRadius: 40),
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
                     textAlign: TextAlign.start,
@@ -93,7 +75,7 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
                 SizedBox(height: MyAppSize.height! * 0.35,),
                 Padding(padding: EdgeInsets.only(left: 35),child: GestureDetector(child: Text("Forgot Password?",style: TextStyle(color: MyColors.RED),))),
                 SizedBox(height: MyAppSize.height! * 0.02,),
-                MyButton(onPressed: (){}, title: "Login", color: MyColors.LIGHT_GREEN, textColor: Colors.white , borderRadius: 35,height: 45,fontSize: 13),
+                MyButton(onPressed: (){}, title: "Login", color: MyColors.LIGHT_GREEN, textColor: Colors.white , borderRadius: 35,height: 45,fontSize: 13,splashColor: MyColors.YELLOW),
 
               ],
             ),

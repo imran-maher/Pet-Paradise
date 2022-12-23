@@ -72,7 +72,7 @@ Widget mobile(BuildContext context) {
               keyboardType: TextInputType.text,
               obscureText: true,
               decoration:
-                  textFieldDecoration(hint: "", icon: Icons.lock_open_outlined),
+                  textFieldDecorationWithIcon(hint: "", icon: Icons.lock_open_outlined),
             ),
             SizedBox(height: 25),
             Text("Confirm Password",
@@ -83,7 +83,7 @@ Widget mobile(BuildContext context) {
               keyboardType: TextInputType.text,
               obscureText: true,
               decoration:
-              textFieldDecoration(hint: "", icon: Icons.lock_open_outlined),
+              textFieldDecorationWithIcon(hint: "", icon: Icons.lock_open_outlined),
             ),
             SizedBox(height: 30,),
             Row(

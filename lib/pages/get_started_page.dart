@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
 import 'package:pet_paradise/module/get_started_page_data.dart';
 
-import 'package:pet_paradise/pages/main_dashboard_page.dart';
+
 import 'package:pet_paradise/utils/colors.dart';
 
 import '../utils/size_config.dart';

@@ -1,7 +1,9 @@
 //TODO: My Custom Button For Dashboards
 
 //TODO : My Custom Button Widget
+
 import 'package:flutter/material.dart';
+
 import 'package:pet_paradise/utils/size_config.dart';
 
 import '../utils/colors.dart';
@@ -14,12 +16,14 @@ Widget MyButton(
     double? fontSize,
     Color? splashColor,
     double? height,
-double? borderRadius}) {
+    double? borderRadius}) {
   return Container(
     height: height == null ? 48 : height,
     child: MaterialButton(
       onPressed: onPressed,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius==null ? 10 : borderRadius)),
+      shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular(borderRadius == null ? 10 : borderRadius)),
       color: color,
       splashColor: splashColor == null ? MyColors.DARK_GREEN : splashColor,
       child: Text(
@@ -33,19 +37,32 @@ double? borderRadius}) {
   );
 }
 
-//TODO : InputDecoration for Login and Sign up TextFields
-InputDecoration textFieldDecoration(
-    {required String hint,  IconData? icon , double? borderRadius}) {
+/// InputDecoration for Login and Sign up TextFields
+InputDecoration textFieldDecorationWithIcon(
+    {required String hint, IconData? icon, double? borderRadius}) {
   return InputDecoration(
     hintText: hint,
     prefixIcon: Icon(icon),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(borderRadius == null ? 5 : borderRadius),
+      borderRadius:
+          BorderRadius.circular(borderRadius == null ? 5 : borderRadius),
+    ),
+  );
+}
+/// InputDecoration for Login and Sign up TextFields
+InputDecoration textFieldDecorationWithOutIcon(
+    {required String hint, double? borderRadius}) {
+  return InputDecoration(
+    hintText: hint,
+    counter: Offstage(),
+    border: OutlineInputBorder(
+      borderRadius:
+      BorderRadius.circular(borderRadius == null ? 5 : borderRadius),
     ),
   );
 }
 
-//TODO : Login and SignUp Button
+///Login and SignUp Button
 Widget loginAndSignUpButton(
     {required Function onPressed, required String title}) {
   return MaterialButton(
@@ -58,7 +75,7 @@ Widget loginAndSignUpButton(
   );
 }
 
-//TODO : Main Dashboard Card
+/// Main Dashboard Card
 
 Widget dashboardCard(
     {required Function onTap,
@@ -80,5 +97,42 @@ Widget dashboardCard(
         ),
       ),
     ),
+  );
+}
+
+///Background Widget
+Widget backgroundWidget() {
+  return Container(
+    width: MyAppSize.width,
+    child: Image(
+      image: AssetImage("assets/images/rectDesign.png"),
+      alignment: Alignment.topRight,
+    ),
+  );
+}
+
+/// MyAppBar with TransparentBackground
+AppBar transparentAppBar({required BuildContext context}) {
+  return AppBar(
+    backgroundColor: Colors.transparent,
+    elevation: 0,
+    leading: GestureDetector(
+      onTap: () {
+        Navigator.of(context).pop();
+      },
+      child: Icon(
+        Icons.arrow_back,
+        color: MyColors.LIGHT_GREEN,
+      ),
+    ),
+  );
+}
+
+/// Right and Left Padding for All Pages
+Padding leftAndRightPadding({required Widget child}) {
+  return Padding(
+    padding: EdgeInsets.only(
+        right: MyAppSize.width! * 0.05, left: MyAppSize.width! * 0.05),
+    child: child,
   );
 }

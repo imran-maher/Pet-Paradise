@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/seller/pages/seller_login_page.dart';
+import 'package:pet_paradise/seller/pages/seller_signup_mobile_number_page.dart';
 
 import '../../controllers/responsive_controller.dart';
 import '../../utils/colors.dart';
@@ -13,14 +14,7 @@ class SellerStartUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: Icon(
-            Icons.arrow_back,
-            color: MyColors.LIGHT_GREEN,
-          ),
-        ),
+        appBar: transparentAppBar(context: context),
         body: Responsive(
           mobile: mobile(context),
           tablet: tablet(context),
@@ -32,13 +26,7 @@ class SellerStartUpPage extends StatelessWidget {
   Widget mobile(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          width: MyAppSize.width,
-          child: Image(
-            image: AssetImage("assets/images/rectDesign.png"),
-            alignment: Alignment.topRight,
-          ),
-        ),
+        backgroundWidget(),
         SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
@@ -63,23 +51,30 @@ class SellerStartUpPage extends StatelessWidget {
 
                 //Register with mobile number button
                 MyButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              SellerSignUpMobileNumberPage()));
+                    },
                     title: "Register with mobile number",
                     color: MyColors.GREEN,
                     textColor: Colors.white,
-                    fontSize: 13,splashColor: MyColors.LIGHT_GREEN),
+                    fontSize: 13,
+                    splashColor: MyColors.LIGHT_GREEN),
 
                 SizedBox(height: 22),
 
                 //Login with Password
                 MyButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SellerLoginPage()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => SellerLoginPage()));
                     },
                     title: "Login with password",
                     color: MyColors.LIGHT_GREEN,
                     textColor: Colors.white,
-                    fontSize: 13, splashColor: MyColors.GREEN),
+                    fontSize: 13,
+                    splashColor: MyColors.GREEN),
               ],
             ),
           ),

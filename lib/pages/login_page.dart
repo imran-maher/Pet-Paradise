@@ -39,14 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
     MyAppSize.config(MediaQuery.of(context));
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: Icon(
-            Icons.arrow_back,
-            color: MyColors.LIGHT_GREEN,
-          ),
-        ),
+        appBar: transparentAppBar(context: context),
         body: Responsive(
           mobile: mobile(context),
           tablet: tablet(context),
@@ -58,13 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget mobile(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          width: MyAppSize.width,
-          child: Image(
-            image: AssetImage("assets/images/rectDesign.png"),
-            alignment: Alignment.topRight,
-          ),
-        ),
+        backgroundWidget(),
         SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
@@ -130,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: TextFormField(
                             controller: loginEmailController,
                             keyboardType: TextInputType.emailAddress,
-                            decoration: textFieldDecoration(
+                            decoration: textFieldDecorationWithIcon(
                                 hint: "Enter Email", icon: Icons.voicemail),
                           ),
                         ),
@@ -144,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             controller: loginPasswordController,
                             obscureText: true,
                             keyboardType: TextInputType.text,
-                            decoration: textFieldDecoration(
+                            decoration: textFieldDecorationWithIcon(
                               hint: "Enter Password",
                               icon: Icons.lock_open_rounded,
                             ),
