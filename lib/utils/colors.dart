@@ -5,10 +5,11 @@ class MyColors{
   static const Color LIGHT_GREEN40 = Color(0x8089aa28);
   static const Color DARK_GREEN = Color(0xff0A6825);
   static const Color RED = Color(0xffAB1818);
-  static const Color HINT_COLOR = Color(0xff906F6F);
+  static const Color LIGHT_PINK = Color(0xff906F6F);
   static const Color DARK_BROWN = Color(0xff380909);
   static const Color ORANGE = Color(0xffC09031);
   static const Color YELLOW = Color(0xffF6DE02);
   static const Color TRANSPARENT = Color(0xffffff);
   static const Color GREEN = Color(0xff445808);
+
 }

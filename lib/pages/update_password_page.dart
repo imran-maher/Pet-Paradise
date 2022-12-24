@@ -65,7 +65,7 @@ Widget mobile(BuildContext context) {
                 textAlign: TextAlign.center),
             SizedBox(height: 40),
             Text("New Password",
-                style: TextStyle(fontSize: 14, color: MyColors.HINT_COLOR),
+                style: TextStyle(fontSize: 14, color: MyColors.LIGHT_PINK),
                 textAlign: TextAlign.start),
             SizedBox(height: 15),
             TextField(
@@ -76,7 +76,7 @@ Widget mobile(BuildContext context) {
             ),
             SizedBox(height: 25),
             Text("Confirm Password",
-                style: TextStyle(fontSize: 14, color: MyColors.HINT_COLOR),
+                style: TextStyle(fontSize: 14, color: MyColors.LIGHT_PINK),
                 textAlign: TextAlign.start),
             SizedBox(height: 15),
             TextField(

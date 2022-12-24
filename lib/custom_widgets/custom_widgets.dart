@@ -187,6 +187,7 @@ Widget codeVerificationTextField(
 Widget clickAbleText(
     {required String text,
     required void onTap(),
+    bool? enable,
     bool? underLine,
     double? textSize,
     Color? textColor,
@@ -194,7 +195,8 @@ Widget clickAbleText(
     FontWeight? fontWeight,
     String? fontFamily}) {
   return GestureDetector(
-    onTap: onTap,
+
+    onTap:enable ==true ? onTap : null,
     child: Text(
       text,
       style: TextStyle(

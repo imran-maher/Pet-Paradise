@@ -91,7 +91,7 @@ Widget mobile(BuildContext context, {required GetStartedPageData pageData}) {
               child: Text(
                 pageData.pageSubTitle,
                 style: TextStyle(
-                    color: MyColors.HINT_COLOR,
+                    color: MyColors.LIGHT_PINK,
                     fontStyle: FontStyle.italic,
                     fontSize: 14),
                 textAlign: TextAlign.center,
