@@ -52,11 +52,12 @@ class _SellerSignupCodeVerificationPageState
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(
-                  height: MyAppSize.height! * 0.2,
+                  height: MyAppSize.height! * 0.15,
                 ),
-                Text("Enter The  Code"),
+                Text("Enter The  Code" ,style: TextStyle(fontSize: 20 , fontFamily: 'Itim-Regular'),),
+                SizedBox(height: 20,),
                 Text(
-                    "Please Enter Verification Code Which Sent to \n$verificationCode"),
+                    "Please enter the 6-digit code sent to;\n$verificationCode",style: TextStyle(fontSize: 15 , fontFamily: 'Itim-Regular'),),
                 SizedBox(
                   height: 30,
                 ),
@@ -115,7 +116,7 @@ class _SellerSignupCodeVerificationPageState
                     color: MyColors.LIGHT_GREEN,
                     textColor: Colors.white,
                     splashColor: MyColors.YELLOW,
-                    height: 45,fontSize: 13,borderRadius: 30),
+                    height: 45,fontSize: 13,borderRadius: 30,fontFamily: 'Itim-Regular'),
               ],
             ),
           ),

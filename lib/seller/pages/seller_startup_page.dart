@@ -60,7 +60,8 @@ class SellerStartUpPage extends StatelessWidget {
                     color: MyColors.GREEN,
                     textColor: Colors.white,
                     fontSize: 13,
-                    splashColor: MyColors.LIGHT_GREEN),
+                    splashColor: MyColors.LIGHT_GREEN,
+                    fontFamily: 'Itim-Regular'),
 
                 SizedBox(height: 22),
 
@@ -74,7 +75,7 @@ class SellerStartUpPage extends StatelessWidget {
                     color: MyColors.LIGHT_GREEN,
                     textColor: Colors.white,
                     fontSize: 13,
-                    splashColor: MyColors.GREEN),
+                    splashColor: MyColors.GREEN,fontFamily: 'Itim-Regular'),
               ],
             ),
           ),

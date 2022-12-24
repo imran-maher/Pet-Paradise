@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "312408969872",
+    "firebase_url": "https://pet-paradise-61cf7-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "pet-paradise-61cf7",
     "storage_bucket": "pet-paradise-61cf7.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "312408969872-ahfk5l0kqvbebf5e83e6gg5b0ccl66pf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gmail.maherimran034.petparadise.pet_paradise",
+            "certificate_hash": "17d11276d5edc3bfc15338dfa89a8481c2f4dfc1"
+          }
+        },
         {
           "client_id": "312408969872-nrholp1uavtpvfhbb54a4hqdtutkuiov.apps.googleusercontent.com",
           "client_type": 3
@@ -29,6 +38,13 @@
             {
               "client_id": "312408969872-nrholp1uavtpvfhbb54a4hqdtutkuiov.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "312408969872-ph8vnr64t6qlssbisajko59hgr0a688l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gmail.maherimran034.petparadise.petParadise"
+              }
             }
           ]
         }

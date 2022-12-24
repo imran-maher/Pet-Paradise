@@ -39,10 +39,11 @@ class _SellerSignupCreatePasswordPageState
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(
-                  height: MyAppSize.height! * 0.2,
+                  height: MyAppSize.height! * 0.15,
                 ),
-                Text("Cleat an Account"),
-                Text("Set up a password"),
+                Text("Create an account",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 20),),
+                SizedBox(height: 10,),
+                Text("Set up a password", style: TextStyle(fontWeight: FontWeight.w500,fontSize: 13)),
                 SizedBox(
                   height: 20,
                 ),
@@ -74,7 +75,7 @@ class _SellerSignupCreatePasswordPageState
                 SizedBox(
                   height: 40,
                 ),
-                Text("Referral Code"),
+                Text("Referral Code", style: TextStyle(fontWeight: FontWeight.w500,fontSize: 13)),
                 SizedBox(
                   height: 20,
                 ),
@@ -92,12 +93,13 @@ class _SellerSignupCreatePasswordPageState
                 SizedBox(
                   height: MyAppSize.height! * 0.1,
                 ),
-                Text("Terms and Conditions"),
+                Text("I agree to Pet Paradise’s ${clickAbleText(text: "Terms of Usage ", onTap: (){})} and for my personal data to be processed according to Pet Paradise Privacy Policy "),
                 SizedBox(
                   height: 20,
                 ),
                 MyButton(
                   onPressed: () {},
+                    fontFamily: 'Itim-Regular',
                   title: "Agree & Create Account",
                   color: MyColors.LIGHT_GREEN,
                   textColor: Colors.white,

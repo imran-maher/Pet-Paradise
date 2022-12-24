@@ -40,11 +40,17 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
                 SizedBox(
                   height: MyAppSize.height! * 0.2,
                 ),
-                Text("Welcome Back"),
+                Text(
+                  "Welcome Back",
+                  style: TextStyle(fontFamily: 'Itim-Regular', fontSize: 20),
+                ),
                 SizedBox(
                   height: MyAppSize.height! * 0.01,
                 ),
-                Text("Login with your Password"),
+                Text(
+                  "Login with your Password",
+                  style: TextStyle(fontFamily: 'Itim-Regular', fontSize: 15),
+                ),
                 SizedBox(height: MyAppSize.height! * 0.05),
 
                 ///Edit Text Fields
@@ -52,9 +58,10 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
                 Container(
                   height: 55,
                   child: TextField(
-
                     decoration: textFieldDecorationWithOutIcon(
-                        hint: "Email/Mobile ", borderRadius: 30),
+                      hint: "Email/Mobile ",
+                      borderRadius: 30,
+                    ),
                     keyboardType: TextInputType.text,
                   ),
                 ),
@@ -76,7 +83,13 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 35),
-                  child: clickAbleText(text: "Forgot Password?", onTap: (){},textColor: MyColors.RED,fontWeight: FontWeight.bold),
+                  child: clickAbleText(
+                    text: "Forgot Password?",
+                    fontFamily: 'Itim-Regular',
+                    onTap: () {},
+                    textColor: MyColors.RED,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 SizedBox(
                   height: MyAppSize.height! * 0.02,
@@ -88,8 +101,8 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
                     textColor: Colors.white,
                     borderRadius: 35,
                     height: 45,
-                    fontSize: 13,
-                    splashColor: MyColors.YELLOW),
+                    fontSize: 14,
+                    splashColor: MyColors.YELLOW,fontFamily: 'Itim-Regular'),
               ],
             ),
           ),

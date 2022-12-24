@@ -43,11 +43,11 @@ class _SellerSignUpMobileNumberPageState
                 SizedBox(
                   height: MyAppSize.height! * 0.2,
                 ),
-                Center(child: Text("What's Your Mobile Number?")),
+                Center(child: Text("What's Your Mobile Number?" , style: TextStyle(fontFamily: 'Itim-Regular' , fontSize: 20),)),
                 SizedBox(
                   height: 10,
                 ),
-                Center(child: Text("A Mobile Number is required for Signup")),
+                Center(child: Text("A Mobile Number is required for Signup", style: TextStyle(fontFamily: 'Itim-Regular' , fontSize: 15),)),
                 SizedBox(
                   height: 40,
                 ),
@@ -71,6 +71,7 @@ class _SellerSignUpMobileNumberPageState
                                   SellerSignupCodeVerificationPage(verificationCode: "123456",)));
                     },
                     title: "Next",
+                    fontFamily: 'Itim-Regular',
                     color: MyColors.LIGHT_GREEN,
                     textColor: Colors.white,
                     borderRadius: 30,

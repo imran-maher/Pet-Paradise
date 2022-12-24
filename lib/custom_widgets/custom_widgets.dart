@@ -16,7 +16,8 @@ Widget MyButton(
     double? fontSize,
     Color? splashColor,
     double? height,
-    double? borderRadius}) {
+    double? borderRadius,
+    String? fontFamily}) {
   return Container(
     height: height == null ? 48 : height,
     child: MaterialButton(
@@ -30,6 +31,7 @@ Widget MyButton(
         title,
         style: TextStyle(
             color: textColor,
+            fontFamily: fontFamily == null ? null : fontFamily,
             fontSize: fontSize == null ? 18 : fontSize,
             fontWeight: FontWeight.w700),
       ),
@@ -55,7 +57,9 @@ InputDecoration textFieldDecorationWithOutIcon(
     {required String hint, double? borderRadius}) {
   return InputDecoration(
     hintText: hint,
-    hintStyle: TextStyle(fontSize: 12 ,),
+    hintStyle: TextStyle(
+      fontSize: 13,
+    ),
     counter: Offstage(),
     border: OutlineInputBorder(
       borderRadius:
@@ -150,7 +154,7 @@ Widget codeVerificationTextField(
       height: 55,
       child: TextField(
           decoration: textFieldDecorationWithOutIcon(
-            hint: "",
+            hint: "-",
             borderRadius: 10,
           ),
           textAlign: TextAlign.center,
@@ -180,15 +184,15 @@ Widget codeVerificationTextField(
 }
 
 ///Clickable Text
-Widget clickAbleText({
-  required String text,
-  required void onTap(),
-  bool? underLine,
-  double? textSize,
-  Color? textColor,
-  TextAlign? textAlign,
-  FontWeight? fontWeight,
-}) {
+Widget clickAbleText(
+    {required String text,
+    required void onTap(),
+    bool? underLine,
+    double? textSize,
+    Color? textColor,
+    TextAlign? textAlign,
+    FontWeight? fontWeight,
+    String? fontFamily}) {
   return GestureDetector(
     onTap: onTap,
     child: Text(
@@ -199,6 +203,7 @@ Widget clickAbleText({
             underLine == null ? TextDecoration.none : TextDecoration.underline,
         fontWeight: fontWeight == null ? FontWeight.normal : fontWeight,
         fontSize: textSize == null ? 13 : textSize,
+        fontFamily: fontFamily == null ? null : fontFamily,
       ),
       textAlign: textAlign == null ? TextAlign.start : textAlign,
     ),
