@@ -60,7 +60,7 @@ class SellerStartUpPage extends StatelessWidget {
                     color: MyColors.GREEN,
                     textColor: Colors.white,
                     fontSize: 13,
-                    splashColor: MyColors.LIGHT_GREEN,
+                    splashColor: MyColors.MATERIAL_LIGHT_GREEN,
                     fontFamily: 'Itim-Regular'),
 
                 SizedBox(height: 22),
@@ -72,7 +72,7 @@ class SellerStartUpPage extends StatelessWidget {
                           builder: (context) => SellerLoginPage()));
                     },
                     title: "Login with password",
-                    color: MyColors.LIGHT_GREEN,
+                    color: MyColors.MATERIAL_LIGHT_GREEN,
                     textColor: Colors.white,
                     fontSize: 13,
                     splashColor: MyColors.GREEN,fontFamily: 'Itim-Regular'),

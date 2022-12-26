@@ -97,7 +97,7 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
                 MyButton(
                     onPressed: () {},
                     title: "Login",
-                    color: MyColors.LIGHT_GREEN,
+                    color: MyColors.MATERIAL_LIGHT_GREEN,
                     textColor: Colors.white,
                     borderRadius: 35,
                     height: 45,

@@ -99,6 +99,13 @@ class _SellerSignUpMobileNumberPageState
                               Navigator.of(context).pop();
                               msg = str + num.toString();
                               ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SellerSignupCodeVerificationPage(
+                                                verificationCode: "123456",
+                                              )));
                             },
                             codeAutoRetrievalTimeout: (str) {
                               Navigator.of(context).pop();
@@ -116,7 +123,7 @@ class _SellerSignUpMobileNumberPageState
                     },
                     title: "Next",
                     fontFamily: 'Itim-Regular',
-                    color: MyColors.LIGHT_GREEN,
+                    color: MyColors.MATERIAL_LIGHT_GREEN,
                     textColor: Colors.white,
                     borderRadius: 30,
                     height: 48,

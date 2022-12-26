@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
+import 'package:pet_paradise/seller/pages/seller_home_page.dart';
 import 'package:pet_paradise/utils/size_config.dart';
 
 import '../../utils/colors.dart';
@@ -98,10 +99,12 @@ class _SellerSignupCreatePasswordPageState
                   height: 20,
                 ),
                 MyButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SellerHomePage()));
+                  },
                     fontFamily: 'Itim-Regular',
                   title: "Agree & Create Account",
-                  color: MyColors.LIGHT_GREEN,
+                  color: MyColors.MATERIAL_LIGHT_GREEN,
                   textColor: Colors.white,
                   splashColor: MyColors.YELLOW,
                   borderRadius: 30,

@@ -2,6 +2,7 @@
 
 //TODO : My Custom Button Widget
 
+
 import 'package:flutter/material.dart';
 
 import 'package:pet_paradise/utils/size_config.dart';
@@ -26,7 +27,7 @@ Widget MyButton(
           borderRadius:
               BorderRadius.circular(borderRadius == null ? 10 : borderRadius)),
       color: color,
-      splashColor: splashColor == null ? MyColors.DARK_GREEN : splashColor,
+      splashColor: splashColor == null ? MyColors.PARRIT_GREEN : splashColor,
       child: Text(
         title,
         style: TextStyle(
@@ -77,7 +78,7 @@ Widget loginAndSignUpButton(
     minWidth: 139,
     height: 39,
     child: Text(title),
-    color: MyColors.LIGHT_GREEN,
+    color: MyColors.MATERIAL_LIGHT_GREEN,
   );
 }
 
@@ -118,17 +119,19 @@ Widget backgroundWidget() {
 }
 
 /// MyAppBar with TransparentBackground
-AppBar transparentAppBar({required BuildContext context}) {
+AppBar transparentAppBar({required BuildContext context , String? centerTitle}) {
   return AppBar(
     backgroundColor: Colors.transparent,
     elevation: 0,
+    centerTitle: centerTitle == null ? false : true,
+    title: Text(centerTitle?? ''),
     leading: GestureDetector(
       onTap: () {
         Navigator.of(context).pop();
       },
       child: Icon(
         Icons.arrow_back,
-        color: MyColors.LIGHT_GREEN,
+        color: MyColors.MATERIAL_LIGHT_GREEN,
       ),
     ),
   );
@@ -195,8 +198,7 @@ Widget clickAbleText(
     FontWeight? fontWeight,
     String? fontFamily}) {
   return GestureDetector(
-
-    onTap:enable ==true ? onTap : null,
+    onTap: enable == true ? onTap : null,
     child: Text(
       text,
       style: TextStyle(
@@ -208,6 +210,26 @@ Widget clickAbleText(
         fontFamily: fontFamily == null ? null : fontFamily,
       ),
       textAlign: textAlign == null ? TextAlign.start : textAlign,
+    ),
+  );
+}
+
+///Seller Center Profile Card
+
+Widget sellerCenterCard({required BuildContext buildContext}) {
+  return Container(
+    width: MyAppSize.width,
+    height: 325.0,
+    child: Card(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [Text("Please Complete Profile "),
+        ListView.builder(itemBuilder: (BuildContext context ,int index){
+          return ListTile(leading: Text("${index +1}"),title: Text("Button"), trailing: Icon(Icons.abc),);
+        }),
+        ],
+      ),
     ),
   );
 }

@@ -140,7 +140,7 @@ class _SellerSignupCodeVerificationPageState
                                       SellerSignupCreatePasswordPage()));
                         },
                         title: "Next",
-                        color: MyColors.LIGHT_GREEN,
+                        color: MyColors.MATERIAL_LIGHT_GREEN,
                         textColor: Colors.white,
                         splashColor: MyColors.YELLOW,
                         height: 45,

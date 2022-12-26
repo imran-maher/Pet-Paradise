@@ -27,7 +27,7 @@ class GetStartedPage extends StatelessWidget {
           },
           child: Icon(
             Icons.arrow_back,
-            color: MyColors.LIGHT_GREEN,
+            color: MyColors.MATERIAL_LIGHT_GREEN,
           ),
         ),
         backgroundColor: Colors.transparent,
@@ -78,7 +78,7 @@ Widget mobile(BuildContext context, {required GetStartedPageData pageData}) {
               height: 340,
               width: MyAppSize.width,
               child: CircleAvatar(
-                backgroundColor: MyColors.LIGHT_GREEN,
+                backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
                 backgroundImage: NetworkImage(pageData.imageUrl),
               ),
             ),
@@ -108,7 +108,7 @@ Widget mobile(BuildContext context, {required GetStartedPageData pageData}) {
             onPressed: () {
 
             },
-            color: MyColors.LIGHT_GREEN,
+            color: MyColors.MATERIAL_LIGHT_GREEN,
             height: 39,
             minWidth: MyAppSize.width,
             child: Text(

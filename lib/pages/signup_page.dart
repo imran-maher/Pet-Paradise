@@ -153,7 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
                 textColor: Colors.black,
                 child: Text("Sign Up"),
-                color: MyColors.LIGHT_GREEN,
+                color: MyColors.MATERIAL_LIGHT_GREEN,
               ),
             ],
           ),
@@ -170,7 +170,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   onTap: () {
                     Navigator.of(context).pop();
                   },
-                  textColor: MyColors.LIGHT_GREEN,
+                  textColor: MyColors.MATERIAL_LIGHT_GREEN,
                   fontWeight: FontWeight.bold,
                   underLine: true)
             ],
@@ -221,7 +221,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 //Login Card
                 Card(
                   elevation: 5,
-                  shadowColor: MyColors.LIGHT_GREEN,
+                  shadowColor: MyColors.MATERIAL_LIGHT_GREEN,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),

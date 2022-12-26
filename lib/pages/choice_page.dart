@@ -74,8 +74,8 @@ Widget mobile(BuildContext context) {
               Navigator.of(context) .push(MaterialPageRoute( builder: (context) => LoginScreen()));
             },
             title: "Pet Owner",
-            color: MyColors.LIGHT_GREEN40,
-            textColor: MyColors.DARK_GREEN,
+            color: MyColors.GREEN40,
+            textColor: MyColors.PARRIT_GREEN,
           ),
           SizedBox(
             height: buttonSpace,
@@ -86,8 +86,8 @@ Widget mobile(BuildContext context) {
           Navigator.of(context) .push(MaterialPageRoute( builder: (context) => SellerStartUpPage()));
           },
             title: "Seller",
-            color: MyColors.LIGHT_GREEN40,
-            textColor: MyColors.DARK_GREEN,
+            color: MyColors.GREEN40,
+            textColor: MyColors.PARRIT_GREEN,
           ),
           SizedBox(
             height: buttonSpace,
@@ -98,8 +98,8 @@ Widget mobile(BuildContext context) {
               Navigator.of(context) .push(MaterialPageRoute( builder: (context) => LoginScreen()));
             },
             title: "Services",
-            color: MyColors.LIGHT_GREEN40,
-            textColor: MyColors.DARK_GREEN,
+            color: MyColors.GREEN40,
+            textColor: MyColors.PARRIT_GREEN,
           ),
           SizedBox(
             height: buttonSpace,
@@ -108,8 +108,8 @@ Widget mobile(BuildContext context) {
           MyButton(
             onPressed: (){},
             title: "Guest",
-            color: MyColors.LIGHT_GREEN40,
-            textColor: MyColors.DARK_GREEN,
+            color: MyColors.GREEN40,
+            textColor: MyColors.PARRIT_GREEN,
           ),
           SizedBox(
             height: 70,

@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 //Login Card
                 Card(
                   elevation: 5,
-                  shadowColor: MyColors.LIGHT_GREEN,
+                  shadowColor: MyColors.MATERIAL_LIGHT_GREEN,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                               textColor: Colors.black,
                               child: Text("Login"),
-                              color: MyColors.LIGHT_GREEN,
+                              color: MyColors.MATERIAL_LIGHT_GREEN,
                             ),
                           ],
                         ),
@@ -224,7 +224,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     MaterialPageRoute(
                                         builder: (context) => SignUpPage()));
                               },
-                              underLine: true,textColor: MyColors.LIGHT_GREEN,fontWeight: FontWeight.bold
+                              underLine: true,textColor: MyColors.MATERIAL_LIGHT_GREEN,fontWeight: FontWeight.bold
                             ),
                           ],
                         )

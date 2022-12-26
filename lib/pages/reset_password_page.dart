@@ -25,7 +25,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           onTap: (){Navigator.pop(context);},
           child: Icon(
             Icons.arrow_back,
-            color: MyColors.LIGHT_GREEN,
+            color: MyColors.MATERIAL_LIGHT_GREEN,
           ),
         ),
         backgroundColor: Colors.transparent,
@@ -109,7 +109,7 @@ Widget mobile(BuildContext context) {
                     "Submit",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  color: MyColors.LIGHT_GREEN,
+                  color: MyColors.MATERIAL_LIGHT_GREEN,
                 ),
               ],
             ),

@@ -23,7 +23,7 @@ class _UpdatePasswordPageState extends State<UpdatePasswordPage> {
         leading: GestureDetector(
           child: Icon(
             Icons.arrow_back,
-            color: MyColors.LIGHT_GREEN,
+            color: MyColors.MATERIAL_LIGHT_GREEN,
           ),
         ),
       ),
@@ -100,7 +100,7 @@ Widget mobile(BuildContext context) {
                     "Reset Password",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  color: MyColors.LIGHT_GREEN,
+                  color: MyColors.MATERIAL_LIGHT_GREEN,
                 ),
               ],
             ),

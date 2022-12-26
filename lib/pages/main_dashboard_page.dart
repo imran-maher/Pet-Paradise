@@ -107,7 +107,7 @@ SliverAppBar myDashboardAppBar({required String title}) {
     elevation: 10,
     expandedHeight: 250,
     backgroundColor:MyColors.YELLOW,
-    leading: Icon(Icons.arrow_back, color: MyColors.LIGHT_GREEN),
+    leading: Icon(Icons.arrow_back, color: MyColors.MATERIAL_LIGHT_GREEN),
     flexibleSpace: FlexibleSpaceBar(
       background: Column(children: [],),
       collapseMode: CollapseMode.pin,
@@ -130,7 +130,7 @@ SliverGrid myDashboardGrid() {
         shadowColor: Colors.green,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: InkWell(
-          splashColor: MyColors.LIGHT_GREEN,
+          splashColor: MyColors.MATERIAL_LIGHT_GREEN,
           onTap: () {
             if(gridCardData[index].title == MainDashboardPage.TRAINER){
               Navigator.push(context, MaterialPageRoute(builder: (context) =>GetStartedPage(pageData: MainDashboardPage.getStartedWithTrainer)));
