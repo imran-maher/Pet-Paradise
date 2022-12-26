@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
+import 'package:pet_paradise/seller/pages/seller_home_page.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/size_config.dart';
 
@@ -95,7 +96,9 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
                   height: MyAppSize.height! * 0.02,
                 ),
                 MyButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SellerHomePage()));
+                    },
                     title: "Login",
                     color: MyColors.MATERIAL_LIGHT_GREEN,
                     textColor: Colors.white,

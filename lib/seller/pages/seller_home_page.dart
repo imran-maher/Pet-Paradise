@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/custom_widgets/seller_bottom_nav.dart';
+import 'package:pet_paradise/seller/module/seller_info.dart';
+import 'package:pet_paradise/seller/pages/seller_profile_page.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/size_config.dart';
 
@@ -19,6 +21,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: transparentAppBar(context: context, centerTitle: "Home"),
+      bottomNavigationBar: SellerBottomNavBar(),
       body: Responsive(
         mobile: mobile(context),
         tablet: tablet(context),
@@ -29,7 +32,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
 
   /// Mobile UI
   Widget mobile(BuildContext context) {
-    List<TileData> tileDataList = [
+    List<TileData> tileDataList =[
       TileData(
           tileActive: true,
           tileTitle: TileData.ADD_PROFILE,
@@ -69,15 +72,12 @@ class _SellerHomePageState extends State<SellerHomePage> {
                     fontFamily: 'Itim-Regular',
                     color: Colors.white),
               ),
-              SizedBox(height: 15,),
-              tiles(tileData: tileDataList[0], tileNumber: 1),
-              SizedBox(height: 10,),
-              tiles(tileData: tileDataList[1], tileNumber: 2),
-              SizedBox(height: 10,),
-              tiles(tileData: tileDataList[2], tileNumber: 3),
-              SizedBox(height: 10,),
-              tiles(tileData: tileDataList[3], tileNumber: 4),
-              SizedBox(height: 10,),
+              SizedBox(height: 20,),
+              Expanded(
+                child: ListView.builder(itemBuilder: (context , index){
+                  return tiles(context: context,tileData: tileDataList[index], tileNumber: index+1);
+                },itemCount: tileDataList.length,),
+              ),
             ],
           ),
         ),
@@ -139,23 +139,31 @@ class TileData {
   }
 }
 
-Widget tiles({required TileData tileData, required int tileNumber}) {
-  return GestureDetector(
-    child: Container(
-      height: 55,
-      decoration: BoxDecoration(
-          color: MyColors.LIGHT_GREEN, borderRadius: BorderRadius.circular(20)),
-      child: Center(
-        child: ListTile(
-          leading: CircleAvatar(
-            maxRadius: 10,
-            backgroundColor: MyColors.GREEN_LIGHT_SHADE,
-            child: Center(
-              child: Text(tileNumber.toString()),
+Widget tiles({required BuildContext context ,required TileData tileData, required int tileNumber}) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 10),
+    child: GestureDetector(
+      onTap: (){
+        if(tileData.tileTitle == TileData.ADD_PROFILE){
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SellerAddBasicProfileInfoPage(sellerBasicInfo: SellerBasicInfo.init(emailAddress: null, phoneNumber: "03016557355", storeName: null),)));
+        }
+      },
+      child: Container(
+        height: 55,
+        decoration: BoxDecoration(
+            color: MyColors.LIGHT_GREEN, borderRadius: BorderRadius.circular(20)),
+        child: Center(
+          child: ListTile(
+            leading: CircleAvatar(
+              maxRadius: 10,
+              backgroundColor: MyColors.GREEN_LIGHT_SHADE,
+              child: Center(
+                child: Text(tileNumber.toString()),
+              ),
             ),
+            title: Text(tileData.tileTitle),
+            trailing: Icon(tileData.trailingIconData),
           ),
-          title: Text(tileData.tileTitle),
-          trailing: Icon(tileData.trailingIconData),
         ),
       ),
     ),
