@@ -2,7 +2,6 @@
 
 //TODO : My Custom Button Widget
 
-
 import 'package:flutter/material.dart';
 
 import 'package:pet_paradise/utils/size_config.dart';
@@ -18,9 +17,11 @@ Widget MyButton(
     Color? splashColor,
     double? height,
     double? borderRadius,
+double? width,
     String? fontFamily}) {
   return Container(
     height: height == null ? 48 : height,
+    width: width == null ? null : width,
     child: MaterialButton(
       onPressed: onPressed,
       shape: RoundedRectangleBorder(
@@ -119,12 +120,12 @@ Widget backgroundWidget() {
 }
 
 /// MyAppBar with TransparentBackground
-AppBar transparentAppBar({required BuildContext context , String? centerTitle}) {
+AppBar transparentAppBar({required BuildContext context, String? centerTitle}) {
   return AppBar(
     backgroundColor: Colors.transparent,
     elevation: 0,
     centerTitle: centerTitle == null ? false : true,
-    title: Text(centerTitle?? ''),
+    title: Text(centerTitle ?? ''),
     leading: GestureDetector(
       onTap: () {
         Navigator.of(context).pop();
@@ -224,12 +225,52 @@ Widget sellerCenterCard({required BuildContext buildContext}) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [Text("Please Complete Profile "),
-        ListView.builder(itemBuilder: (BuildContext context ,int index){
-          return ListTile(leading: Text("${index +1}"),title: Text("Button"), trailing: Icon(Icons.abc),);
-        }),
+        children: [
+          Text("Please Complete Profile "),
+          ListView.builder(itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              leading: Text("${index + 1}"),
+              title: Text("Button"),
+              trailing: Icon(Icons.abc),
+            );
+          }),
         ],
       ),
     ),
   );
+}
+
+///Important Text
+Widget importantText({required String text}) {
+  return Row(
+    children: [
+      Text(
+        "*",
+        style: TextStyle(color: Colors.red),
+      ),
+      Text(
+        text,
+        style: TextStyle(
+            color: Colors.grey, fontSize: 13, fontFamily: 'Itim-Regular'),
+      )
+    ],
+  );
+}
+
+///ReadOnly Text Field
+Widget readOnlyTextFiled(
+    {required BuildContext context,
+    required TextEditingController controller,required String hint,bool important=false}) {
+  return Container(
+      height: 30,
+      child: TextField(
+        controller: controller,
+        readOnly: true,
+
+        decoration: InputDecoration(
+
+          label: important ? importantText(text: hint) : Text(hint),
+          border: InputBorder.none,
+            contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),),
+      ));
 }
