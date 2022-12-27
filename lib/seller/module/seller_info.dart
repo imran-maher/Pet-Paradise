@@ -65,4 +65,4 @@ class SellerAddressModule{
 }
 
 ///Seller ID and Banking Info
-class
+
