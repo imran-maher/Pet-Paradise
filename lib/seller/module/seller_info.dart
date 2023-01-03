@@ -65,4 +65,40 @@ class SellerAddressModule{
 }
 
 ///Seller ID and Banking Info
+class SellerIDInfoModule{
+  late  var _idFrontSide;
+  late var _idBackSide;
+  late final String _nameOnID;
+  late final String _idNumber;
 
+  SellerIDInfoModule.init({required var idFrontSide , required var idBackSide , required String nameOnID , required String idNumber}){
+    this._idBackSide = idBackSide ;
+    this._idFrontSide = idFrontSide;
+    this._nameOnID = nameOnID;
+    this._idNumber = idNumber;
+  }
+
+  String get idNumber => _idNumber;
+
+  set idNumber(String value) {
+    _idNumber = value;
+  }
+
+  String get nameOnID => _nameOnID;
+
+  set nameOnID(String value) {
+    _nameOnID = value;
+  }
+
+  get idBackSide => _idBackSide;
+
+  set idBackSide(value) {
+    _idBackSide = value;
+  }
+
+  get idFrontSide => _idFrontSide;
+
+  set idFrontSide(value) {
+    _idFrontSide = value;
+  }
+}

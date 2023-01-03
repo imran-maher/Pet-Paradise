@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/custom_widgets/seller_bottom_nav.dart';
-import 'package:pet_paradise/seller/module/seller_address_module.dart';
+
 import 'package:pet_paradise/seller/module/seller_info.dart';
+import 'package:pet_paradise/seller/pages/seller_add_Id_info_page.dart';
 import 'package:pet_paradise/seller/pages/seller_add_address_page.dart';
 import 'package:pet_paradise/seller/pages/seller_profile_page.dart';
 import 'package:pet_paradise/utils/colors.dart';
@@ -152,6 +153,8 @@ Widget tiles({required BuildContext context ,required TileData tileData, require
         }else if(tileData.tileTitle == TileData.ADD_ADDRESS){
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => SellerAddAddressPage(sellerAddressModule: SellerAddressModule(businessAddress: null , wareHouseAddress: null , returnAddress: null),)));
 
+        }else if(tileData.tileTitle == TileData.VERIFY_ID_BANK){
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SellerAddIDInfoPage()));
         }
       },
       child: Container(

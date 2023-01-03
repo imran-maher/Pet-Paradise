@@ -17,7 +17,7 @@ Widget MyButton(
     Color? splashColor,
     double? height,
     double? borderRadius,
-double? width,
+    double? width,
     String? fontFamily}) {
   return Container(
     height: height == null ? 48 : height,
@@ -241,7 +241,7 @@ Widget sellerCenterCard({required BuildContext buildContext}) {
 }
 
 ///Important Text
-Widget importantText({required String text}) {
+Widget importantText({required String text, double? fontSize,Color? textColor}) {
   return Row(
     children: [
       Text(
@@ -251,7 +251,9 @@ Widget importantText({required String text}) {
       Text(
         text,
         style: TextStyle(
-            color: Colors.grey, fontSize: 13, fontFamily: 'Itim-Regular'),
+            color: textColor == null ? Colors.grey : textColor,
+            fontSize: fontSize == null ? 13 : fontSize,
+            fontFamily: 'Itim-Regular'),
       )
     ],
   );
@@ -260,17 +262,18 @@ Widget importantText({required String text}) {
 ///ReadOnly Text Field
 Widget readOnlyTextFiled(
     {required BuildContext context,
-    required TextEditingController controller,required String hint,bool important=false}) {
+    required TextEditingController controller,
+    required String hint,
+    bool important = false}) {
   return Container(
       height: 30,
       child: TextField(
         controller: controller,
         readOnly: true,
-
         decoration: InputDecoration(
-
           label: important ? importantText(text: hint) : Text(hint),
           border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),),
+          contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+        ),
       ));
 }
