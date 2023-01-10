@@ -82,19 +82,97 @@ class _SellerAddIDInfoPageState extends State<SellerAddIDInfoPage> {
             "Your account information is secure ",
             style: TextStyle(fontSize: 12, fontFamily: 'Itim-Regular'),
           ),
+
           ///ID Documents
           Card(
             child: Container(
-              height: 150,
-              child:  Column(
-                  children: [
-                    leftAndRightPadding(child: importantText(text: "ID Documents",fontSize: 18,textColor: Colors.black)),
-                    Divider(color: MyColors.GREEN_LIGHT_SHADE,)
-                  ],
-                ),
-              ),  
+              height: 180,
+              child: Column(
+                children: [
+                  leftAndRightPadding(
+                      child: importantText(
+                          text: "ID Documents",
+                          fontSize: 18,
+                          textColor: Colors.black)),
+                  Divider(
+                    color: MyColors.GREEN_LIGHT_SHADE,
+                  ),
+
+                  ///ID Documents Images
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ///ID Front Side
+                      Column(
+                        children: [
+                          Text(
+                            "Front Side ",
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: 'Itim-Regular',
+                                color: MyColors.LIGHT_PINK),
+                          ),
+                          Container(
+                            height: 110,
+                            width: 110,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                              color: MyColors.GREEN_LIGHT_SHADE,
+                            )),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.add),
+                                Text(
+                                  "Upload",
+                                  style: TextStyle(
+                                      fontFamily: 'Itim-Regular', fontSize: 11),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+
+                      ///ID Back Side
+                      Column(
+                        children: [
+                          Text(
+                            "Front Side ",
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: 'Itim-Regular',
+                                color: MyColors.LIGHT_PINK),
+                          ),
+                          Container(
+                            height: 110,
+                            width: 110,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                              color: MyColors.GREEN_LIGHT_SHADE,
+                            )),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.add),
+                                Text(
+                                  "Upload",
+                                  style: TextStyle(
+                                      fontFamily: 'Itim-Regular', fontSize: 11),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-        
+          ),
         ],
       ),
     );
