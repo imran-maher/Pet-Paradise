@@ -4,6 +4,7 @@ import 'package:pet_paradise/controllers/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/custom_widgets/dailogs.dart';
 import 'package:pet_paradise/seller/pages/seller_signup_code_verification_page.dart';
+import 'package:pet_paradise/seller/pages/seller_signup_create_password_page.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/size_config.dart';
 
@@ -77,49 +78,17 @@ class _SellerSignUpMobileNumberPageState
                   height: MyAppSize.height! * 0.4,
                 ),
                 MyButton(
-                    onPressed: () {
-                      CustomProgressIndicatorDialog(context: context);
-                      if (_mobileNumberController.text.isNotEmpty) {
-                        var mobileNumber = _mobileNumberController.text;
-                        var msg = "";
-                        SnackBar snackBar = SnackBar(content: Text(msg));
-                        FirebaseAuth.instance.verifyPhoneNumber(
-                            phoneNumber: mobileNumber,
-                            verificationCompleted: (cred) {
-                              Navigator.of(context).pop();
-                              msg = cred.providerId;
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                            },
-                            verificationFailed: (e) {
-                              Navigator.of(context).pop();
-                              msg = e.toString();
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                            },
-                            codeSent: (str, num) {
-                              Navigator.of(context).pop();
-                              msg = str + num.toString();
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                              Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SellerSignupCodeVerificationPage(
-                                                verificationCode: "123456",
-                                              )));
-                            },
-                            codeAutoRetrievalTimeout: (str) {
-                              Navigator.of(context).pop();
-                              msg = str + str.length.toString();
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                            });
-                      }
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) =>
-                      //             SellerSignupCodeVerificationPage(
-                      //               verificationCode: "123456",
-                      //             )));
+                    onPressed: ()async{
+                      await FirebaseAuth.instance.verifyPhoneNumber(
+                        phoneNumber: _mobileNumberController.text,
+                        verificationCompleted: (PhoneAuthCredential credential) {},
+                        verificationFailed: (FirebaseAuthException e) {},
+                        codeSent: (String verificationId, int? resendToken) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(verificationId)));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SellerSignupCreatePasswordPage()));
+                        },
+                        codeAutoRetrievalTimeout: (String verificationId) {},
+                      );
                     },
                     title: "Next",
                     fontFamily: 'Itim-Regular',

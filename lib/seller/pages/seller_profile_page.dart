@@ -26,7 +26,7 @@ class _SellerAddBasicProfileInfoPageState extends State<SellerAddBasicProfileInf
     // TODO: implement initState
     super.initState();
     _emailController.text = widget._sellerBasicInfo.emailAddress?? "";
-    _mobileNumberController.text = widget._sellerBasicInfo.phoneNumber?? "";
+    _mobileNumberController.text = widget._sellerBasicInfo.phoneNumber;
     _storeNameController.text = widget._sellerBasicInfo.storeName?? "" ;
 
   }
