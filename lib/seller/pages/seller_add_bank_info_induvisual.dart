@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
-import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/seller/pages/seller_add_bank_info_induvisual.dart';
-import 'package:pet_paradise/utils/colors.dart';
 
-TextEditingController idNameController = TextEditingController();
-TextEditingController idNumberController = TextEditingController();
+import '../../custom_widgets/custom_widgets.dart';
+import '../../utils/colors.dart';
 
-class SellerAddIDInfoPage extends StatefulWidget {
-  const SellerAddIDInfoPage({Key? key}) : super(key: key);
+//Controllers
+TextEditingController accountTitleController = TextEditingController();
+TextEditingController ibanController = TextEditingController();
+TextEditingController accountNumberController = TextEditingController();
+TextEditingController bankNameController = TextEditingController();
+TextEditingController branchCodeController = TextEditingController();
+
+class SellerAddBankIndividual extends StatefulWidget {
+  const SellerAddBankIndividual({Key? key}) : super(key: key);
 
   @override
-  State<SellerAddIDInfoPage> createState() => _SellerAddIDInfoPageState();
+  State<SellerAddBankIndividual> createState() =>
+      _SellerAddBankIndividualState();
 }
 
-class _SellerAddIDInfoPageState extends State<SellerAddIDInfoPage> {
+class _SellerAddBankIndividualState extends State<SellerAddBankIndividual> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.WHITE_WITH_GREEN_SHADE,
       appBar: transparentAppBar(
-          context: context, centerTitle: "Add ID & Bank Info"),
+        context: context,
+        centerTitle: "Add Bank Information",
+      ),
       body: Responsive(
         mobile: mobile(context),
         tablet: tablet(context),
@@ -42,11 +49,11 @@ class _SellerAddIDInfoPageState extends State<SellerAddIDInfoPage> {
             children: [
               CircleAvatar(
                 radius: 18,
-                backgroundColor: MyColors.GREEN_LIGHT_SHADE,
+                backgroundColor: Colors.white,
                 child: Center(
                   child: Text(
                     "1",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: MyColors.GREEN_LIGHT_SHADE),
                   ),
                 ),
               ),
@@ -59,11 +66,11 @@ class _SellerAddIDInfoPageState extends State<SellerAddIDInfoPage> {
               ),
               CircleAvatar(
                 radius: 18,
-                backgroundColor: Colors.white,
+                backgroundColor: MyColors.GREEN_LIGHT_SHADE,
                 child: Center(
                   child: Text(
                     "2",
-                    style: TextStyle(color: MyColors.GREEN_LIGHT_SHADE),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
@@ -74,10 +81,10 @@ class _SellerAddIDInfoPageState extends State<SellerAddIDInfoPage> {
             height: 15,
           ),
 
-          /// Step 1 ID information
+          /// Step 2 Bank information
           Center(
               child: Text(
-            "Step1 : ID Information..",
+            "Step2 : Bank Information..",
             style: TextStyle(fontSize: 12, fontFamily: 'Itim-Regular'),
           )),
           SizedBox(
@@ -89,7 +96,7 @@ class _SellerAddIDInfoPageState extends State<SellerAddIDInfoPage> {
             style: TextStyle(fontSize: 12, fontFamily: 'Itim-Regular'),
           ),
 
-          ///ID Documents
+          ///Bank Documents
           Card(
             child: Container(
               height: 180,
@@ -97,7 +104,7 @@ class _SellerAddIDInfoPageState extends State<SellerAddIDInfoPage> {
                 children: [
                   leftAndRightPadding(
                       child: importantText(
-                          text: "ID Documents",
+                          text: "Check Copy",
                           fontSize: 18,
                           textColor: Colors.black)),
                   Divider(
@@ -113,45 +120,6 @@ class _SellerAddIDInfoPageState extends State<SellerAddIDInfoPage> {
                       ///ID Front Side
                       Column(
                         children: [
-                          Text(
-                            "Front Side ",
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontFamily: 'Itim-Regular',
-                                color: MyColors.LIGHT_PINK),
-                          ),
-                          Container(
-                            height: 110,
-                            width: 110,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                              color: MyColors.GREEN_LIGHT_SHADE,
-                            )),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.add),
-                                Text(
-                                  "Upload",
-                                  style: TextStyle(
-                                      fontFamily: 'Itim-Regular', fontSize: 11),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-
-                      ///ID Back Side
-                      Column(
-                        children: [
-                          Text(
-                            "Front Side ",
-                            style: TextStyle(
-                                fontSize: 13,
-                                fontFamily: 'Itim-Regular',
-                                color: MyColors.LIGHT_PINK),
-                          ),
                           Container(
                             height: 110,
                             width: 110,
@@ -180,13 +148,13 @@ class _SellerAddIDInfoPageState extends State<SellerAddIDInfoPage> {
             ),
           ),
           SizedBox(
-            height: 20,
+            height: 10,
           ),
 
-          ///ID information
+          ///Bank Account information
           Card(
             child: Container(
-              height: 150,
+              height: 280,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -194,9 +162,9 @@ class _SellerAddIDInfoPageState extends State<SellerAddIDInfoPage> {
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      "ID Information",
+                      "Bank Account Information",
                       style:
-                          TextStyle(fontSize: 12, fontFamily: 'Itim-Regular'),
+                          TextStyle(fontSize: 18, fontFamily: 'Itim-Regular'),
                     ),
                   ),
                   Divider(
@@ -205,8 +173,8 @@ class _SellerAddIDInfoPageState extends State<SellerAddIDInfoPage> {
                   leftAndRightPadding(
                       child: myCustomTextFiled(
                           context: context,
-                          controller: idNameController,
-                          hint: "ID Name",
+                          controller: accountTitleController,
+                          hint: "Account Title",
                           important: true)),
                   Divider(
                     color: MyColors.GREEN_LIGHT_SHADE,
@@ -214,30 +182,75 @@ class _SellerAddIDInfoPageState extends State<SellerAddIDInfoPage> {
                   leftAndRightPadding(
                       child: myCustomTextFiled(
                           context: context,
-                          controller: idNameController,
-                          hint: "ID Number",
+                          controller: ibanController,
+                          hint: "IBAN",
+                          important: true)),
+                  Divider(
+                    color: MyColors.GREEN_LIGHT_SHADE,
+                  ),
+                  leftAndRightPadding(
+                      child: myCustomTextFiled(
+                          context: context,
+                          controller: accountNumberController,
+                          hint: "Account Number",
+                          important: true)),
+                  Divider(
+                    color: MyColors.GREEN_LIGHT_SHADE,
+                  ),
+                  leftAndRightPadding(
+                      child: myCustomTextFiled(
+                          context: context,
+                          controller: bankNameController,
+                          hint: "Bank Name ",
+                          important: true)),
+                  Divider(
+                    color: MyColors.GREEN_LIGHT_SHADE,
+                  ),
+                  leftAndRightPadding(
+                      child: myCustomTextFiled(
+                          context: context,
+                          controller: branchCodeController,
+                          hint: "Branch Code",
                           important: true)),
                 ],
               ),
             ),
           ),
           SizedBox(
-            height: 120,
+            height: 15,
           ),
-          MyButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SellerAddBankIndividual()));
-              },
-              title: "Next",
-              fontSize: 14,
-              fontFamily: 'Itim-Regular',
-              height: 45,
-              color: MyColors.GREEN_LIGHT_SHADE,
-              textColor: Colors.white,
-              borderRadius: 25)
+          Row(children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: MyButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    title: "Previous",
+                    color: Colors.white,
+                    height: 45,
+                    fontSize: 14,
+                    fontFamily: 'Itim-Regular',
+                    textColor:MyColors.GREEN_LIGHT_SHADE,
+                    borderRadius: 25),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: MyButton(
+                    onPressed: () {},
+                    title: "Submit",
+                    fontSize: 14,
+                    fontFamily: 'Itim-Regular',
+                    height: 45,
+                    color: MyColors.GREEN_LIGHT_SHADE,
+                    textColor: Colors.white,
+                    borderRadius: 25),
+              ),
+            ),
+          ])
         ],
       ),
     );

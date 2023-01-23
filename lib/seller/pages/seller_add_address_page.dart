@@ -74,7 +74,7 @@ class _SellerAddAddressPageState extends State<SellerAddAddressPage> {
                       SizedBox(
                         height: 15,
                       ),
-                      readOnlyTextFiled(
+                      myCustomTextFiled(
                           context: context,
                           controller: _businessAddressController,
                           hint: 'Address',
@@ -131,7 +131,7 @@ class _SellerAddAddressPageState extends State<SellerAddAddressPage> {
                       Divider(
                         color: MyColors.GREEN,
                       ),
-                      readOnlyTextFiled(
+                      myCustomTextFiled(
                           context: context,
                           controller: _wareHouseAddressController,
                           hint: 'Address',
@@ -188,7 +188,7 @@ class _SellerAddAddressPageState extends State<SellerAddAddressPage> {
                       Divider(
                         color: MyColors.GREEN,
                       ),
-                      readOnlyTextFiled(
+                      myCustomTextFiled(
                           context: context,
                           controller: _returnAddressController,
                           hint: 'Address',

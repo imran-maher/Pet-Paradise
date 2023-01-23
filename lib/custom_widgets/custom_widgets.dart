@@ -260,7 +260,7 @@ Widget importantText({required String text, double? fontSize,Color? textColor}) 
 }
 
 ///ReadOnly Text Field
-Widget readOnlyTextFiled(
+Widget myCustomTextFiled(
     {required BuildContext context,
     required TextEditingController controller,
     required String hint,
