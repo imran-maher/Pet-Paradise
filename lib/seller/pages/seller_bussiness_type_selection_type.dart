@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/controllers/responsive_controller.dart';
+import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/utils/colors.dart';
 
 class SellerBusinessTypeSelectionPage extends StatelessWidget {
@@ -6,6 +8,29 @@ class SellerBusinessTypeSelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: MyColors.WHITE_WITH_GREEN_SHADE,);
+    return Scaffold(
+      backgroundColor: MyColors.WHITE_WITH_GREEN_SHADE,
+      appBar:
+          transparentAppBar(context: context, centerTitle: "Business Type "),
+      body: Responsive(mobile: mobile(context),tablet: tablet(context),web: web(context),),
+    );
+  }
+  ///mobile 
+  Widget mobile(BuildContext context) {
+    return Column()
+    );
+  }
+  ///Tablet 
+  Widget tablet(BuildContext context) {
+    return Center(
+      child: Text("In Designing Process"),
+    );
+  }
+
+  ///Web
+  Widget web(BuildContext context) {
+    return Center(
+      child: Text("In Designing Process"),
+    );
   }
 }
