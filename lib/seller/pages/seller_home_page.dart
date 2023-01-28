@@ -6,8 +6,8 @@ import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/custom_widgets/seller_bottom_nav.dart';
 
 import 'package:pet_paradise/seller/module/seller_info.dart';
-import 'package:pet_paradise/seller/pages/seller_add_Id_info_page.dart';
 import 'package:pet_paradise/seller/pages/seller_add_address_page.dart';
+import 'package:pet_paradise/seller/pages/seller_bussiness_type_selection_type.dart';
 import 'package:pet_paradise/seller/pages/seller_profile_page.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/size_config.dart';
@@ -55,10 +55,12 @@ class _SellerHomePageState extends State<SellerHomePage> {
     ];
     return leftAndRightPadding(
         child: Card(
+          elevation: 3,
+          shadowColor: MyColors.WHITE_WITH_GREEN_SHADE,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       color: MyColors.GREEN_LIGHT_SHADE,
       child: Container(
-        height: 335,
+        height: 350,
         width: MyAppSize.width! * 0.9,
         child: leftAndRightPadding(
           child: Column(
@@ -154,10 +156,11 @@ Widget tiles({required BuildContext context ,required TileData tileData, require
           Navigator.of(context).push(MaterialPageRoute(builder: (context) => SellerAddAddressPage(sellerAddressModule: SellerAddressModule(businessAddress: null , wareHouseAddress: null , returnAddress: null),)));
 
         }else if(tileData.tileTitle == TileData.VERIFY_ID_BANK){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SellerAddIDInfoPage()));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => SellerBusinessTypeSelectionPage()));
         }
       },
       child: Container(
+
         height: 55,
         decoration: BoxDecoration(
             color: MyColors.LIGHT_GREEN, borderRadius: BorderRadius.circular(20)),
@@ -167,11 +170,11 @@ Widget tiles({required BuildContext context ,required TileData tileData, require
               maxRadius: 10,
               backgroundColor: MyColors.GREEN_LIGHT_SHADE,
               child: Center(
-                child: Text(tileNumber.toString()),
+                child: Text(tileNumber.toString() ),
               ),
             ),
             title: Text(tileData.tileTitle),
-            trailing: Icon(tileData.trailingIconData),
+            trailing: Icon(tileData.trailingIconData,size: 15),
           ),
         ),
       ),
