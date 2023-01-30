@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
+import 'package:pet_paradise/seller/pages/seller_add_pet.dart';
 
 class SellerToolsPage extends StatefulWidget {
   const SellerToolsPage({Key? key}) : super(key: key);
@@ -96,6 +97,32 @@ class _SellerToolsPageState extends State<SellerToolsPage> {
                         onTape: () {},
                         title: "Finance",
                         imgPath: "assets/images/finance.png"),
+                  ],
+                ),
+              ),
+
+              SizedBox(
+                height: 20,
+              ),
+              ///Third Row Tools
+              leftAndRightPadding(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ///Add Pet Tool
+                    sellerToolButton(
+                        onTape: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SellerAddPet()));
+                        },
+                        title: "Add Pet",
+                        imgPath: "assets/images/addPet.png"),
+
+                    ///Add Accessorie/Feed Tool
+                    sellerToolButton(
+                        onTape: () {},
+                        title: "Schedule Drop-offs",
+                        imgPath: "assets/images/addFeed.png"),
+
                   ],
                 ),
               ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/custom_widgets/seller_bottom_nav.dart';
+import 'package:pet_paradise/seller/pages/seller_bottom_nav.dart';
 
 class SellerProfileInfoPage extends StatefulWidget {
   const SellerProfileInfoPage({Key? key}) : super(key: key);

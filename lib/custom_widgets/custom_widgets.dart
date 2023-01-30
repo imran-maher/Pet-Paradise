@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
-import 'package:pet_paradise/custom_widgets/seller_bottom_nav.dart';
+import 'package:pet_paradise/seller/pages/seller_bottom_nav.dart';
 
 import 'package:pet_paradise/utils/size_config.dart';
 
@@ -339,11 +339,11 @@ Widget sellerProfileContainer(
 
 /// Seller Tools Button
 Widget sellerToolButton(
-    {required Function onTape,
+    {required  onTape(),
     required String title,
     required String imgPath}) {
   return GestureDetector(
-    onTap: onTape(),
+    onTap: onTape,
     child: Container(
       height: 100,
       width: 65,
