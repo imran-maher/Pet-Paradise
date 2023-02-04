@@ -1,10 +1,7 @@
-
-
 class ServiceProviders {
   static const TRAINER = "Trainer";
   static const VET = "Veterinarian";
   static const BREEDER = "Breeder";
-
 
   late final String _id;
   late final String _name;
@@ -15,15 +12,18 @@ class ServiceProviders {
   late final int _rating;
   late final double _fee;
   late final List<String> _activeDays;
-  late final DateTime _startTime;
-  late final DateTime _endTime;
-  late final String _imgUrl;
+  late final DateTime? _startTime;
+  late final DateTime? _endTime;
+  late final String? _imgUrl;
+
+  ///Constructors
 
   ServiceProviders.init(
       {required String id,
       required String name,
       required String address,
-      required double fee , required String serviceType}) {
+      required double fee,
+      required String serviceType}) {
     this._id = id;
     this._name = name;
     this._address = address;
@@ -31,21 +31,55 @@ class ServiceProviders {
     this._serviceType = serviceType;
   }
 
-  String get imgUrl => _imgUrl;
+  ///Constructor
+  ServiceProviders.fromMap(Map<String, dynamic> map) {
+    this._name = map['name'];
+    this._id = map['id'];
+    this._serviceType = map['serviceType'];
+    this._address = map['address'];
+    this._experience = map['experience'];
+    this._activeDays = map['activeDays'];
+    this._fee = map['fee'];
+    this._rating = map['rating'];
+    this._qualification = map['qualification'];
+    this._startTime = map['startTime'];
+    this._endTime = map['endTime'];
+    this._imgUrl = map['imgUrl'];
+  }
 
-  set imgUrl(String value) {
+  Map<String,dynamic> toMap(){
+    return {
+      'name' : this._name,
+      'id' : this._id,
+      'serviceType' : this._serviceType,
+      'address' : this._address,
+      'experience' : this._experience,
+      'activeDays' : this._activeDays,
+      'fee' : this._fee,
+      'rating' :this._rating,
+      'qualification' : this._qualification,
+      'startTime' : this._startTime,
+      'endTime' : this._endTime,
+      'imgUrl' : this._imgUrl
+
+    };
+  }
+
+  String? get imgUrl => _imgUrl;
+
+  set imgUrl(String? value) {
     _imgUrl = value;
   }
 
-  DateTime get endTime => _endTime;
+  DateTime? get endTime => _endTime;
 
-  set endTime(DateTime value) {
+  set endTime(DateTime? value) {
     _endTime = value;
   }
 
-  DateTime get startTime => _startTime;
+  DateTime? get startTime => _startTime;
 
-  set startTime(DateTime value) {
+  set startTime(DateTime? value) {
     _startTime = value;
   }
 
