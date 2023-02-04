@@ -17,8 +17,8 @@ class SellerBusinessTypeSelectionPage extends StatelessWidget {
   }
   ///mobile 
   Widget mobile(BuildContext context) {
-   return Container();
-
+    return Column()
+    );
   }
   ///Tablet 
   Widget tablet(BuildContext context) {

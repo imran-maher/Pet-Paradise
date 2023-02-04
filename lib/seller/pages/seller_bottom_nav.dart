@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/seller/pages/seller_home_page.dart';
+import 'package:pet_paradise/seller/pages/seller_messages_notification_page.dart';
+import 'package:pet_paradise/seller/pages/seller_profile_info_page.dart';
+import 'package:pet_paradise/seller/pages/seller_tools_page.dart';
 import 'package:pet_paradise/utils/colors.dart';
 
 class SellerBottomNavBar extends StatefulWidget {
@@ -47,6 +51,19 @@ class _SellerBottomNavBarState extends State<SellerBottomNavBar> {
       onTap: (index){
         setState(() {
           selectedIndex = index;
+          if(selectedIndex == 0){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => SellerHomePage()));
+          }
+          else if(selectedIndex == 1){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => SellerToolsPage()));
+          }
+          else if(selectedIndex == 2){}
+          else if(selectedIndex == 3){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => SellerMessagesAndNotificationPage()));
+          }
+          else if(selectedIndex == 4){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => SellerProfileInfoPage()));
+          }
         });
       },
     );

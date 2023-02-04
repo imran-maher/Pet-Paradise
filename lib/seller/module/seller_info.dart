@@ -1,4 +1,5 @@
 class SellerBasicInfo {
+
   late final String? _emailAddress;
   late final String _phoneNumber;
   late final String? _storeName;
@@ -64,7 +65,7 @@ class SellerAddressModule{
 
 }
 
-///Seller ID and Banking Info
+///Seller ID Info
 class SellerIDInfoModule{
   late  var _idFrontSide;
   late var _idBackSide;

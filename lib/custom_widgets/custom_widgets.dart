@@ -3,6 +3,8 @@
 //TODO : My Custom Button Widget
 
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/controllers/responsive_controller.dart';
+import 'package:pet_paradise/seller/pages/seller_bottom_nav.dart';
 
 import 'package:pet_paradise/utils/size_config.dart';
 
@@ -241,7 +243,8 @@ Widget sellerCenterCard({required BuildContext buildContext}) {
 }
 
 ///Important Text
-Widget importantText({required String text, double? fontSize,Color? textColor}) {
+Widget importantText(
+    {required String text, double? fontSize, Color? textColor}) {
   return Row(
     children: [
       Text(
@@ -276,4 +279,117 @@ Widget myCustomTextFiled(
           contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
         ),
       ));
+}
+
+///Custom Body
+Widget customBodyWithCenterTextAppBar(
+    {required BuildContext context,
+    required String appBarTitle,
+    required Responsive responsiveScreens,
+    SellerBottomNavBar? bottomNavigationBar}) {
+  return Scaffold(
+    bottomNavigationBar: bottomNavigationBar,
+    backgroundColor: MyColors.WHITE_WITH_GREEN_SHADE,
+    appBar: transparentAppBar(context: context, centerTitle: appBarTitle),
+    body: responsiveScreens,
+  );
+}
+
+///Seller Profile Container
+Widget sellerProfileContainer(
+    {required String tittle,
+    required Function? onTap(),
+    bool? topBorder,
+    bool? bootomBorder}) {
+  return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            height: topBorder == null ? 0 : 1,
+            color: MyColors.GREEN_LIGHT_SHADE,
+          ),
+          Container(
+            height: 50,
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Text(
+                    tittle,
+                    style: TextStyle(fontSize: 15, fontFamily: 'Itim-Regular'),
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: MyColors.GREEN,
+                )
+              ],
+            ),
+          ),
+          Container(
+            height: bootomBorder == null ? 0 : 1,
+            color: MyColors.GREEN_LIGHT_SHADE,
+          ),
+        ],
+      ));
+}
+
+/// Seller Tools Button
+Widget sellerToolButton(
+    {required  onTape(),
+    required String title,
+    required String imgPath}) {
+  return GestureDetector(
+    onTap: onTape,
+    child: Container(
+      height: 100,
+      width: 65,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image(image: AssetImage(imgPath)),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            title,
+            style: TextStyle(fontFamily: 'itim-Regular', fontSize: 14),
+          )
+        ],
+      ),
+    ),
+  );
+}
+
+///Seller Notification custom Container
+Widget customContainerForSellerNotification(
+    {required String imgName, required String title}) {
+  return Container(
+    height: 80,
+    color: Colors.white,
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+            left: 15,
+          ),
+          child: Image(
+            image: AssetImage("assets/images/$imgName"),
+          ),
+        ),
+        SizedBox(
+          width: 15,
+        ),
+        Text(
+          title,
+          style: TextStyle(fontSize: 15, fontFamily: 'Itim-Regular'),
+        )
+      ],
+    ),
+  );
 }
