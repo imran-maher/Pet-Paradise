@@ -43,6 +43,7 @@ Future<String> login(
       if (user.emailVerified) {
         response = "Login Success , UUID : ${user.uid}";
         Navigator.of(context).pop();
+
       } else {
         response = "Your Email is Not Verified , Kindly Verify and Login Again";
         Navigator.of(context).pop();

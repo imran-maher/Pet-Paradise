@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
+import 'package:pet_paradise/pages/service_selection_page.dart';
 import 'package:pet_paradise/seller/pages/seller_startup_page.dart';
 import '../custom_widgets/custom_widgets.dart';
 import '../utils/colors.dart';
@@ -95,22 +96,13 @@ Widget mobile(BuildContext context) {
           //TODO: Services
           MyButton(
             onPressed:  (){
-              Navigator.of(context) .push(MaterialPageRoute( builder: (context) => LoginScreen()));
+              Navigator.of(context) .push(MaterialPageRoute( builder: (context) => ServiceSelectionPage()));
             },
             title: "Services",
             color: MyColors.GREEN40,
             textColor: MyColors.PARRIT_GREEN,
           ),
-          SizedBox(
-            height: buttonSpace,
-          ),
-          //TODO: Guest
-          MyButton(
-            onPressed: (){},
-            title: "Guest",
-            color: MyColors.GREEN40,
-            textColor: MyColors.PARRIT_GREEN,
-          ),
+
           SizedBox(
             height: 70,
           ),
