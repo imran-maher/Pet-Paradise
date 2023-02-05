@@ -1,3 +1,5 @@
+import 'package:pet_paradise/module/app_user.dart';
+
 import '../controllers/firebase_auth_controller.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import '../controllers/form_validation_controller.dart';
@@ -13,7 +15,10 @@ TextEditingController signUpPasswordController = TextEditingController();
 TextEditingController signUpRePasswordController = TextEditingController();
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+  late final String _userType;
+   SignUpPage({Key? key,required userType}) : super(key: key){
+     this._userType = userType;
+   }
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -144,10 +149,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 onPressed: () async {
+                  AppUser appUser = AppUser(null, widget._userType, signUpNameController.text, signUpEmailController.text);
                   String msg = await firebase_auth.signUp(
+                    appUser: appUser,
                       context: context,
-                      email: signUpEmailController.text,
-                      password: signUpPasswordController.text);
+                     password: signUpPasswordController.text
+                      );
                   SnackBar snackBar = SnackBar(content: Text(msg));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },

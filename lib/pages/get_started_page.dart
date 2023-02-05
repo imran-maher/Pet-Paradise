@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
 import 'package:pet_paradise/module/get_started_page_data.dart';
+import 'package:pet_paradise/pages/service_provider_for_pet_owner.dart';
 
 
 import 'package:pet_paradise/utils/colors.dart';
@@ -106,7 +107,7 @@ Widget mobile(BuildContext context, {required GetStartedPageData pageData}) {
           alignment: Alignment.bottomCenter,
           child: MaterialButton(
             onPressed: () {
-
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ServiceProviderForPetOwnerPage(typeOfService: pageData.pageTitle,)));
             },
             color: MyColors.MATERIAL_LIGHT_GREEN,
             height: 39,

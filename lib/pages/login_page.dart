@@ -1,4 +1,5 @@
 import 'package:pet_paradise/custom_widgets/dailogs.dart';
+import 'package:pet_paradise/module/app_user.dart';
 
 import '../controllers/firebase_auth_controller.dart' as firebase_auth;
 import 'package:flutter/material.dart';
@@ -18,7 +19,11 @@ TextEditingController loginEmailController = TextEditingController();
 TextEditingController loginPasswordController = TextEditingController();
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  late final String _userType;
+
+  LoginScreen({Key? key, required String userType}) : super(key: key) {
+    this._userType = userType;
+  }
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -41,14 +46,14 @@ class _LoginScreenState extends State<LoginScreen> {
         extendBodyBehindAppBar: true,
         appBar: transparentAppBar(context: context),
         body: Responsive(
-          mobile: mobile(context),
+          mobile: mobile(context, widget._userType),
           tablet: tablet(context),
           web: web(context),
         ));
   }
 
   //TODO : Mobile
-  Widget mobile(BuildContext context) {
+  Widget mobile(BuildContext context, String userType) {
     return Stack(
       children: [
         backgroundWidget(),
@@ -144,7 +149,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         clickAbleText(
                             text: "Forgot Password?",
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ResetPasswordPage()));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ResetPasswordPage()));
                             },
                             textColor: MyColors.RED,
                             fontWeight: FontWeight.bold,
@@ -162,10 +168,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   borderRadius: BorderRadius.circular(20)),
                               onPressed: () async {
                                 CustomProgressIndicatorDialog(context: context);
+                                AppUser appUser = AppUser(null, userType, null,
+                                    loginEmailController.text);
                                 String msg = await firebase_auth.login(
                                     context: context,
-                                    email: loginEmailController.text,
-                                    password: loginPasswordController.text);
+                                    password: loginPasswordController.text,
+                                    appUser: appUser);
 
                                 SnackBar snackBar =
                                     SnackBar(content: Text(msg));
@@ -217,15 +225,19 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Text("Don't have an account?"),
                             clickAbleText(
-                              text: "SignUp",
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SignUpPage()));
-                              },
-                              underLine: true,textColor: MyColors.MATERIAL_LIGHT_GREEN,fontWeight: FontWeight.bold
-                            ),
+                                enable: true,
+                                text: "SignUp",
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SignUpPage(
+                                                userType: widget._userType,
+                                              )));
+                                },
+                                underLine: true,
+                                textColor: MyColors.MATERIAL_LIGHT_GREEN,
+                                fontWeight: FontWeight.bold),
                           ],
                         )
                       ],

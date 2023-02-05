@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
 import 'package:pet_paradise/pages/service_selection_page.dart';
+import 'package:pet_paradise/module/app_user.dart';
 import 'package:pet_paradise/seller/pages/seller_startup_page.dart';
 import '../custom_widgets/custom_widgets.dart';
 import '../utils/colors.dart';
@@ -32,10 +33,10 @@ class _ChoicePageState extends State<ChoicePage> {
 }
 
 //TODO : Go To Login Screen
-goToLoginScreen(BuildContext context) {
+goToLoginScreen(BuildContext context,String userType) {
   Navigator.of(context).pushReplacement(
     MaterialPageRoute(
-      builder: (context) => LoginScreen(),
+      builder: (context) => LoginScreen(userType: userType,),
     ),
   );
 }
@@ -72,11 +73,11 @@ Widget mobile(BuildContext context) {
           //TODO : Pet Owner
           MyButton(
             onPressed: (){
-              Navigator.of(context) .push(MaterialPageRoute( builder: (context) => LoginScreen()));
+              Navigator.of(context) .push(MaterialPageRoute( builder: (context) => LoginScreen(userType: AppUser.PET_OWNER)));
             },
             title: "Pet Owner",
-            color: MyColors.GREEN40,
-            textColor: MyColors.PARRIT_GREEN,
+            color: MyColors.MATERIAL_LIGHT_GREEN,
+            textColor: Colors.white,
           ),
           SizedBox(
             height: buttonSpace,
@@ -87,8 +88,8 @@ Widget mobile(BuildContext context) {
           Navigator.of(context) .push(MaterialPageRoute( builder: (context) => SellerStartUpPage()));
           },
             title: "Seller",
-            color: MyColors.GREEN40,
-            textColor: MyColors.PARRIT_GREEN,
+            color: MyColors.MATERIAL_LIGHT_GREEN,
+            textColor: Colors.white,
           ),
           SizedBox(
             height: buttonSpace,
@@ -99,8 +100,8 @@ Widget mobile(BuildContext context) {
               Navigator.of(context) .push(MaterialPageRoute( builder: (context) => ServiceSelectionPage()));
             },
             title: "Services",
-            color: MyColors.GREEN40,
-            textColor: MyColors.PARRIT_GREEN,
+            color: MyColors.MATERIAL_LIGHT_GREEN,
+            textColor: Colors.white,
           ),
 
           SizedBox(

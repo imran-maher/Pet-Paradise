@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/controllers/responsive_controller.dart';
+import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
+import 'package:pet_paradise/module/app_user.dart';
 import 'package:pet_paradise/module/get_started_page_data.dart';
 import 'package:pet_paradise/pages/get_started_page.dart';
 
@@ -7,7 +9,11 @@ import '../utils/colors.dart';
 import '../utils/size_config.dart';
 
 class MainDashboardPage extends StatefulWidget {
-  const MainDashboardPage({Key? key}) : super(key: key);
+  late final AppUser _appUser;
+
+  MainDashboardPage({Key? key, required AppUser appUser}) : super(key: key) {
+    this._appUser = appUser;
+  }
 
   static const TRAINER = "Trainer";
   static const VET = "Veterinarian";
@@ -15,7 +21,6 @@ class MainDashboardPage extends StatefulWidget {
   static const PET_PANDA = "Pet Panda";
   static const ADOPT_A_PET = "Adopt A Pet";
   static const BLOGS_AND_ARTICLES = "Blogs & Articles";
-
 
   //Get Started with Blog Page Data
   static final GetStartedPageData getStartedWithBlogs = GetStartedPageData(
@@ -66,7 +71,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
     MyAppSize.config(MediaQuery.of(context));
     return Scaffold(
       body: Responsive(
-        mobile: mobile(context),
+        mobile: mobile(context, widget._appUser),
         web: web(context),
         tablet: tablet(context),
       ),
@@ -76,18 +81,20 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
 
 //TODO : Mobile UI
 
-Widget mobile(BuildContext context) {
-  return
-      CustomScrollView(
-        physics: BouncingScrollPhysics(),
-        slivers: [
-          myDashboardAppBar(title: "Hello User!"),
-          SliverPadding(
-            padding: EdgeInsets.only(left: MyAppSize.width! * 0.05 ,right:MyAppSize.width! * 0.05,bottom: MyAppSize.height! * 0.05 ),
-            sliver: myDashboardGrid(),
-          )
-        ],
-      );
+Widget mobile(BuildContext context, AppUser appUser) {
+  return CustomScrollView(
+    physics: BouncingScrollPhysics(),
+    slivers: [
+      myDashboardAppBar(title: "Hello ${appUser.userName}!", appUser: appUser),
+      SliverPadding(
+        padding: EdgeInsets.only(
+            left: MyAppSize.width! * 0.05,
+            right: MyAppSize.width! * 0.05,
+            bottom: MyAppSize.height! * 0.05),
+        sliver: myDashboardGrid(),
+      )
+    ],
+  );
 }
 
 //TODO : Tablet UI
@@ -101,16 +108,57 @@ Widget web(BuildContext context) {
 }
 
 // Appbar
-SliverAppBar myDashboardAppBar({required String title}) {
+SliverAppBar myDashboardAppBar(
+    {required String title, required AppUser appUser}) {
   return SliverAppBar(
-    pinned: true,
-    elevation: 10,
-    expandedHeight: 250,
-    backgroundColor:MyColors.YELLOW,
-    leading: Icon(Icons.arrow_back, color: MyColors.MATERIAL_LIGHT_GREEN),
+    title: Text(
+      title,
+      style: TextStyle(
+          fontSize: 16, color: Colors.white, fontFamily: 'Itim-Regular'),
+    ),
+    pinned: false,
+    elevation: 5,
+    automaticallyImplyLeading: false,
+    actions: [
+      Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: CircleAvatar(
+          backgroundColor: Colors.black,
+          maxRadius: 30,
+        ),
+      )
+    ],
+    expandedHeight: 200,
+    backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
     flexibleSpace: FlexibleSpaceBar(
-      background: Column(children: [],),
-      collapseMode: CollapseMode.pin,
+      background: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 14,right: 16),
+              child: Text(
+                "Dear ${appUser.userName} You Have Registered 5 Pets",
+                style: TextStyle(fontFamily: 'Itim-Regular',fontSize: 18),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: MyButton(
+                onPressed: () {},
+                title: 'Your Pets Here',
+                color: Colors.yellow,
+                textColor: Colors.black,
+                height: 45),
+          )
+        ],
+      ),
+      collapseMode: CollapseMode.parallax,
     ),
   );
 }
@@ -121,54 +169,78 @@ SliverGrid myDashboardGrid() {
   return SliverGrid(
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisExtent: 230,
+        mainAxisExtent: 250,
         mainAxisSpacing: 2,
         crossAxisSpacing: 2),
     delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
       return Card(
-        elevation: 1,
-        shadowColor: Colors.green,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        child: InkWell(
-          splashColor: MyColors.MATERIAL_LIGHT_GREEN,
-          onTap: () {
-            if(gridCardData[index].title == MainDashboardPage.TRAINER){
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>GetStartedPage(pageData: MainDashboardPage.getStartedWithTrainer)));
-            }else if(gridCardData[index].title == MainDashboardPage.VET){
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>GetStartedPage(pageData: MainDashboardPage.getStartedWithVet)));
-            }else if(gridCardData[index].title == MainDashboardPage.BREEDER){
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>GetStartedPage(pageData: MainDashboardPage.getStartedWithBreeder)));
-            }else if(gridCardData[index].title == MainDashboardPage.ADOPT_A_PET){
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>GetStartedPage(pageData: MainDashboardPage.getStartedWithAdoptAPet)));
-            }else if(gridCardData[index].title == MainDashboardPage.BLOGS_AND_ARTICLES){
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>GetStartedPage(pageData: MainDashboardPage.getStartedWithBlogs)));
-            }
-          },
-          borderRadius: BorderRadius.circular(10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                  flex: 4,
-                  child:
-                      Image(image: AssetImage(gridCardData[index]._imgPath))),
-              Expanded(
-                  child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  gridCardData[index]._title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: MyColors.DARK_BROWN,
-                      fontSize: 17,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w500),
-                ),
-              ))
-            ],
+          elevation: 1,
+          shadowColor: Colors.green,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          child: InkWell(
+            splashColor: MyColors.MATERIAL_LIGHT_GREEN,
+            onTap: () {
+              if (gridCardData[index].title == MainDashboardPage.TRAINER) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => GetStartedPage(
+                            pageData: MainDashboardPage.getStartedWithTrainer)));
+              } else if (gridCardData[index].title == MainDashboardPage.VET) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => GetStartedPage(
+                            pageData: MainDashboardPage.getStartedWithVet)));
+              } else if (gridCardData[index].title == MainDashboardPage.BREEDER) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => GetStartedPage(
+                            pageData: MainDashboardPage.getStartedWithBreeder)));
+              } else if (gridCardData[index].title ==
+                  MainDashboardPage.ADOPT_A_PET) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => GetStartedPage(
+                            pageData:
+                                MainDashboardPage.getStartedWithAdoptAPet)));
+              } else if (gridCardData[index].title ==
+                  MainDashboardPage.BLOGS_AND_ARTICLES) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => GetStartedPage(
+                            pageData: MainDashboardPage.getStartedWithBlogs)));
+              }
+            },
+            borderRadius: BorderRadius.circular(10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                    flex: 4,
+                    child:
+                        Image(image: AssetImage(gridCardData[index]._imgPath))),
+                Expanded(
+                    child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    gridCardData[index]._title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: MyColors.DARK_BROWN,
+                        fontSize: 17,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ))
+              ],
+            ),
           ),
-        ),
+
       );
     }, childCount: gridCardData.length),
   );
@@ -192,15 +264,20 @@ class MyDashboardCardData {
 List<MyDashboardCardData> generateCardData() {
   return <MyDashboardCardData>[
     MyDashboardCardData(
-        title: MainDashboardPage.TRAINER, imgPath: "assets/images/trainerLogo.png"),
+        title: MainDashboardPage.TRAINER,
+        imgPath: "assets/images/trainerLogo.png"),
     MyDashboardCardData(
-        title: MainDashboardPage.VET, imgPath: "assets/images/veterinariansLogo.png"),
+        title: MainDashboardPage.VET,
+        imgPath: "assets/images/veterinariansLogo.png"),
     MyDashboardCardData(
-        title: MainDashboardPage.BREEDER, imgPath: "assets/images/breedersLogo.png"),
+        title: MainDashboardPage.BREEDER,
+        imgPath: "assets/images/breedersLogo.png"),
     MyDashboardCardData(
-        title: MainDashboardPage.PET_PANDA, imgPath: "assets/images/petPandaLogo.png"),
+        title: MainDashboardPage.PET_PANDA,
+        imgPath: "assets/images/petPandaLogo.png"),
     MyDashboardCardData(
-        title: MainDashboardPage.ADOPT_A_PET, imgPath: "assets/images/adoptPetLogo.png"),
+        title: MainDashboardPage.ADOPT_A_PET,
+        imgPath: "assets/images/adoptPetLogo.png"),
     MyDashboardCardData(
         title: MainDashboardPage.BLOGS_AND_ARTICLES,
         imgPath: "assets/images/blogs&ArticlesLogo.png"),
