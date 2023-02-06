@@ -3,11 +3,12 @@
 //TODO : My Custom Button Widget
 
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/controllers/responsive_controller.dart';
-import 'package:pet_paradise/seller/pages/seller_bottom_nav.dart';
+import 'package:pet_paradise/utils/responsive_controller.dart';
+
 
 import 'package:pet_paradise/utils/size_config.dart';
 
+import '../seller_module/pages/seller_bottom_nav.dart';
 import '../utils/colors.dart';
 
 Widget MyButton(
@@ -298,11 +299,11 @@ Widget customBodyWithCenterTextAppBar(
 ///Seller Profile Container
 Widget sellerProfileContainer(
     {required String tittle,
-    required Function? onTap(),
+    required Function onTap,
     bool? topBorder,
     bool? bootomBorder}) {
   return GestureDetector(
-      onTap: onTap,
+      onTap: onTap(),
       child: Column(
         children: [
           Container(
