@@ -16,12 +16,7 @@ class MainDashboardPage extends StatefulWidget {
     this._appUser = appUser;
   }
 
-  static const TRAINER = "Trainer";
-  static const VET = "Veterinarian";
-  static const BREEDER = "Breeder";
-  static const PET_PANDA = "Pet Panda";
-  static const ADOPT_A_PET = "Adopt A Pet";
-  static const BLOGS_AND_ARTICLES = "Blogs & Articles";
+
 
   //Get Started with Blog Page Data
   static final GetStartedPageData getStartedWithBlogs = GetStartedPageData(
@@ -137,22 +132,22 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
   List<MyDashboardCardData> generateCardData() {
     return <MyDashboardCardData>[
       MyDashboardCardData(
-          title: MainDashboardPage.TRAINER,
+          title: GetStartedPageData.TRAINER,
           imgPath: "assets/images/trainerLogo.png"),
       MyDashboardCardData(
-          title: MainDashboardPage.VET,
+          title: GetStartedPageData.VET,
           imgPath: "assets/images/veterinariansLogo.png"),
       MyDashboardCardData(
-          title: MainDashboardPage.BREEDER,
+          title: GetStartedPageData.BREEDER,
           imgPath: "assets/images/breedersLogo.png"),
       MyDashboardCardData(
-          title: MainDashboardPage.PET_PANDA,
+          title: GetStartedPageData.PET_PANDA,
           imgPath: "assets/images/petPandaLogo.png"),
       MyDashboardCardData(
-          title: MainDashboardPage.ADOPT_A_PET,
+          title: GetStartedPageData.ADOPT_A_PET,
           imgPath: "assets/images/adoptPetLogo.png"),
       MyDashboardCardData(
-          title: MainDashboardPage.BLOGS_AND_ARTICLES,
+          title: GetStartedPageData.BLOGS_AND_ARTICLES,
           imgPath: "assets/images/blogs&ArticlesLogo.png"),
     ];
   }
@@ -174,26 +169,26 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
           child: InkWell(
             splashColor: MyColors.MATERIAL_LIGHT_GREEN,
             onTap: () {
-              if (gridCardData[index].title == MainDashboardPage.TRAINER) {
+              if (gridCardData[index].title == GetStartedPageData.TRAINER) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => GetStartedPage(
                             pageData: MainDashboardPage.getStartedWithTrainer)));
-              } else if (gridCardData[index].title == MainDashboardPage.VET) {
+              } else if (gridCardData[index].title == GetStartedPageData.VET) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => GetStartedPage(
                             pageData: MainDashboardPage.getStartedWithVet)));
-              } else if (gridCardData[index].title == MainDashboardPage.BREEDER) {
+              } else if (gridCardData[index].title == GetStartedPageData.BREEDER) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => GetStartedPage(
                             pageData: MainDashboardPage.getStartedWithBreeder)));
               } else if (gridCardData[index].title ==
-                  MainDashboardPage.ADOPT_A_PET) {
+                  GetStartedPageData.ADOPT_A_PET) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -201,7 +196,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
                             pageData:
                             MainDashboardPage.getStartedWithAdoptAPet)));
               } else if (gridCardData[index].title ==
-                  MainDashboardPage.BLOGS_AND_ARTICLES) {
+                  GetStartedPageData.BLOGS_AND_ARTICLES) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(

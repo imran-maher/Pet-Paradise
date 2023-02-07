@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/blogs_module/pages/blogs_selection_page.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/pet_owner_module/module/get_started_page_data.dart';
-import 'package:pet_paradise/pet_owner_module/pages/service_provider_for_pet_owner.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import '../../utils/size_config.dart';
 
@@ -105,12 +105,9 @@ class GetStartedPage extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: MaterialButton(
               onPressed: () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ServiceProviderForPetOwnerPage(
-                              typeOfService: pageData.pageTitle,
-                            )));
+                if(pageData.pageTitle == GetStartedPageData.BLOGS_AND_ARTICLES){
+                  navigateToiNextScreen(context, BlogSelectionPage());
+                }
               },
               color: MyColors.MATERIAL_LIGHT_GREEN,
               height: 39,
@@ -123,5 +120,10 @@ class GetStartedPage extends StatelessWidget {
         )
       ],
     );
+  }
+  
+  /// Navigate To NextScreen 
+  navigateToiNextScreen(BuildContext context , var screen){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
   }
 }
