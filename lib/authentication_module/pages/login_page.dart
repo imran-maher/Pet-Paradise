@@ -1,6 +1,5 @@
 import 'package:pet_paradise/authentication_module/pages/reset_password_page.dart';
 import 'package:pet_paradise/authentication_module/pages/signup_page.dart';
-import 'package:pet_paradise/custom_widgets/dailogs.dart';
 import 'package:pet_paradise/authentication_module/module/app_user.dart';
 import '../../firebase_services/firebase_auth_controller.dart' as firebase_auth;
 import 'package:flutter/material.dart';
@@ -143,6 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         //TODO: Forgot Password
                         clickAbleText(
+                          enable: true,
                             text: "Forgot Password?",
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
@@ -163,18 +163,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               onPressed: () async {
-                                CustomProgressIndicatorDialog(context: context);
                                 AppUser appUser = AppUser(null, userType, null,
                                     loginEmailController.text);
-                                String msg = await firebase_auth.login(
+                            await firebase_auth.login(
                                     context: context,
                                     password: loginPasswordController.text,
                                     appUser: appUser);
 
-                                SnackBar snackBar =
-                                    SnackBar(content: Text(msg));
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar);
                               },
                               textColor: Colors.black,
                               child: Text("Login"),

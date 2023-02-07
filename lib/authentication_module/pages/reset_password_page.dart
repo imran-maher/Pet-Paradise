@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/authentication_module/pages/update_password_page.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/size_config.dart';
+
+import '../../firebase_services/firebase_auth_controller.dart' as firebase_auth;
 
 TextEditingController resetPasswordEmailController = TextEditingController();
 
@@ -99,7 +100,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => UpdatePasswordPage()));
+                      firebase_auth.senResetPasswordLink(context: context,email: resetPasswordEmailController.text);
                     },
                     textColor: Colors.black,
                     child: Text(

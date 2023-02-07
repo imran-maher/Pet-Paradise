@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/custom_widgets/dailogs.dart';
 import 'package:pet_paradise/authentication_module/pages/login_page.dart';
+import 'package:pet_paradise/pet_owner_module/pages/main_dashboard_page.dart';
+import 'package:pet_paradise/utils/colors.dart';
 import '../authentication_module/module/app_user.dart';
-import '../pet_owner_module/pages/main_dashboard_page.dart';
+
 import 'firebase_helper.dart';
 
 ///Firebase Signup with Email and Password
@@ -59,34 +62,133 @@ Future<String> login(
     required AppUser appUser,
     required String password}) async {
   String response = "";
-  CustomProgressIndicatorDialog(context: context);
+
   try {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    UserCredential userCredential = await auth.signInWithEmailAndPassword(
-        email: appUser.userEmail, password: password);
+    CustomProgressIndicatorDialog(context: context);
+    UserCredential userCredential = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+            email: appUser.userEmail, password: password);
     User? user = userCredential.user;
-    if (user != null) {
-      Navigator.of(context).pop();
-      if (user.emailVerified) {
-        AppUser appUserData = FirebaseHelper.fetchAppUserBasicInfo(user.uid);
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MainDashboardPage(appUser: appUserData)));
-      } else {
-        Navigator.of(context).pop();
-        response = "Your Email is not Verified";
-      }
-    } else {
-      Navigator.of(context).pop();
+    if (user != null && user.emailVerified) {
+      FirebaseHelper.PET_OWNER_DATABASE_REF.onValue.listen((event) {
+        var appUserDataFromFirebase =
+            AppUser.fromJason(event.snapshot.child(user.uid).value);
+        print(appUserDataFromFirebase.userName);
+        Navigator.pop(context);
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => MainDashboardPage(
+                  appUser: appUserDataFromFirebase,
+                )));
+        showSnackBarMsg(context, "Login Successfully");
+      });
+    } else if (user != null && user.emailVerified == false) {
+      Navigator.pop(context);
+      showDialog(
+          barrierDismissible: false,
+          useSafeArea: true,
+          context: context,
+          builder: (context) {
+            return Dialog(
+              backgroundColor: Colors.white,
+              alignment: Alignment.center,
+              child: Container(
+                height: 200,
+                width: 200,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Container(
+                      height: 40,
+                      color: MyColors.MATERIAL_LIGHT_GREEN,
+                      child: Center(
+                        child: Text(
+                          "Email verification",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: leftAndRightPadding(
+                        child: Text(
+                          "Dear user,Your Email is not verified please check your Email and verify it.\n If you don't receive Email or Email link is expired, click on re-send link button to get new verification link",
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: MyButton(
+                                borderRadius: 0,
+                                height: 40,
+                                fontSize: 12,
+                                onPressed: () {
+                                  user.sendEmailVerification().whenComplete(() {
+                                    Navigator.pop(context);
+                                    showSnackBarMsg(context,
+                                        "Email verification link send successfully.");
+                                  });
+                                },
+                                title: "Re-Send Link",
+                                fontFamily: 'Itim-Regular',
+                                color: MyColors.MATERIAL_LIGHT_GREEN,
+                                textColor: Colors.white),
+                          ),
+                          Expanded(
+                            child: MyButton(
+                                borderRadius: 0,
+                                height: 40,
+                                fontSize: 12,
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                title: "Cancel",
+                                fontFamily: 'Itim-Regular',
+                                color: MyColors.MATERIAL_LIGHT_GREEN,
+                                textColor: Colors.white),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          });
     }
   } on FirebaseAuthException catch (e) {
-    Navigator.of(context).pop();
-    response = e.code;
+    Navigator.pop(context);
+    showSnackBarMsg(context, e.code, error: true);
   } catch (e) {
-    Navigator.of(context).pop();
-    response = e.toString();
+    Navigator.pop(context);
+    showSnackBarMsg(context, e.toString(), error: true);
   }
 
   return response;
+}
+
+/// Reset Password
+String senResetPasswordLink(
+    {required String email, required BuildContext context}) {
+  CustomProgressIndicatorDialog(context: context);
+  try {
+    FirebaseAuth.instance.sendPasswordResetEmail(email: email).whenComplete(() {
+      Navigator.pop(context);
+      showSnackBarMsg(context, "Password resend link send");
+    });
+  } on FirebaseAuthException catch (e) {
+    Navigator.pop(context);
+    showSnackBarMsg(context, e.code, error: true);
+  } catch (e) {
+    Navigator.pop(context);
+    showSnackBarMsg(context, e.toString(), error: true);
+  }
+
+  return "";
 }

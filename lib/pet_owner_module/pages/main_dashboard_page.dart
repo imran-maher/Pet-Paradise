@@ -10,11 +10,9 @@ import 'get_started_page.dart';
 
 
 class MainDashboardPage extends StatefulWidget {
-  late final AppUser _appUser;
+ late final AppUser appUser;
 
-  MainDashboardPage({Key? key, required AppUser appUser}) : super(key: key) {
-    this._appUser = appUser;
-  }
+  MainDashboardPage({Key? key, required this.appUser}) : super(key: key) ;
 
 
 
@@ -62,12 +60,19 @@ class MainDashboardPage extends StatefulWidget {
 }
 
 class _MainDashboardPageState extends State<MainDashboardPage> {
+
+  @override
+  void initState()  {
+    super.initState();
+
+
+  }
   @override
   Widget build(BuildContext context) {
     MyAppSize.config(MediaQuery.of(context));
     return Scaffold(
       body: Responsive(
-        mobile: mobile(context, widget._appUser),
+        mobile: mobile(context, widget.appUser),
         web: webUI(),
         tablet: tabletUI(),
       ),

@@ -36,8 +36,20 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
               pinned: false,
               automaticallyImplyLeading: false,
               expandedHeight: 200,
+              flexibleSpace: FlexibleSpaceBar(
+                background: SafeArea(
+                  child: leftAndRightPadding(child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+                      ),
+                    ],
+                  )),
+                ),
+              ),
             ),
-
           ],
         ),
       ],

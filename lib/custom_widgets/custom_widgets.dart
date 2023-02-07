@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 
-
 import 'package:pet_paradise/utils/size_config.dart';
 
 import '../seller_module/pages/seller_bottom_nav.dart';
@@ -340,9 +339,7 @@ Widget sellerProfileContainer(
 
 /// Seller Tools Button
 Widget sellerToolButton(
-    {required  onTape(),
-    required String title,
-    required String imgPath}) {
+    {required onTape(), required String title, required String imgPath}) {
   return GestureDetector(
     onTap: onTape,
     child: Container(
@@ -393,4 +390,14 @@ Widget customContainerForSellerNotification(
       ],
     ),
   );
+}
+
+void showSnackBarMsg(BuildContext context, String msg ,{bool error=false} ) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text(
+      "$msg",
+      style: TextStyle(fontFamily: 'Itim-Regular', color: error==false ? Colors.white : Colors.red),
+    ),
+    backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
+  ));
 }
