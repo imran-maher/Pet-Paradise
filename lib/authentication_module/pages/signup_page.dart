@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/authentication_module/module/app_user.dart';
-
 import '../../firebase_services/firebase_auth_controller.dart' as firebase_auth;
 import '../../utils/form_validation_controller.dart';
 import '../../utils/responsive_controller.dart';
@@ -150,10 +148,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 onPressed: () async {
-                  AppUser appUser = AppUser(null, widget._userType, signUpNameController.text, signUpEmailController.text);
                   String msg = await firebase_auth.signUp(
-                    appUser: appUser,
                       context: context,
+                     email: signUpEmailController.text,
+                     name: signUpNameController.text,
+                     userType: widget._userType,
                      password: signUpPasswordController.text
                       );
                   SnackBar snackBar = SnackBar(content: Text(msg));

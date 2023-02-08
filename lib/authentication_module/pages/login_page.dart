@@ -1,6 +1,5 @@
 import 'package:pet_paradise/authentication_module/pages/reset_password_page.dart';
 import 'package:pet_paradise/authentication_module/pages/signup_page.dart';
-import 'package:pet_paradise/authentication_module/module/app_user.dart';
 import '../../firebase_services/firebase_auth_controller.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -163,12 +162,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               onPressed: () async {
-                                AppUser appUser = AppUser(null, userType, null,
-                                    loginEmailController.text);
+
                             await firebase_auth.login(
                                     context: context,
                                     password: loginPasswordController.text,
-                                    appUser: appUser);
+                                    email: loginEmailController.text,userType: userType);
 
                               },
                               textColor: Colors.black,

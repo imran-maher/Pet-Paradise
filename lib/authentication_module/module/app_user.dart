@@ -3,24 +3,38 @@ class AppUser {
   static const String SERVICE_PROVIDER = 'service-provider';
   static const String SELLER = 'seller';
 
-  late final String? _uuid;
+  late final String _uid;
   late final String _userType;
   late final String? _userName;
   late final String _userEmail;
 
-  AppUser(this._uuid, this._userType, this._userName, this._userEmail);
+  AppUser(
+      {required String userType,
+      required String uid,
+      required String userName,
+      required String userEmail}){
+    this._userType = userType;
+    this._userEmail = userEmail;
+    this._userName = userName;
+    this._uid = uid;
+  }
 
   Map<String, dynamic> toMap() {
     return {
-      'uuid': this._uuid,
+      'uid': this._uid,
       'userType': this._userType,
       'userName': this._userName,
       'userEmail': this._userEmail
     };
   }
 
-  factory AppUser.fromJason(json){
-    return AppUser(json['uuid'], json['userType'], json['userName'], json['userEmail']);
+  factory AppUser.fromJason(var json) {
+    print(json.toString());
+    return AppUser(
+        uid: json['uid'],
+        userType: json['userType'],
+        userName: json['userName'],
+        userEmail: json['userEmail']);
   }
 
   String get userEmail => _userEmail;
@@ -41,9 +55,9 @@ class AppUser {
     _userType = value;
   }
 
-  String? get uuid => _uuid;
+  String get uuid => _uid;
 
-  set uuid(String? value) {
-    _uuid = value;
+  set uuid(String value) {
+    _uid = value;
   }
 }

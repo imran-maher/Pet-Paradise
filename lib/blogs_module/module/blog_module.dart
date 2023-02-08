@@ -12,7 +12,7 @@ class Blog {
   Blog(this._writerId, this._blogId, this._blogTitle, this._blogContent,
       this._blogImgURL , this._numberOfLikes,this._numberOfReads);
 
-  factory Blog.fromJson(Map<String, dynamic> json) {
+  factory Blog.fromJson(var json) {
     return Blog(
         json['writerId'] as String,
         json['blogId'] as String,

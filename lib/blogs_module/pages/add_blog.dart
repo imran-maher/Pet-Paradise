@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/authentication_module/module/app_user.dart';
+import 'package:pet_paradise/blogs_module/module/blog_module.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
+import 'package:pet_paradise/firebase_services/firebase_helper.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 
 class AddBlog extends StatefulWidget {
-  late final String _userID;
+  late final AppUser _appUser;
 
-  AddBlog({Key? key, required String userID}) : super(key: key) {
-    this._userID = userID;
+  AddBlog({Key? key, required AppUser appUser}) : super(key: key) {
+    this._appUser = appUser;
   }
 
   @override
@@ -17,9 +20,18 @@ class _AddBlogState extends State<AddBlog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          var blogKey = FirebaseHelper.BLOGS_REF.child(widget._appUser.uuid).push() ;
+          Blog blog = Blog(widget._appUser.uuid, blogKey.toString(), "Blog Title",
+              "Blog Content is here ", "asdfsdf", 0, 0);
+          blogKey.set(Blog.toMap(blog));
+
+        },
+      ),
       appBar: transparentAppBar(context: context),
       body: Responsive(
-        mobile: mobile(context, widget._userID),
+        mobile: mobile(context, widget._appUser),
         tablet: tabletUI(),
         web: webUI(),
       ),
@@ -27,7 +39,7 @@ class _AddBlogState extends State<AddBlog> {
   }
 
   ///mobile UI
-  Widget mobile(BuildContext context, String userId) {
+  Widget mobile(BuildContext context, AppUser appUser) {
     return Stack(
       children: [
         backgroundWidget(),

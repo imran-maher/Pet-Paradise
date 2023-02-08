@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/authentication_module/module/app_user.dart';
 import 'package:pet_paradise/blogs_module/pages/blogs_selection_page.dart';
+import 'package:pet_paradise/custom_widgets/dailogs.dart';
+import 'package:pet_paradise/firebase_services/firebase_helper.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/pet_owner_module/module/get_started_page_data.dart';
 import 'package:pet_paradise/utils/colors.dart';
+import '../../blogs_module/module/blog_module.dart';
 import '../../utils/size_config.dart';
 
 class GetStartedPage extends StatelessWidget {
   late final GetStartedPageData _pageData;
+  late final AppUser _appUser;
 
-  GetStartedPage({Key? key, required GetStartedPageData pageData})
+  GetStartedPage(
+      {Key? key,
+      required GetStartedPageData pageData,
+      required AppUser appUser})
       : super(key: key) {
     this._pageData = pageData;
+    this._appUser = appUser;
   }
 
   @override
@@ -32,7 +41,8 @@ class GetStartedPage extends StatelessWidget {
         elevation: 0,
       ),
       body: Responsive(
-        mobile: mobile(context, pageData: this._pageData),
+        mobile:
+            mobile(context, pageData: this._pageData, appUser: this._appUser),
         tablet: tabletUI(),
         web: webUI(),
       ),
@@ -40,7 +50,9 @@ class GetStartedPage extends StatelessWidget {
   }
 
   /// Mobile
-  Widget mobile(BuildContext context, {required GetStartedPageData pageData}) {
+  Widget mobile(BuildContext context,
+      {required GetStartedPageData pageData, required AppUser appUser}) {
+    List<Blog> list = List.empty(growable: true);
     return Stack(
       children: [
         Container(
@@ -104,9 +116,26 @@ class GetStartedPage extends StatelessWidget {
           child: Container(
             alignment: Alignment.bottomCenter,
             child: MaterialButton(
-              onPressed: () {
-                if(pageData.pageTitle == GetStartedPageData.BLOGS_AND_ARTICLES){
-                  navigateToiNextScreen(context, BlogSelectionPage());
+              onPressed: () async {
+                if (pageData.pageTitle ==
+                    GetStartedPageData.BLOGS_AND_ARTICLES) {
+                  CustomProgressIndicatorDialog(context: context);
+                  FirebaseHelper.BLOGS_REF.onValue.listen((event) {
+                    var v = event.snapshot.children.iterator;
+                    while (v.moveNext()) {
+                      var e = v.current.children.iterator;
+                      print(e);
+                      while (e.moveNext()) {
+                        Blog blog = Blog.fromJson(e.current.value);
+                        list.add(blog);
+                      }
+                    }
+                    print(list);
+                    print(list.length);
+                    Navigator.pop(context);
+                    navigateToiNextScreen(context,
+                        BlogSelectionPage(appUser: appUser, blogsList: list));
+                  });
                 }
               },
               color: MyColors.MATERIAL_LIGHT_GREEN,
@@ -121,9 +150,10 @@ class GetStartedPage extends StatelessWidget {
       ],
     );
   }
-  
-  /// Navigate To NextScreen 
-  navigateToiNextScreen(BuildContext context , var screen){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
+
+  /// Navigate To NextScreen
+  navigateToiNextScreen(BuildContext context, var screen) {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => screen));
   }
 }

@@ -12,18 +12,19 @@ import 'firebase_helper.dart';
 ///Firebase Signup with Email and Password
 Future<String> signUp(
     {required BuildContext context,
-    required AppUser appUser,
+    required String email,required String name , required String userType,
     required String password}) async {
   CustomProgressIndicatorDialog(context: context);
   String response = "";
   try {
     FirebaseAuth auth = FirebaseAuth.instance;
     UserCredential userCredential = await auth.createUserWithEmailAndPassword(
-        email: appUser.userEmail, password: password);
+        email: email, password: password);
     User? user = userCredential.user;
     if (user != null) {
       user.sendEmailVerification().whenComplete(() {
-        if (appUser.userType == AppUser.PET_OWNER) {
+        AppUser appUser = AppUser(userType: userType, uid: user.uid, userName: name, userEmail: email);
+        if (userType == AppUser.PET_OWNER) {
           FirebaseHelper.PET_OWNER_DATABASE_REF
               .child(user.uid)
               .set(appUser.toMap());
@@ -59,7 +60,7 @@ Future<String> signUp(
 ///Firebase Login with Email and Password
 Future<String> login(
     {required context,
-    required AppUser appUser,
+    required String email, required String userType,
     required String password}) async {
   String response = "";
 
@@ -67,13 +68,13 @@ Future<String> login(
     CustomProgressIndicatorDialog(context: context);
     UserCredential userCredential = await FirebaseAuth.instance
         .signInWithEmailAndPassword(
-            email: appUser.userEmail, password: password);
+            email: email, password: password);
     User? user = userCredential.user;
     if (user != null && user.emailVerified) {
       FirebaseHelper.PET_OWNER_DATABASE_REF.onValue.listen((event) {
         var appUserDataFromFirebase =
             AppUser.fromJason(event.snapshot.child(user.uid).value);
-        print(appUserDataFromFirebase.userName);
+        print(appUserDataFromFirebase);
         Navigator.pop(context);
         Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (context) => MainDashboardPage(
