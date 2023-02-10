@@ -22,10 +22,10 @@ class _AddBlogState extends State<AddBlog> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          var blogKey = FirebaseHelper.BLOGS_REF.child(widget._appUser.uuid).push() ;
+          String? blogKey = FirebaseHelper.BLOGS_REF.push().key;
           Blog blog = Blog(widget._appUser.uuid, blogKey.toString(), "Blog Title",
               "Blog Content is here ", "asdfsdf", 0, 0);
-          blogKey.set(Blog.toMap(blog));
+          FirebaseHelper.BLOGS_REF.child(blogKey!).set(Blog.toMap(blog));
 
         },
       ),

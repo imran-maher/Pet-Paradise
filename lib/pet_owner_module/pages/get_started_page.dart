@@ -119,23 +119,7 @@ class GetStartedPage extends StatelessWidget {
               onPressed: () async {
                 if (pageData.pageTitle ==
                     GetStartedPageData.BLOGS_AND_ARTICLES) {
-                  CustomProgressIndicatorDialog(context: context);
-                  FirebaseHelper.BLOGS_REF.onValue.listen((event) {
-                    var v = event.snapshot.children.iterator;
-                    while (v.moveNext()) {
-                      var e = v.current.children.iterator;
-                      print(e);
-                      while (e.moveNext()) {
-                        Blog blog = Blog.fromJson(e.current.value);
-                        list.add(blog);
-                      }
-                    }
-                    print(list);
-                    print(list.length);
-                    Navigator.pop(context);
-                    navigateToiNextScreen(context,
-                        BlogSelectionPage(appUser: appUser, blogsList: list));
-                  });
+                  navigateToiNextScreen(context, BlogSelectionPage(appUser: appUser));
                 }
               },
               color: MyColors.MATERIAL_LIGHT_GREEN,
