@@ -3,7 +3,8 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/authentication_module/module/app_user.dart';
 import 'package:pet_paradise/blogs_module/module/blog_module.dart';
-import 'package:pet_paradise/blogs_module/pages/add_blog.dart';
+
+import 'package:pet_paradise/blogs_module/pages/blogger_dashboard.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/size_config.dart';
@@ -17,7 +18,6 @@ class BlogSelectionPage extends StatefulWidget {
   late final Query _query;
   final TextEditingController searchController = TextEditingController();
 
-
   BlogSelectionPage({Key? key, required appUser}) : super(key: key) {
     this._appUser = appUser;
     _blogsList = List.empty(growable: true);
@@ -29,6 +29,7 @@ class BlogSelectionPage extends StatefulWidget {
 
 class _BlogSelectionPageState extends State<BlogSelectionPage> {
   String searchValue = "";
+
   @override
   void initState() {
     // TODO: implement initState
@@ -80,8 +81,8 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
                           textSize: 14,
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    AddBlog(appUser: widget._appUser)));
+                                builder: (context) => BloggerDashboard(
+                                    appUser: widget._appUser)));
                           },
                           enable: true),
                     ],
@@ -100,12 +101,11 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
                           borderRadius: BorderRadius.circular(5.0),
                         ),
                       ),
-                      onChanged: (value){
+                      onChanged: (value) {
                         setState(() {
                           print(value);
                           searchValue = value;
                         });
-
                       },
                     ),
                   ),
@@ -120,81 +120,77 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
         Padding(
           padding: const EdgeInsets.only(top: 200),
           child: FirebaseAnimatedList(
-
               query: widget._query,
               itemBuilder: (context, dataSnapshot, animation, index) {
                 print(index);
-                var v = dataSnapshot.value;
-                Blog blog = Blog.fromJson(v);
-                if(searchValue.isEmpty){
-
+                var jsonValue = dataSnapshot.value;
+                Blog blog = Blog.fromJson(jsonValue);
+                if (searchValue.isEmpty) {
                   return blogCard(blog);
-                }else if(searchValue.isNotEmpty && blog.blogTitle.toLowerCase() == searchValue.toLowerCase()){
-                 return blogCard(blog);
-                }else{
-                  return Center(child: Text("No Data Found"),);
+                } else if (searchValue.isNotEmpty &&
+                    blog.blogTitle.toLowerCase() == searchValue.toLowerCase()) {
+                  return blogCard(blog);
+                } else {
+                  return Center(
+                    child: Text("No Data Found"),
+                  );
                 }
-
               }),
         )
       ],
     );
   }
 
- ///blog card
- Widget blogCard(Blog blog){
-   return Padding(
-     padding: EdgeInsets.only(
-         left: MyAppSize.width! * 0.05,
-         right: MyAppSize.width! * 0.05,
-         bottom: 10),
-     child: Card(
-       color: MyColors.LIGHT_GREEN,
-       child: Container(
-         height: 170,
-         decoration: BoxDecoration(
-           gradient: LinearGradient(
-               colors: [
-                 MyColors.GREEN40,
-                 MyColors.GRADIENT_YELLOW
-               ],
-               begin: Alignment.topCenter,
-               end: Alignment.bottomCenter),
-         ),
-         child: Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-           crossAxisAlignment: CrossAxisAlignment.stretch,
-           children: [
-             Row(
-               mainAxisAlignment: MainAxisAlignment.start,
-               children: [
-                 SizedBox(
-                   width: 20,
-                 ),
-                 CircleAvatar(
-                   maxRadius: 60,
-                   backgroundColor: Colors.white,
-                 ),
-                 SizedBox(
-                   width: 40,
-                 ),
-                 Text(blog.blogTitle)
-               ],
-             ),
-             Padding(
-               padding: const EdgeInsets.only(right: 8.0),
-               child: Text(
-                 "${blog.numberOfReads} Reads",
-                 textAlign: TextAlign.end,
-                 style:
-                 TextStyle(color: Colors.grey, fontSize: 13),
-               ),
-             )
-           ],
-         ),
-       ),
-     ),
-   );
-
- }
+  ///blog card
+  Widget blogCard(Blog blog) {
+    return Padding(
+      padding: EdgeInsets.only(
+          left: MyAppSize.width! * 0.05,
+          right: MyAppSize.width! * 0.05,
+          bottom: 10),
+      child: Card(
+        color: MyColors.LIGHT_GREEN,
+        child: Container(
+          height: 170,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [MyColors.GREEN40, MyColors.GRADIENT_YELLOW],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  CircleAvatar(
+                    maxRadius: 60,
+                    backgroundColor: Colors.white,
+                    backgroundImage: NetworkImage(blog.blogImgURL),
+                  ),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  Text(blog.blogTitle)
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Text(
+                  "${blog.numberOfReads} Reads",
+                  textAlign: TextAlign.end,
+                  style: TextStyle(color: Colors.grey, fontSize: 13),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }

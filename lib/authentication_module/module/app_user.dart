@@ -55,9 +55,9 @@ class AppUser {
     _userType = value;
   }
 
-  String get uuid => _uid;
+  String get uid => _uid;
 
-  set uuid(String value) {
+  set uid(String value) {
     _uid = value;
   }
 }
