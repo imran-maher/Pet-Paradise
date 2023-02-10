@@ -120,8 +120,10 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
         Padding(
           padding: const EdgeInsets.only(top: 200),
           child: FirebaseAnimatedList(
+
               query: widget._query,
               itemBuilder: (context, dataSnapshot, animation, index) {
+                print(index);
                 var v = dataSnapshot.value;
                 Blog blog = Blog.fromJson(v);
                 if(searchValue.isEmpty){
