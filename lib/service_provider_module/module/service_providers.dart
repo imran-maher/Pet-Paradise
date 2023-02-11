@@ -1,4 +1,6 @@
-class ServiceProviders {
+import 'package:flutter/material.dart';
+
+class ServiceProvider {
   static const TRAINER = "Trainer";
   static const VET = "Veterinarian";
   static const BREEDER = "Breeder";
@@ -8,78 +10,152 @@ class ServiceProviders {
   late final String _serviceType;
   late final String _qualification;
   late final String _experience;
-  late final String _address;
   late final int _rating;
   late final double _fee;
   late final List<String> _activeDays;
-  late final DateTime? _startTime;
-  late final DateTime? _endTime;
-  late final String? _imgUrl;
+  late final TimeOfDay _startTime;
+  late final TimeOfDay _endTime;
+  late final String _cnic;
+  late final String _phoneNumber;
+  late final String _imgUrl;
+  late final DateTime _dob;
+  late final String _countryName;
+  late final String _cityName;
+  late final String _streetAddress;
 
   ///Constructors
-
-  ServiceProviders.init(
+  ServiceProvider(
       {required String id,
       required String name,
-      required String address,
+      required String serviceType,
+      required String qualification,
+      required String experience,
+      required String streetAddress,
+      required int rating,
       required double fee,
-      required String serviceType}) {
+      required List<String> activeDays,
+      required TimeOfDay startTime,
+      required TimeOfDay endTime,
+      required String cnic,
+      required String phoneNumber,
+      required String imgUrl,
+      required DateTime dob,
+      required String countryName,
+      required String cityName}) {
+    this._countryName = countryName;
+    this._cityName = cityName;
     this._id = id;
     this._name = name;
-    this._address = address;
-    this._fee = fee;
     this._serviceType = serviceType;
+    this._qualification = qualification;
+    this._experience = experience;
+    this._streetAddress = streetAddress;
+    this._rating = rating;
+    this._fee = fee;
+    this._activeDays = activeDays;
+    this._startTime = startTime;
+    this._endTime = endTime;
+    this._cnic = cnic;
+    this._phoneNumber = phoneNumber;
+    this._imgUrl = imgUrl;
+    this._dob = dob;
   }
 
   ///Constructor
-  ServiceProviders.fromMap(Map<String, dynamic> map) {
-    this._name = map['name'];
-    this._id = map['id'];
-    this._serviceType = map['serviceType'];
-    this._address = map['address'];
-    this._experience = map['experience'];
-    this._activeDays = map['activeDays'];
-    this._fee = map['fee'];
-    this._rating = map['rating'];
-    this._qualification = map['qualification'];
-    this._startTime = map['startTime'];
-    this._endTime = map['endTime'];
-    this._imgUrl = map['imgUrl'];
+  factory ServiceProvider.fromJson(var json) {
+    return ServiceProvider(
+        countryName: json['countryName'],
+        cityName: json['cityName'],
+        id: json['id'],
+        name: json['name'],
+        serviceType: json['serviceType'],
+        qualification: json['qualification'],
+        experience: json['experience'],
+        streetAddress: json['streetAddress'],
+        rating: json['rating'],
+        fee: json['fee'],
+        activeDays: json['activeDays'],
+        startTime: json['startTime'],
+        endTime: json['endTime'],
+        cnic: json['cnic'],
+        phoneNumber: json['phoneNumber'],
+        imgUrl: json['imgUrl'],
+        dob: json['dob'] as DateTime);
   }
 
-  Map<String,dynamic> toMap(){
+  static Map<String, dynamic> toMap(ServiceProvider serviceProvider) {
     return {
-      'name' : this._name,
-      'id' : this._id,
-      'serviceType' : this._serviceType,
-      'address' : this._address,
-      'experience' : this._experience,
-      'activeDays' : this._activeDays,
-      'fee' : this._fee,
-      'rating' :this._rating,
-      'qualification' : this._qualification,
-      'startTime' : this._startTime,
-      'endTime' : this._endTime,
-      'imgUrl' : this._imgUrl
-
+      'countryName' : serviceProvider.countryName,
+      'cityName' : serviceProvider.cityName,
+      'dob' : serviceProvider.dob,
+      'imgUrl': serviceProvider.imgUrl,
+      'phoneNumber': serviceProvider.phoneNumber,
+      'cnic': serviceProvider.cnic,
+      'endTime': serviceProvider.endTime,
+      'startTime': serviceProvider.startTime,
+      'activeDays': serviceProvider.activeDays,
+      'fee': serviceProvider.fee,
+      'rating': serviceProvider.rating,
+      'streetAddress': serviceProvider.streetAddress,
+      'experience': serviceProvider.experience,
+      'qualification': serviceProvider.qualification,
+      'serviceType': serviceProvider.serviceType,
+      'name': serviceProvider.name,
+      'id': serviceProvider.id
     };
   }
 
-  String? get imgUrl => _imgUrl;
+  String get streetAddress => _streetAddress;
 
-  set imgUrl(String? value) {
+  set streetAddress(String value) {
+    _streetAddress = value;
+  }
+
+  String get cityName => _cityName;
+
+  set cityName(String value) {
+    _cityName = value;
+  }
+
+  String get countryName => _countryName;
+
+  set countryName(String value) {
+    _countryName = value;
+  }
+
+  DateTime get dob => _dob;
+
+  set dob(DateTime value) {
+    _dob = value;
+  }
+
+  String get imgUrl => _imgUrl;
+
+  set imgUrl(String value) {
     _imgUrl = value;
   }
 
-  DateTime? get endTime => _endTime;
+  String get phoneNumber => _phoneNumber;
 
-  set endTime(DateTime? value) {
+  set phoneNumber(String value) {
+    _phoneNumber = value;
+  }
+
+  String get cnic => _cnic;
+
+  set cnic(String value) {
+    _cnic = value;
+  }
+
+  TimeOfDay get endTime => _endTime;
+
+  set endTime(TimeOfDay value) {
     _endTime = value;
   }
 
-  DateTime? get startTime => _startTime;
+  TimeOfDay get startTime => _startTime;
 
-  set startTime(DateTime? value) {
+  set startTime(TimeOfDay value) {
     _startTime = value;
   }
 
@@ -101,12 +177,6 @@ class ServiceProviders {
     _rating = value;
   }
 
-  String get address => _address;
-
-  set address(String value) {
-    _address = value;
-  }
-
   String get experience => _experience;
 
   set experience(String value) {
@@ -119,6 +189,12 @@ class ServiceProviders {
     _qualification = value;
   }
 
+  String get serviceType => _serviceType;
+
+  set serviceType(String value) {
+    _serviceType = value;
+  }
+
   String get name => _name;
 
   set name(String value) {
@@ -129,11 +205,5 @@ class ServiceProviders {
 
   set id(String value) {
     _id = value;
-  }
-
-  String get serviceType => _serviceType;
-
-  set serviceType(String value) {
-    _serviceType = value;
   }
 }

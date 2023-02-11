@@ -113,7 +113,7 @@ class _BloggerDashboardState extends State<BloggerDashboard> {
                 var jsonValue = dataSnapshot.value;
                 Blog userBlog = Blog.fromJson(jsonValue);
                 print(userBlog.writerId);
-                if (userBlog.writerId == widget._appUser.userId) {
+                if (userBlog.writerId == widget._appUser.uid) {
                   return blogCard(userBlog);
                 } else {
                   return Container(

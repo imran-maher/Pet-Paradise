@@ -3,15 +3,19 @@ import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/authentication_module/module/app_user.dart';
 import 'package:pet_paradise/pet_owner_module/module/get_started_page_data.dart';
-
 import '../../utils/colors.dart';
 import '../../utils/size_config.dart';
+import '../module/pet_owner_module.dart';
 import 'get_started_page.dart';
 
-class MainDashboardPage extends StatefulWidget {
-  late final GeneralAppUser appUser;
+class PetOwnerDashboard extends StatefulWidget {
+  late final GeneralAppUser _generalAppUser;
+  late final PetOwner _petOwner;
 
-  MainDashboardPage({Key? key, required this.appUser}) : super(key: key);
+  PetOwnerDashboard({Key? key, required GeneralAppUser generalAppUser , required PetOwner petOwner}) : super(key: key){
+    this._generalAppUser = generalAppUser;
+    this._petOwner = petOwner;
+  }
 
   //Get Started with Blog Page Data
   static final GetStartedPageData getStartedWithBlogs = GetStartedPageData(
@@ -53,10 +57,10 @@ class MainDashboardPage extends StatefulWidget {
           "https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
 
   @override
-  State<MainDashboardPage> createState() => _MainDashboardPageState();
+  State<PetOwnerDashboard> createState() => _PetOwnerDashboardState();
 }
 
-class _MainDashboardPageState extends State<MainDashboardPage> {
+class _PetOwnerDashboardState extends State<PetOwnerDashboard> {
   @override
   void initState() {
     super.initState();
@@ -67,7 +71,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
     MyAppSize.config(MediaQuery.of(context));
     return Scaffold(
       body: Responsive(
-        mobile: mobile(context, widget.appUser),
+        mobile: mobile(context, widget._generalAppUser),
         web: webUI(),
         tablet: tabletUI(),
       ),
@@ -76,7 +80,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
 
   ///Sliver AppBar
   SliverAppBar myDashboardAppBar(
-      {required String title, required GeneralAppUser appUser}) {
+      {required String title, required GeneralAppUser generalAppUser}) {
     return SliverAppBar(
       title: Text(
         title,
@@ -106,7 +110,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 14, right: 16),
                 child: Text(
-                  "Dear ${appUser.userName} You Have Registered 5 Pets",
+                  "Dear ${generalAppUser.userName} You Have Registered 5 Pets",
                   style: TextStyle(fontFamily: 'Itim-Regular', fontSize: 18),
                 ),
               ),
@@ -177,7 +181,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => GetStartedPage(
-                              pageData: MainDashboardPage.getStartedWithTrainer,
+                              pageData: PetOwnerDashboard.getStartedWithTrainer,
                           appUser: appUser,
                             )));
               } else if (gridCardData[index].title == GetStartedPageData.VET) {
@@ -185,7 +189,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => GetStartedPage(
-                              pageData: MainDashboardPage.getStartedWithVet,
+                              pageData: PetOwnerDashboard.getStartedWithVet,
                           appUser: appUser,
                             )));
               } else if (gridCardData[index].title ==
@@ -194,7 +198,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => GetStartedPage(
-                              pageData: MainDashboardPage.getStartedWithBreeder,
+                              pageData: PetOwnerDashboard.getStartedWithBreeder,
                               appUser: appUser,
                             )));
               } else if (gridCardData[index].title ==
@@ -204,7 +208,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
                     MaterialPageRoute(
                         builder: (context) => GetStartedPage(
                               pageData:
-                                  MainDashboardPage.getStartedWithAdoptAPet,
+                                  PetOwnerDashboard.getStartedWithAdoptAPet,
                               appUser: appUser,
                             )));
               } else if (gridCardData[index].title ==
@@ -213,7 +217,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => GetStartedPage(
-                              pageData: MainDashboardPage.getStartedWithBlogs,
+                              pageData: PetOwnerDashboard.getStartedWithBlogs,
                               appUser: appUser,
                             )));
               }
@@ -254,7 +258,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
       physics: BouncingScrollPhysics(),
       slivers: [
         myDashboardAppBar(
-            title: "Hello ${appUser.userName}!", appUser: appUser),
+            title: "Hello ${appUser.userName}!", generalAppUser: appUser),
         SliverPadding(
           padding: EdgeInsets.only(
               left: MyAppSize.width! * 0.05,

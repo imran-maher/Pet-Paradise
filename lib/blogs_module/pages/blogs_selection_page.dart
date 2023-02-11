@@ -3,13 +3,11 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/authentication_module/module/app_user.dart';
 import 'package:pet_paradise/blogs_module/module/blog_module.dart';
-
 import 'package:pet_paradise/blogs_module/pages/blogger_dashboard.dart';
 import 'package:pet_paradise/blogs_module/pages/bloog_reading_page.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/size_config.dart';
-
 import '../../firebase_services/firebase_helper.dart';
 import '../../utils/responsive_controller.dart';
 

@@ -1,12 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/common_module/choice_page.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/custom_widgets/dailogs.dart';
 import 'package:pet_paradise/authentication_module/pages/login_page.dart';
-import 'package:pet_paradise/pet_owner_module/pages/main_dashboard_page.dart';
-import 'package:pet_paradise/service_provider_module/pages/service_selection_page.dart';
+import 'package:pet_paradise/common_module/user_type_selection.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import '../authentication_module/module/app_user.dart';
 
@@ -72,31 +69,16 @@ Future<String> login(
     if (user != null && user.emailVerified) {
       var ref = FirebaseHelper.APP_USERS_REF.child(user.uid);
       ref.once().then((value) {
-        GeneralAppUser generalAppUser = GeneralAppUser.fromJason(value.snapshot.value);
+        GeneralAppUser generalAppUser =
+            GeneralAppUser.fromJason(value.snapshot.value);
         print(generalAppUser.userEmail);
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> ServiceSelectionPage()));
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => UserTypeSelectionPage(
+                      generalAppUser: generalAppUser,
+                    )));
       });
-      // FirebaseHelper.APP_USERS_REF.child(user.uid).onValue.listen((event) {
-      //   event.snapshot.children.forEach((element) {
-      //     if (element.child("userType").value == "userType") {
-      //       var userKey = element.key;
-      //       FirebaseHelper.APP_USERS_REF
-      //           .child(user.uid)
-      //           .child(userKey!)
-      //           .onValue
-      //           .listen((event) {
-      //         var appUserDataFromFirebase =
-      //             GeneralAppUser.fromJason(event.snapshot.value);
-      //         Navigator.pop(context);
-      //         Navigator.of(context).pushReplacement(MaterialPageRoute(
-      //             builder: (context) => MainDashboardPage(
-      //                   appUser: appUserDataFromFirebase,
-      //                 )));
-      //         showSnackBarMsg(context, "Login Successfully");
-      //       });
-      //     }
-      //   });
-      // });
     } else if (user != null && user.emailVerified == false) {
       Navigator.pop(context);
       showDialog(

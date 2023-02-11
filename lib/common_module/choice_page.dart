@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
-import 'package:pet_paradise/service_provider_module/pages/service_selection_page.dart';
-import 'package:pet_paradise/authentication_module/module/app_user.dart';
-import '../custom_widgets/custom_widgets.dart';
-import '../seller_module/pages/seller_startup_page.dart';
 import '../utils/colors.dart';
 import '../utils/size_config.dart';
 import '../authentication_module/pages/login_page.dart';
