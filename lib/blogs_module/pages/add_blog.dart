@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,15 +13,15 @@ import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 
 class AddBlog extends StatefulWidget {
-  late final AppUser _appUser;
+  late final GeneralAppUser _appUser;
   late final ImagePicker _imagePicker;
   late final String blogID;
   late final String imgUrl;
-  late File? imgFile = null;
+  late File? imgFile = null ;
   TextEditingController _titleController = TextEditingController();
   TextEditingController _contentController = TextEditingController();
 
-  AddBlog({Key? key, required AppUser appUser}) : super(key: key) {
+  AddBlog({Key? key, required GeneralAppUser appUser}) : super(key: key) {
     this._appUser = appUser;
   }
 
@@ -54,7 +53,7 @@ class _AddBlogState extends State<AddBlog> {
   }
 
   ///mobile UI
-  Widget mobile(BuildContext context, AppUser appUser) {
+  Widget mobile(BuildContext context, GeneralAppUser appUser) {
     return Stack(
       children: [
         backgroundWidget(),
@@ -126,7 +125,7 @@ class _AddBlogState extends State<AddBlog> {
                     child: Center(
                       child: widget.imgFile?.path == null
                           ? Icon(Icons.add_a_photo)
-                          : Image(image: FileImage(widget.imgFile!)),
+                          : Image(image: FileImage(widget.imgFile!),fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -174,23 +173,22 @@ class _AddBlogState extends State<AddBlog> {
                           widget._titleController.text.isNotEmpty &&
                           widget.imgFile?.path != null) {
                         uploadImageToFireStore(context).then((value) {
-                          print("VAL $value");
+
                           if (widget.imgUrl.isNotEmpty) {
                             Blog blog = Blog(
-                                widget._appUser.uid,
+                               " widget._appUser.userId",
                                 widget.blogID,
                                 widget._titleController.text,
                                 widget._contentController.text,
-                                value,
-                                0,
-                                0);
+                                widget.imgUrl,
+                                "0",
+                                "0");
                             FirebaseHelper.BLOGS_REF
                                 .child(widget.blogID)
                                 .set(Blog.toMap(blog))
                                 .whenComplete(() {
                               Navigator.pop(context);
                               Navigator.of(context).pop();
-
                             });
                           } else {
                             Navigator.pop(context);
@@ -202,7 +200,6 @@ class _AddBlogState extends State<AddBlog> {
                             ));
                           }
                         });
-
                       } else {
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -227,7 +224,6 @@ class _AddBlogState extends State<AddBlog> {
 
   Future<String> uploadImageToFireStore(context) async {
     CustomProgressIndicatorDialog(context: context);
-    print("asdf ${widget.imgFile?.path}");
     var ref = FirebaseStorage.instance.ref("blog-images");
 
     try {
@@ -241,7 +237,6 @@ class _AddBlogState extends State<AddBlog> {
             .then((value) {
           Navigator.pop(context);
           widget.imgUrl = value;
-
         });
       });
     } catch (e) {
@@ -254,10 +249,8 @@ class _AddBlogState extends State<AddBlog> {
     try {
       var pickedFile =
           await widget._imagePicker.pickImage(source: ImageSource.gallery);
-
-      widget.imgFile = File(pickedFile!.path);
-
       setState(() {
+        widget.imgFile = File(pickedFile!.path);
         print("Image Picker path:${widget.imgFile?.path} ");
       });
     } catch (e) {

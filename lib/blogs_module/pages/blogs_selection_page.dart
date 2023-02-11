@@ -5,6 +5,7 @@ import 'package:pet_paradise/authentication_module/module/app_user.dart';
 import 'package:pet_paradise/blogs_module/module/blog_module.dart';
 
 import 'package:pet_paradise/blogs_module/pages/blogger_dashboard.dart';
+import 'package:pet_paradise/blogs_module/pages/bloog_reading_page.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/size_config.dart';
@@ -13,7 +14,7 @@ import '../../firebase_services/firebase_helper.dart';
 import '../../utils/responsive_controller.dart';
 
 class BlogSelectionPage extends StatefulWidget {
-  late final AppUser _appUser;
+  late final GeneralAppUser _appUser;
   late final List<Blog> _blogsList;
   late final Query _query;
   final TextEditingController searchController = TextEditingController();
@@ -125,11 +126,14 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
                 print(index);
                 var jsonValue = dataSnapshot.value;
                 Blog blog = Blog.fromJson(jsonValue);
+                print("Blog Reads : ${blog.numberOfReads}");
                 if (searchValue.isEmpty) {
-                  return blogCard(blog);
+                  return readBlog(
+                      context: context, child: blogCard(blog), blog: blog);
                 } else if (searchValue.isNotEmpty &&
                     blog.blogTitle.toLowerCase() == searchValue.toLowerCase()) {
-                  return blogCard(blog);
+                  return readBlog(
+                      context: context, child: blogCard(blog), blog: blog);
                 } else {
                   return Center(
                     child: Text("No Data Found"),
@@ -174,9 +178,9 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
                     backgroundImage: NetworkImage(blog.blogImgURL),
                   ),
                   SizedBox(
-                    width: 40,
+                    width: 20,
                   ),
-                  Text(blog.blogTitle)
+                  Text(blog.blogTitle,overflow: TextOverflow.ellipsis,maxLines: 3,)
                 ],
               ),
               Padding(
@@ -192,5 +196,33 @@ class _BlogSelectionPageState extends State<BlogSelectionPage> {
         ),
       ),
     );
+  }
+
+  ///read a blog
+  Widget readBlog(
+      {required context, required Blog blog, required Widget child}) {
+    return GestureDetector(
+      onTap: () {
+        increaseNumberOfReads(blog);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BlogReadingPage(blog: blog)));
+      },
+      child: child,
+    );
+  }
+
+  void increaseNumberOfReads(Blog blog) async {
+    var ref = FirebaseHelper.BLOGS_REF.child(blog.blogId);
+     if(blog.writerId != widget._appUser.uid){
+       print("previous reads : ${blog.blogTitle}");
+       var numOfReads = blog.numberOfReads;
+       ref.update({"numberOfReads" : numOfReads}).whenComplete(() {
+         print("Number of reads increased");
+       });
+
+     }
+
   }
 }

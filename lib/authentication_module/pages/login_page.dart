@@ -13,10 +13,7 @@ TextEditingController loginEmailController = TextEditingController();
 TextEditingController loginPasswordController = TextEditingController();
 
 class LoginScreen extends StatefulWidget {
-  late final String _userType;
-
-  LoginScreen({Key? key, required String userType}) : super(key: key) {
-    this._userType = userType;
+  LoginScreen({Key? key}) : super(key: key) {
   }
 
   @override
@@ -40,14 +37,14 @@ class _LoginScreenState extends State<LoginScreen> {
         extendBodyBehindAppBar: true,
         appBar: transparentAppBar(context: context),
         body: Responsive(
-          mobile: mobile(context, widget._userType),
+          mobile: mobile(context),
           tablet: tabletUI(),
           web: webUI(),
         ));
   }
 
   //TODO : Mobile
-  Widget mobile(BuildContext context, String userType) {
+  Widget mobile(BuildContext context) {
     return Stack(
       children: [
         backgroundWidget(),
@@ -166,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             await firebase_auth.login(
                                     context: context,
                                     password: loginPasswordController.text,
-                                    email: loginEmailController.text,userType: userType);
+                                    email: loginEmailController.text,);
 
                               },
                               textColor: Colors.black,
@@ -221,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => SignUpPage(
-                                                userType: widget._userType,
+
                                               )));
                                 },
                                 underLine: true,

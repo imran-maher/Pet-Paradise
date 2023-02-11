@@ -11,12 +11,12 @@ import '../../utils/size_config.dart';
 
 class GetStartedPage extends StatelessWidget {
   late final GetStartedPageData _pageData;
-  late final AppUser _appUser;
+  late final GeneralAppUser _appUser;
 
   GetStartedPage(
       {Key? key,
       required GetStartedPageData pageData,
-      required AppUser appUser})
+      required GeneralAppUser appUser})
       : super(key: key) {
     this._pageData = pageData;
     this._appUser = appUser;
@@ -51,7 +51,7 @@ class GetStartedPage extends StatelessWidget {
 
   /// Mobile
   Widget mobile(BuildContext context,
-      {required GetStartedPageData pageData, required AppUser appUser}) {
+      {required GetStartedPageData pageData, required GeneralAppUser appUser}) {
     List<Blog> list = List.empty(growable: true);
     return Stack(
       children: [

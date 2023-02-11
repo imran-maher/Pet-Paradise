@@ -8,5 +8,6 @@ class FirebaseHelper{
    static final PET_OWNER_DATABASE_REF = databaseReference.ref("pet-owners-data");
    static final SERVICE_PROVIDERS_DATABASE_REF = databaseReference.ref("service-providers-data");
    static final BLOGS_REF = databaseReference.ref("blogs");
+   static final APP_USERS_REF = databaseReference.ref("App-Users");
 
 }

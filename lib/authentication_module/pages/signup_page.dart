@@ -14,9 +14,8 @@ TextEditingController signUpPasswordController = TextEditingController();
 TextEditingController signUpRePasswordController = TextEditingController();
 
 class SignUpPage extends StatefulWidget {
-  late final String _userType;
-   SignUpPage({Key? key,required userType}) : super(key: key){
-     this._userType = userType;
+   SignUpPage({Key? key}) : super(key: key){
+
    }
 
   @override
@@ -152,7 +151,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       context: context,
                      email: signUpEmailController.text,
                      name: signUpNameController.text,
-                     userType: widget._userType,
+
                      password: signUpPasswordController.text
                       );
                   SnackBar snackBar = SnackBar(content: Text(msg));

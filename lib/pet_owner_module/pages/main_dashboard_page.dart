@@ -9,7 +9,7 @@ import '../../utils/size_config.dart';
 import 'get_started_page.dart';
 
 class MainDashboardPage extends StatefulWidget {
-  late final AppUser appUser;
+  late final GeneralAppUser appUser;
 
   MainDashboardPage({Key? key, required this.appUser}) : super(key: key);
 
@@ -76,7 +76,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
 
   ///Sliver AppBar
   SliverAppBar myDashboardAppBar(
-      {required String title, required AppUser appUser}) {
+      {required String title, required GeneralAppUser appUser}) {
     return SliverAppBar(
       title: Text(
         title,
@@ -155,7 +155,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
   }
 
   /// Dashboard Grid
-  SliverGrid myDashboardGrid(AppUser appUser) {
+  SliverGrid myDashboardGrid(GeneralAppUser appUser) {
     List<MyDashboardCardData> gridCardData = generateCardData();
     return SliverGrid(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -249,7 +249,7 @@ class _MainDashboardPageState extends State<MainDashboardPage> {
   }
 
   ///Mobile UI
-  Widget mobile(BuildContext context, AppUser appUser) {
+  Widget mobile(BuildContext context, GeneralAppUser appUser) {
     return CustomScrollView(
       physics: BouncingScrollPhysics(),
       slivers: [

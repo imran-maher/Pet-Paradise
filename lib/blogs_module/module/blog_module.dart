@@ -6,8 +6,8 @@ class Blog {
   late final String _blogTitle;
   late final String _blogContent;
   late final String _blogImgURL;
-  late final int _numberOfReads;
-  late final int _numberOfLikes;
+  late final String _numberOfReads;
+  late final String _numberOfLikes;
 
   Blog(this._writerId, this._blogId, this._blogTitle, this._blogContent,
       this._blogImgURL , this._numberOfLikes,this._numberOfReads);
@@ -19,8 +19,8 @@ class Blog {
         json['blogTitle'] as String,
         json['blogContent'] as String,
         json['blogImgURL'] as String,
-        json['numberOfReads'] as int,
-       json['numberOfLikes'] as int
+        json['numberOfReads'] as String,
+       json['numberOfLikes'] as String
     );
   }
 
@@ -67,15 +67,15 @@ class Blog {
     _writerId = value;
   }
 
-  int get numberOfLikes => _numberOfLikes;
+  String get numberOfLikes => _numberOfLikes;
 
-  set numberOfLikes(int value) {
+  set numberOfLikes(String value) {
     _numberOfLikes = value;
   }
 
-  int get numberOfReads => _numberOfReads;
+  String get numberOfReads => _numberOfReads;
 
-  set numberOfReads(int value) {
+  set numberOfReads(String value) {
     _numberOfReads = value;
   }
 }

@@ -14,7 +14,7 @@ class BloggerDashboard extends StatefulWidget {
   late final _appUser;
   late final _query;
 
-  BloggerDashboard({Key? key, required AppUser appUser}) : super(key: key) {
+  BloggerDashboard({Key? key, required GeneralAppUser appUser}) : super(key: key) {
     this._appUser = appUser;
   }
 
@@ -110,12 +110,10 @@ class _BloggerDashboardState extends State<BloggerDashboard> {
           child: FirebaseAnimatedList(
               query: widget._query,
               itemBuilder: (context, dataSnapshot, animation, index) {
-               var a=  dataSnapshot.ref.equalTo(widget._appUser.uid ,key: 'uid').onValue.length;
-               print(a);
-               var jsonValue = dataSnapshot.value;
+                var jsonValue = dataSnapshot.value;
                 Blog userBlog = Blog.fromJson(jsonValue);
                 print(userBlog.writerId);
-                if (userBlog.writerId == widget._appUser.uid) {
+                if (userBlog.writerId == widget._appUser.userId) {
                   return blogCard(userBlog);
                 } else {
                   return Container(
@@ -161,7 +159,9 @@ class _BloggerDashboardState extends State<BloggerDashboard> {
                   CircleAvatar(
                     maxRadius: 60,
                     backgroundColor: Colors.white,
-                    backgroundImage: NetworkImage(blog.blogImgURL),
+                    backgroundImage: NetworkImage(
+                      blog.blogImgURL,
+                    ),
                   ),
                   SizedBox(
                     width: 40,

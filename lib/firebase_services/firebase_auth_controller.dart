@@ -1,18 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/common_module/choice_page.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/custom_widgets/dailogs.dart';
 import 'package:pet_paradise/authentication_module/pages/login_page.dart';
 import 'package:pet_paradise/pet_owner_module/pages/main_dashboard_page.dart';
+import 'package:pet_paradise/service_provider_module/pages/service_selection_page.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import '../authentication_module/module/app_user.dart';
 
 import 'firebase_helper.dart';
 
+String? uid;
+
 ///Firebase Signup with Email and Password
 Future<String> signUp(
     {required BuildContext context,
-    required String email,required String name , required String userType,
+    required String email,
+    required String name,
     required String password}) async {
   CustomProgressIndicatorDialog(context: context);
   String response = "";
@@ -23,26 +29,22 @@ Future<String> signUp(
     User? user = userCredential.user;
     if (user != null) {
       user.sendEmailVerification().whenComplete(() {
-        AppUser appUser = AppUser(userType: userType, uid: user.uid, userName: name, userEmail: email);
-        if (userType == AppUser.PET_OWNER) {
-          FirebaseHelper.PET_OWNER_DATABASE_REF
-              .child(user.uid)
-              .set(appUser.toMap());
-        } else if (appUser.userType == AppUser.SERVICE_PROVIDER) {
-          FirebaseHelper.SERVICE_PROVIDERS_DATABASE_REF
-              .child(user.uid)
-              .set(appUser.toMap());
-        } else if (appUser.userType == AppUser.SELLER) {
-          FirebaseHelper.SELLER_DATABASE_REF
-              .child(user.uid)
-              .set(appUser.toMap());
-        }
-        response = "Register Successfully. Check Your Email To Verify...";
-        Navigator.of(context).pop();
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => LoginScreen(userType: appUser.userType)));
+        var ref = FirebaseHelper.APP_USERS_REF.child(user.uid);
+        GeneralAppUser generalAppUser =
+            GeneralAppUser(uid: user.uid, userName: name, userEmail: email);
+        ref.set(generalAppUser.toMap()).whenComplete(() {
+          Navigator.pop(context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content:
+                  Text("Account Created.Please Check Your E-mail to verify"),
+              backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
+              duration: Duration(seconds: 5),
+            ),
+          );
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        });
       });
     } else {
       Navigator.of(context).pop();
@@ -59,29 +61,42 @@ Future<String> signUp(
 
 ///Firebase Login with Email and Password
 Future<String> login(
-    {required context,
-    required String email, required String userType,
-    required String password}) async {
+    {required context, required String email, required String password}) async {
   String response = "";
 
   try {
     CustomProgressIndicatorDialog(context: context);
     UserCredential userCredential = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-            email: email, password: password);
+        .signInWithEmailAndPassword(email: email, password: password);
     User? user = userCredential.user;
     if (user != null && user.emailVerified) {
-      FirebaseHelper.PET_OWNER_DATABASE_REF.onValue.listen((event) {
-        var appUserDataFromFirebase =
-            AppUser.fromJason(event.snapshot.child(user.uid).value);
-        print(appUserDataFromFirebase);
-        Navigator.pop(context);
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => MainDashboardPage(
-                  appUser: appUserDataFromFirebase,
-                )));
-        showSnackBarMsg(context, "Login Successfully");
+      var ref = FirebaseHelper.APP_USERS_REF.child(user.uid);
+      ref.once().then((value) {
+        GeneralAppUser generalAppUser = GeneralAppUser.fromJason(value.snapshot.value);
+        print(generalAppUser.userEmail);
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> ServiceSelectionPage()));
       });
+      // FirebaseHelper.APP_USERS_REF.child(user.uid).onValue.listen((event) {
+      //   event.snapshot.children.forEach((element) {
+      //     if (element.child("userType").value == "userType") {
+      //       var userKey = element.key;
+      //       FirebaseHelper.APP_USERS_REF
+      //           .child(user.uid)
+      //           .child(userKey!)
+      //           .onValue
+      //           .listen((event) {
+      //         var appUserDataFromFirebase =
+      //             GeneralAppUser.fromJason(event.snapshot.value);
+      //         Navigator.pop(context);
+      //         Navigator.of(context).pushReplacement(MaterialPageRoute(
+      //             builder: (context) => MainDashboardPage(
+      //                   appUser: appUserDataFromFirebase,
+      //                 )));
+      //         showSnackBarMsg(context, "Login Successfully");
+      //       });
+      //     }
+      //   });
+      // });
     } else if (user != null && user.emailVerified == false) {
       Navigator.pop(context);
       showDialog(
