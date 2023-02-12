@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 
 class ServiceProvider {
   static const TRAINER = "Trainer";
@@ -11,14 +11,14 @@ class ServiceProvider {
   late final String _qualification;
   late final String _experience;
   late final int _rating;
-  late final double _fee;
-  late final List<String> _activeDays;
-  late final TimeOfDay _startTime;
-  late final TimeOfDay _endTime;
+  late final num _fee;
+  late final List _activeDays;
+  late final String _startTime;
+  late final String _endTime;
   late final String _cnic;
   late final String _phoneNumber;
   late final String _imgUrl;
-  late final DateTime _dob;
+  late final String _dob;
   late final String _countryName;
   late final String _cityName;
   late final String _streetAddress;
@@ -32,14 +32,14 @@ class ServiceProvider {
       required String experience,
       required String streetAddress,
       required int rating,
-      required double fee,
-      required List<String> activeDays,
-      required TimeOfDay startTime,
-      required TimeOfDay endTime,
+      required num fee,
+      required List activeDays,
+      required String startTime,
+      required String endTime,
       required String cnic,
       required String phoneNumber,
       required String imgUrl,
-      required DateTime dob,
+      required String dob,
       required String countryName,
       required String cityName}) {
     this._countryName = countryName;
@@ -64,23 +64,23 @@ class ServiceProvider {
   ///Constructor
   factory ServiceProvider.fromJson(var json) {
     return ServiceProvider(
-        countryName: json['countryName'],
-        cityName: json['cityName'],
-        id: json['id'],
-        name: json['name'],
-        serviceType: json['serviceType'],
-        qualification: json['qualification'],
-        experience: json['experience'],
-        streetAddress: json['streetAddress'],
-        rating: json['rating'],
-        fee: json['fee'],
-        activeDays: json['activeDays'],
-        startTime: json['startTime'],
-        endTime: json['endTime'],
-        cnic: json['cnic'],
-        phoneNumber: json['phoneNumber'],
-        imgUrl: json['imgUrl'],
-        dob: json['dob'] as DateTime);
+        countryName: json['countryName'] as String,
+        cityName: json['cityName'] as String,
+        id: json['id'] as String,
+        name: json['name'] as String,
+        serviceType: json['serviceType'] as String,
+        qualification: json['qualification'] as String,
+        experience: json['experience'] as String,
+        streetAddress: json['streetAddress'] as String,
+        rating: json['rating'] as int,
+        fee: json['fee'] as num,
+        activeDays: json['activeDays'] as List,
+        startTime: json['startTime'] as String,
+        endTime: json['endTime'] as String,
+        cnic: json['cnic'] as String,
+        phoneNumber: json['phoneNumber'] as String,
+        imgUrl: json['imgUrl'] as String,
+        dob: json['dob'] as String) ;
   }
 
   static Map<String, dynamic> toMap(ServiceProvider serviceProvider) {
@@ -123,9 +123,9 @@ class ServiceProvider {
     _countryName = value;
   }
 
-  DateTime get dob => _dob;
+  String get dob => _dob;
 
-  set dob(DateTime value) {
+  set dob(String value) {
     _dob = value;
   }
 
@@ -147,27 +147,27 @@ class ServiceProvider {
     _cnic = value;
   }
 
-  TimeOfDay get endTime => _endTime;
+  String get endTime => _endTime;
 
-  set endTime(TimeOfDay value) {
+  set endTime(String value) {
     _endTime = value;
   }
 
-  TimeOfDay get startTime => _startTime;
+  String get startTime => _startTime;
 
-  set startTime(TimeOfDay value) {
+  set startTime(String value) {
     _startTime = value;
   }
 
-  List<String> get activeDays => _activeDays;
+  List get activeDays => _activeDays;
 
-  set activeDays(List<String> value) {
+  set activeDays(List value) {
     _activeDays = value;
   }
 
-  double get fee => _fee;
+  num get fee => _fee;
 
-  set fee(double value) {
+  set fee(num value) {
     _fee = value;
   }
 

@@ -6,6 +6,7 @@ import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/custom_widgets/dailogs.dart';
 import 'package:pet_paradise/firebase_services/firebase_helper.dart';
 import 'package:pet_paradise/service_provider_module/module/service_providers.dart';
+import 'package:pet_paradise/service_provider_module/pages/service_provider_dashboard.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 
 import '../../utils/colors.dart';
@@ -32,9 +33,9 @@ class ServiceProviderRegistrationPage extends StatefulWidget {
 
 class _ServiceProviderRegistrationPageState
     extends State<ServiceProviderRegistrationPage> {
-  DateTime? dob = null;
-  TimeOfDay? from = null;
-  TimeOfDay? to = null;
+  String? dob = null;
+  String? from = null;
+  String? to = null;
   bool monChip = false;
   bool tueChip = false;
   bool wedChip = false;
@@ -80,6 +81,9 @@ class _ServiceProviderRegistrationPageState
 
   @override
   Widget build(BuildContext context) {
+    print("build");
+    print("Dob : $dob");
+    print("activeDays : ${activeDays.toString()}");
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: transparentAppBar(context: context),
@@ -229,10 +233,10 @@ class _ServiceProviderRegistrationPageState
                                 children: [
                                   Expanded(
                                       child: Text(dob != null
-                                          ? dob.toString().substring(0, 10)
+                                          ? dob!
                                           : "Date of Birth")),
                                   IconButton(
-                                      onPressed: () async {
+                                      onPressed: () {
                                         showDatePicker(
                                                 context: context,
                                                 firstDate: DateTime(1960),
@@ -240,13 +244,8 @@ class _ServiceProviderRegistrationPageState
                                                 initialDate: DateTime.now())
                                             .then((value) {
                                           setState(() {
-                                            if (value != null) {
-                                              dob = DateTime(value.year,
-                                                  value.month, value.day);
-                                              print(dob
-                                                  .toString()
-                                                  .substring(0, 10));
-                                            }
+                                            dob =
+                                                "${value!.day}:${value.month}:${value.year}";
                                           });
                                         });
                                       },
@@ -591,7 +590,7 @@ class _ServiceProviderRegistrationPageState
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(from != null
-                                            ? "${from?.hour} : ${from?.minute} "
+                                            ? from!.toString()
                                             : "From"),
                                       ),
                                       IconButton(
@@ -601,7 +600,8 @@ class _ServiceProviderRegistrationPageState
                                                   initialTime: TimeOfDay.now())
                                               .then((value) {
                                             setState(() {
-                                              from = value;
+                                              from =
+                                                  "${value!.hour} : ${value.minute}";
                                             });
                                           });
                                         },
@@ -631,9 +631,8 @@ class _ServiceProviderRegistrationPageState
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text(to != null
-                                            ? "${to?.hour} : ${to?.minute} "
-                                            : "To"),
+                                        child: Text(
+                                            to != null ? to!.toString() : "To"),
                                       ),
                                       IconButton(
                                         onPressed: () async {
@@ -642,7 +641,8 @@ class _ServiceProviderRegistrationPageState
                                                   initialTime: TimeOfDay.now())
                                               .then((value) {
                                             setState(() {
-                                              to = value;
+                                              to =
+                                                  "${value!.hour} : ${value.minute}";
                                             });
                                           });
                                         },
@@ -682,7 +682,10 @@ class _ServiceProviderRegistrationPageState
                           from == null ||
                           to == null) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text("Some Fields are Empty",style: TextStyle(color: Colors.red),),
+                          content: Text(
+                            "Some Fields are Empty",
+                            style: TextStyle(color: Colors.red),
+                          ),
                           backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
                         ));
                       } else {
@@ -746,11 +749,18 @@ class _ServiceProviderRegistrationPageState
             .child(widget._generalAppUser.uid)
             .child(widget._serviceProviderId);
       }
-
       ref.set(ServiceProvider.toMap(serviceProvider)).whenComplete(() {
         Navigator.pop(context);
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (contaxt) => ServiceProviderDashboard(
+                  serviceProvider: serviceProvider,
+                  generalAppUser: widget._generalAppUser,
+                )));
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Registration Successfully",style: TextStyle(color: Colors.white),),
+          content: Text(
+            "Registration Successfully",
+            style: TextStyle(color: Colors.white),
+          ),
           backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
         ));
       });

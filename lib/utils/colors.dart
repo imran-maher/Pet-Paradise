@@ -14,6 +14,7 @@ class MyColors{
   static const Color LIGHT_GREEN = Color(0xffE3FF91);
   static const Color GREEN_LIGHT_SHADE = Color(0xff668115);
   static const Color WHITE_WITH_GREEN_SHADE = Color(0xffEBF2E8);
-  static const Color GRADIENT_YELLOW = Color(0xfF1F523);
+  static const Color GRADIENT_YELLOW = Color(0xffF1F523);
+  static const Color BOTOM_NAV_COLOR = Color(0xffCDC685);
 
 }
