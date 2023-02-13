@@ -5,7 +5,7 @@ import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/size_config.dart';
 
-import '../module/seller_info.dart';
+import '../../module/seller_info.dart';
 
 class SellerAddAddressPage extends StatefulWidget {
 

@@ -5,7 +5,7 @@ import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/utils/colors.dart';
 
-import '../module/seller_info.dart';
+import '../../module/seller_info.dart';
 
 class SellerAddBasicProfileInfoPage extends StatefulWidget {
   late final SellerBasicInfo _sellerBasicInfo;

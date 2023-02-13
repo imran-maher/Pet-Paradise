@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 
-import '../../utils/colors.dart';
+import '../../../utils/colors.dart';
 
 class SellerMessagesAndNotificationPage extends StatefulWidget {
   const SellerMessagesAndNotificationPage({Key? key}) : super(key: key);
@@ -21,6 +21,7 @@ class _SellerMessagesAndNotificationPageState
       child: Scaffold(
         backgroundColor: MyColors.WHITE_WITH_GREEN_SHADE,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           elevation: 0,
           title: Text(

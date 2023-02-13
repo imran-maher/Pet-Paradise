@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/seller_module/pages/dashboard/seller_dashboard_page.dart';
+import 'package:pet_paradise/seller_module/pages/dashboard/seller_messages_notification_page.dart';
+import 'package:pet_paradise/seller_module/pages/dashboard/seller_profile_info_page.dart';
+import 'package:pet_paradise/seller_module/pages/dashboard/seller_tools_page.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/seller_module/pages/seller_home_page.dart';
+import 'package:pet_paradise/seller_module/pages/dashboard/seller_home_page.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/size_config.dart';
 
@@ -97,7 +101,7 @@ class _SellerLoginPageState extends State<SellerLoginPage> {
                 ),
                 MyButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SellerHomePage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SellerDashboardPage(pages: [SellerHomePage(),SellerToolsPage(),SellerMessagesAndNotificationPage() ,SellerProfileInfoPage()])));
                     },
                     title: "Login",
                     color: MyColors.MATERIAL_LIGHT_GREEN,

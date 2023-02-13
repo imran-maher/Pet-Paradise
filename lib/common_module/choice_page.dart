@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/seller_module/pages/seller_startup_page.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import '../utils/colors.dart';
 import '../utils/size_config.dart';
@@ -8,10 +9,7 @@ String dropDownValue = "English";
 double buttonSpace = 20;
 
 class ChoicePage extends StatefulWidget {
-
-   ChoicePage({Key? key}) : super(key: key){
-
-  }
+  ChoicePage({Key? key}) : super(key: key) {}
 
   @override
   State<ChoicePage> createState() => _ChoicePageState();
@@ -42,7 +40,6 @@ class _ChoicePageState extends State<ChoicePage> {
           SizedBox(
             height: 15,
           ),
-
           Image(
             image: AssetImage("assets/images/logo.png"),
             height: 135,
@@ -51,19 +48,24 @@ class _ChoicePageState extends State<ChoicePage> {
           SizedBox(
             height: buttonSpace,
           ),
-            GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
-              },
-              child: Card(
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()));
+            },
+            child: Card(
               child: Container(
                 height: 200,
                 decoration: BoxDecoration(color: MyColors.YELLOW),
                 child: Text("General User"),
               ),
-          ),
             ),
+          ),
           GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SellerStartUpPage()));
+            },
             child: Card(
               child: Container(
                 height: 200,
@@ -72,7 +74,6 @@ class _ChoicePageState extends State<ChoicePage> {
               ),
             ),
           ),
-          
         ],
       ),
     );

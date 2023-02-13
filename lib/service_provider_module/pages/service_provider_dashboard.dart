@@ -8,14 +8,16 @@ import '../../utils/colors.dart';
 class ServiceProviderDashboard extends StatefulWidget {
   late final GeneralAppUser _generalAppUser;
   late final ServiceProvider _serviceProvider;
+  late final  List _pages;
 
   ServiceProviderDashboard(
       {Key? key,
       required GeneralAppUser generalAppUser,
-      required ServiceProvider serviceProvider})
+      required ServiceProvider serviceProvider,required List<Widget> pages})
       : super(key: key) {
     this._serviceProvider = serviceProvider;
     this._generalAppUser = generalAppUser;
+    this._pages = pages;
   }
 
   @override
@@ -24,23 +26,19 @@ class ServiceProviderDashboard extends StatefulWidget {
 }
 
 class _ServiceProviderDashboardState extends State<ServiceProviderDashboard> {
-  List screens = List.empty(growable: true);
-  int selectedScreen = 0;
-
+  int selectedPage = 0;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    screens.add(homeBody(serviceProvider: widget._serviceProvider));
-    screens.add(inboxBody());
-    screens.add(profileBody());
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-          currentIndex: selectedScreen,
+          currentIndex: selectedPage,
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
             BottomNavigationBarItem(
@@ -51,47 +49,19 @@ class _ServiceProviderDashboardState extends State<ServiceProviderDashboard> {
           onTap: (index) {
             setState(() {
               print(index);
-              selectedScreen = index;
+              selectedPage = index;
             });
           },
           selectedItemColor: MyColors.MATERIAL_LIGHT_GREEN),
       body: Responsive(
-        mobile: screens[selectedScreen],
+        mobile: widget._pages[selectedPage],
         tablet: tabletUI(),
         web: webUI(),
       ),
     );
   }
 
-  ///Home body
-  Widget homeBody({required ServiceProvider serviceProvider}) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Container(
-          height: 200,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Center(
-                    child: GestureDetector(
-                      onTap: (){},
-                      child: CircleAvatar(
-                  maxRadius: 80,
-                  backgroundColor: Colors.red,
-                  backgroundImage: NetworkImage(widget._serviceProvider.imgUrl),
-                ),
-                    ))
-              ]),
-        )
-      ],
-    );
-  }
+
 
   ///inbox body
   Widget inboxBody() {

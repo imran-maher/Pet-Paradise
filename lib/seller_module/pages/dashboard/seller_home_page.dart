@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/seller_module/pages/seller_add_address_page.dart';
+import 'package:pet_paradise/seller_module/pages/prifile_setup/seller_add_address_page.dart';
 import 'package:pet_paradise/seller_module/pages/seller_bottom_nav.dart';
-import 'package:pet_paradise/seller_module/pages/seller_bussiness_type_selection_type.dart';
-import 'package:pet_paradise/seller_module/pages/seller_profile_page.dart';
+import 'package:pet_paradise/seller_module/pages/prifile_setup/seller_bussiness_type_selection_type.dart';
+import 'package:pet_paradise/seller_module/pages/prifile_setup/seller_profile_page.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/size_config.dart';
 
-import '../module/seller_info.dart';
+import '../../module/seller_info.dart';
 
 class SellerHomePage extends StatefulWidget {
   const SellerHomePage({Key? key}) : super(key: key);
@@ -25,13 +25,8 @@ class _SellerHomePageState extends State<SellerHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: transparentAppBar(context: context, centerTitle: "Home"),
-      bottomNavigationBar: SellerBottomNavBar(),
-      body: Responsive(
-        mobile: mobile(context),
-        tablet: tabletUI(),
-        web: webUI(),
-      ),
+      appBar: transparentAppBar(context: context,centerTitle: "Home Page"),
+      body: mobile(context),
     );
   }
 
@@ -55,49 +50,53 @@ class _SellerHomePageState extends State<SellerHomePage> {
           tileTitle: TileData.ADD_PRODUCT,
           trailingIconData: Icons.arrow_forward_ios)
     ];
-    return leftAndRightPadding(
-        child: Card(
-      elevation: 3,
-      shadowColor: MyColors.WHITE_WITH_GREEN_SHADE,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      color: MyColors.GREEN_LIGHT_SHADE,
-      child: Container(
-        height: 350,
-        width: MyAppSize.width! * 0.9,
-        child: leftAndRightPadding(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(
-                height: 15,
+    return Column(
+      children: [
+        leftAndRightPadding(
+            child: Card(
+          elevation: 3,
+          shadowColor: MyColors.WHITE_WITH_GREEN_SHADE,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          color: MyColors.GREEN_LIGHT_SHADE,
+          child: Container(
+            height: 350,
+            width: MyAppSize.width! * 0.9,
+            child: leftAndRightPadding(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    "Please complete the todo as soon as possible, and then start the business journey",
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'Itim-Regular',
+                        color: Colors.white),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        return tiles(
+                            context: context,
+                            tileData: tileDataList[index],
+                            tileNumber: index + 1);
+                      },
+                      itemCount: tileDataList.length,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                "Please complete the todo as soon as possible, and then start the business journey",
-                style: TextStyle(
-                    fontSize: 12,
-                    fontFamily: 'Itim-Regular',
-                    color: Colors.white),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return tiles(
-                        context: context,
-                        tileData: tileDataList[index],
-                        tileNumber: index + 1);
-                  },
-                  itemCount: tileDataList.length,
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
-    ));
+        )),
+      ],
+    );
   }
 
 }
@@ -152,7 +151,7 @@ Widget tiles(
         if (tileData.tileTitle == TileData.ADD_PROFILE) {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => SellerAddBasicProfileInfoPage(
-                    sellerBasicInfo: SellerBasicInfo.init(
+                    sellerBasicInfo: SellerBasicInfo(
                         emailAddress: null,
                         phoneNumber: "03016557355",
                         storeName: null),

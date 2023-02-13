@@ -17,7 +17,6 @@ class _SellerProfileInfoPageState extends State<SellerProfileInfoPage> {
     return customBodyWithCenterTextAppBar(
         context: context,
         appBarTitle: "Profile",
-        bottomNavigationBar: SellerBottomNavBar(),
         responsiveScreens: Responsive(
             mobile: mobile(context),
             tablet: tabletUI(),

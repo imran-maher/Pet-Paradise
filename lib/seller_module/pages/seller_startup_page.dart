@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/seller_module/pages/seller_login_page.dart';
-import 'package:pet_paradise/seller_module/pages/seller_signup_mobile_number_page.dart';
+import 'package:pet_paradise/seller_module/pages/authentication/seller_signup_mobile_number_page.dart';
 
 
 import '../../utils/responsive_controller.dart';
 import '../../utils/colors.dart';
 import '../../utils/size_config.dart';
+import 'authentication/seller_login_page.dart';
 
 class SellerStartUpPage extends StatelessWidget {
   const SellerStartUpPage({Key? key}) : super(key: key);

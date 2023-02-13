@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/authentication_module/provider/verification_code_provider.dart';
+import 'package:pet_paradise/seller_module/pages/authentication/seller_signup_create_password_page.dart';
+import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/seller_module/pages/seller_signup_create_password_page.dart';
 import 'package:pet_paradise/utils/size_config.dart';
 import 'package:provider/provider.dart';
-import '../../authentication_module/provider/verification_code_provider.dart';
-import '../../utils/colors.dart';
+
 
 
 class SellerSignupCodeVerificationPage extends StatefulWidget {

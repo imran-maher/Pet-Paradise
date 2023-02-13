@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/seller_module/pages/prifile_setup/seller_add_bank_info_induvisual.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/seller_module/pages/seller_add_bank_info_induvisual.dart';
 
-import '../../utils/colors.dart';
+import '../../../utils/colors.dart';
 
 TextEditingController compnyNameController = TextEditingController();
 TextEditingController businessRegNumberController = TextEditingController();

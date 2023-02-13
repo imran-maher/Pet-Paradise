@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pet_paradise/seller_module/pages/seller_home_page.dart';
-import 'package:pet_paradise/seller_module/pages/seller_messages_notification_page.dart';
-import 'package:pet_paradise/seller_module/pages/seller_profile_info_page.dart';
-import 'package:pet_paradise/seller_module/pages/seller_tools_page.dart';
+import 'package:pet_paradise/seller_module/pages/dashboard/seller_home_page.dart';
+import 'package:pet_paradise/seller_module/pages/dashboard/seller_messages_notification_page.dart';
+import 'package:pet_paradise/seller_module/pages/dashboard/seller_profile_info_page.dart';
+import 'package:pet_paradise/seller_module/pages/dashboard/seller_tools_page.dart';
 
 import 'package:pet_paradise/utils/colors.dart';
 

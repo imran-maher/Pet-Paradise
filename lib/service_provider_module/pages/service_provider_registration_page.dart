@@ -6,6 +6,9 @@ import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/custom_widgets/dailogs.dart';
 import 'package:pet_paradise/firebase_services/firebase_helper.dart';
 import 'package:pet_paradise/service_provider_module/module/service_providers.dart';
+import 'package:pet_paradise/service_provider_module/pages/home_screen.dart';
+import 'package:pet_paradise/service_provider_module/pages/notification_screen.dart';
+import 'package:pet_paradise/service_provider_module/pages/profile_screen.dart';
 import 'package:pet_paradise/service_provider_module/pages/service_provider_dashboard.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 
@@ -755,6 +758,7 @@ class _ServiceProviderRegistrationPageState
             builder: (contaxt) => ServiceProviderDashboard(
                   serviceProvider: serviceProvider,
                   generalAppUser: widget._generalAppUser,
+                 pages: [HomePageServiceProvide(serviceProvider: serviceProvider,) , NotificationPageServiceProvider() , ProfilePageServiceProvider()],
                 )));
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(

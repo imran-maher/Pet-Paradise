@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/seller_module/pages/seller_home_page.dart';
+import 'package:pet_paradise/seller_module/pages/dashboard/seller_home_page.dart';
 import 'package:pet_paradise/utils/size_config.dart';
 
-import '../../utils/colors.dart';
+import '../../../utils/colors.dart';
 
 class SellerSignupCreatePasswordPage extends StatefulWidget {
   const SellerSignupCreatePasswordPage({Key? key}) : super(key: key);

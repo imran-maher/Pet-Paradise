@@ -1,13 +1,14 @@
 class SellerBasicInfo {
-
   late final String? _emailAddress;
   late final String _phoneNumber;
   late final String? _storeName;
+  late final bool _profileCompleted;
 
-  SellerBasicInfo.init(
-      { String? emailAddress,
+  SellerBasicInfo(
+      {String? emailAddress,
       required String phoneNumber,
-       String? storeName}) {
+      String? storeName,
+      bool profileCompleted = false}) {
     this._emailAddress = emailAddress;
     this._phoneNumber = phoneNumber;
     this._storeName = storeName;
@@ -33,13 +34,15 @@ class SellerBasicInfo {
 }
 
 ///Seller Address Info
-class SellerAddressModule{
-
+class SellerAddressModule {
   late final String? _businessAddress;
   late final String? _wareHouseAddress;
   late final String? _returnAddress;
 
-  SellerAddressModule({required String? businessAddress ,required String? wareHouseAddress , required String? returnAddress}){
+  SellerAddressModule(
+      {required String? businessAddress,
+      required String? wareHouseAddress,
+      required String? returnAddress}) {
     this._businessAddress = businessAddress;
     this._wareHouseAddress = wareHouseAddress;
     this._returnAddress = returnAddress;
@@ -62,18 +65,21 @@ class SellerAddressModule{
   set businessAddress(String? value) {
     _businessAddress = value;
   }
-
 }
 
 ///Seller ID Info
-class SellerIDInfoModule{
-  late  var _idFrontSide;
+class SellerIDInfoModule {
+  late var _idFrontSide;
   late var _idBackSide;
   late final String _nameOnID;
   late final String _idNumber;
 
-  SellerIDInfoModule.init({required var idFrontSide , required var idBackSide , required String nameOnID , required String idNumber}){
-    this._idBackSide = idBackSide ;
+  SellerIDInfoModule.init(
+      {required var idFrontSide,
+      required var idBackSide,
+      required String nameOnID,
+      required String idNumber}) {
+    this._idBackSide = idBackSide;
     this._idFrontSide = idFrontSide;
     this._nameOnID = nameOnID;
     this._idNumber = idNumber;

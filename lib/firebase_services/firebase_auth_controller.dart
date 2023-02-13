@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/common_module/user_type_selection.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/custom_widgets/dailogs.dart';
 import 'package:pet_paradise/authentication_module/pages/login_page.dart';
-import 'package:pet_paradise/common_module/user_type_selection.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import '../authentication_module/module/app_user.dart';
 
@@ -69,15 +69,9 @@ Future<String> login(
     if (user != null && user.emailVerified) {
       var ref = FirebaseHelper.APP_USERS_REF.child(user.uid);
       ref.once().then((value) {
-        GeneralAppUser generalAppUser =
-            GeneralAppUser.fromJason(value.snapshot.value);
+        GeneralAppUser generalAppUser = GeneralAppUser.fromJason(value.snapshot.value);
         print(generalAppUser.userEmail);
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => UserTypeSelectionPage(
-                      generalAppUser: generalAppUser,
-                    )));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> UserTypeSelectionPage(generalAppUser: generalAppUser)));
       });
     } else if (user != null && user.emailVerified == false) {
       Navigator.pop(context);

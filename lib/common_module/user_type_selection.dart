@@ -4,6 +4,9 @@ import 'package:pet_paradise/custom_widgets/dailogs.dart';
 import 'package:pet_paradise/firebase_services/firebase_helper.dart';
 import 'package:pet_paradise/pet_owner_module/module/pet_owner_module.dart';
 import 'package:pet_paradise/pet_owner_module/pages/pet_owner_dashboard_page.dart';
+import 'package:pet_paradise/service_provider_module/pages/home_screen.dart';
+import 'package:pet_paradise/service_provider_module/pages/notification_screen.dart';
+import 'package:pet_paradise/service_provider_module/pages/profile_screen.dart';
 import 'package:pet_paradise/service_provider_module/pages/service_provider_dashboard.dart';
 import 'package:pet_paradise/service_provider_module/pages/service_provider_registration_page.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
@@ -308,6 +311,6 @@ class UserTypeSelectionPage extends StatelessWidget {
       required GeneralAppUser generalAppUser}) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => ServiceProviderDashboard(
-            generalAppUser: generalAppUser, serviceProvider: serviceProvider)));
+            generalAppUser: generalAppUser, serviceProvider: serviceProvider ,pages: [HomePageServiceProvide(serviceProvider: serviceProvider,) , NotificationPageServiceProvider() , ProfilePageServiceProvider()],)));
   }
 }

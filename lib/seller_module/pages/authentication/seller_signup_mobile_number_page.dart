@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/seller_module/pages/authentication/seller_signup_create_password_page.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/seller_module/pages/seller_signup_create_password_page.dart';
 import 'package:pet_paradise/utils/colors.dart';
 import 'package:pet_paradise/utils/size_config.dart';
 
@@ -76,14 +76,20 @@ class _SellerSignUpMobileNumberPageState
                   height: MyAppSize.height! * 0.4,
                 ),
                 MyButton(
-                    onPressed: ()async{
+                    onPressed: () async {
                       await FirebaseAuth.instance.verifyPhoneNumber(
                         phoneNumber: _mobileNumberController.text,
-                        verificationCompleted: (PhoneAuthCredential credential) {},
+                        verificationCompleted:
+                            (PhoneAuthCredential credential) {},
                         verificationFailed: (FirebaseAuthException e) {},
                         codeSent: (String verificationId, int? resendToken) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(verificationId)));
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SellerSignupCreatePasswordPage()));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(verificationId)));
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      SellerSignupCreatePasswordPage()));
                         },
                         codeAutoRetrievalTimeout: (String verificationId) {},
                       );

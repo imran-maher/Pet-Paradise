@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
-import 'package:pet_paradise/seller_module/pages/seller_add_pet.dart';
+import 'package:pet_paradise/seller_module/pages/prifile_setup/seller_add_pet.dart';
 
 class SellerToolsPage extends StatefulWidget {
   const SellerToolsPage({Key? key}) : super(key: key);
@@ -13,15 +13,7 @@ class SellerToolsPage extends StatefulWidget {
 class _SellerToolsPageState extends State<SellerToolsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: transparentAppBar(context: context, centerTitle: "Tools"),
-      body: Responsive(
-        mobile: mobile(context),
-        tablet: tabletUI(),
-        web: webUI(),
-      ),
-    );
+    return mobile(context);
   }
 
   /// mobile
