@@ -54,11 +54,34 @@ class _ChoicePageState extends State<ChoicePage> {
                   MaterialPageRoute(builder: (context) => LoginScreen()));
             },
             child: Card(
+              shadowColor: Colors.yellowAccent,
+              elevation: 5,
               child: Container(
-                height: 200,
-                decoration: BoxDecoration(color: MyColors.YELLOW),
-                child: Text("General User"),
-              ),
+                  height: 150,
+                  decoration:
+                      BoxDecoration(color: MyColors.MATERIAL_LIGHT_GREEN),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "General App User",
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontFamily: 'Itim-Regular',
+                              color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                            "If You are Pet Owner or any Service Provider (Veterinarian , Breeder , Trainer)\nPlease Click Here",textAlign: TextAlign.center,style: TextStyle(color: MyColors.YELLOW),),
+                      ),
+                    ],
+                  )),
             ),
           ),
           GestureDetector(
@@ -67,11 +90,33 @@ class _ChoicePageState extends State<ChoicePage> {
                   MaterialPageRoute(builder: (context) => SellerStartUpPage()));
             },
             child: Card(
+              elevation: 5,
               child: Container(
-                height: 200,
-                decoration: BoxDecoration(color: MyColors.MATERIAL_LIGHT_GREEN),
-                child: Text("Seller"),
-              ),
+                  height: 150,
+                  decoration:
+                  BoxDecoration(color: MyColors.MATERIAL_LIGHT_GREEN),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Seller",
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontFamily: 'Itim-Regular',
+                              color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "If You Want to Sell Your Products related to pets.\nPlease Click Here",textAlign: TextAlign.center,style: TextStyle(color: MyColors.YELLOW),),
+                      ),
+                    ],
+                  )),
             ),
           ),
         ],

@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pet_paradise/authentication_module/module/app_user.dart';
 import 'package:pet_paradise/blogs_module/module/blog_module.dart';
-
-
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/custom_widgets/dailogs.dart';
 import 'package:pet_paradise/firebase_services/firebase_helper.dart';

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_paradise/authentication_module/provider/verification_code_provider.dart';
 import 'package:pet_paradise/seller_module/pages/authentication/seller_signup_create_password_page.dart';
@@ -7,13 +8,16 @@ import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
 import 'package:pet_paradise/utils/size_config.dart';
 import 'package:provider/provider.dart';
 
-
-
 class SellerSignupCodeVerificationPage extends StatefulWidget {
-  final String verificationCode;
+  late final String _verificationId;
+  late final int? _resendToken;
 
-  SellerSignupCodeVerificationPage({Key? key, required this.verificationCode})
-      : super(key: key);
+  SellerSignupCodeVerificationPage(
+      {Key? key, required String verificationId, int? resendToken})
+      : super(key: key) {
+    this._verificationId = verificationId;
+    this._resendToken = resendToken;
+  }
 
   @override
   State<SellerSignupCodeVerificationPage> createState() =>
@@ -22,12 +26,12 @@ class SellerSignupCodeVerificationPage extends StatefulWidget {
 
 class _SellerSignupCodeVerificationPageState
     extends State<SellerSignupCodeVerificationPage> {
-  final TextEditingController _digitOneController = TextEditingController();
-  final TextEditingController _digitTwoController = TextEditingController();
-  final TextEditingController _digitThreeController = TextEditingController();
-  final TextEditingController _digitFourController = TextEditingController();
-  final TextEditingController _digitFiveController = TextEditingController();
-  final TextEditingController _digitSixController = TextEditingController();
+   TextEditingController _digitOneController = TextEditingController();
+   TextEditingController _digitTwoController = TextEditingController();
+   TextEditingController _digitThreeController = TextEditingController();
+   TextEditingController _digitFourController = TextEditingController();
+   TextEditingController _digitFiveController = TextEditingController();
+   TextEditingController _digitSixController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +39,7 @@ class _SellerSignupCodeVerificationPageState
       extendBodyBehindAppBar: true,
       appBar: transparentAppBar(context: context),
       body: Responsive(
-        mobile:
-            mobile(context: context, verificationCode: widget.verificationCode),
+        mobile: mobile(context: context),
         tablet: tabletUI(),
         web: webUI(),
       ),
@@ -44,8 +47,7 @@ class _SellerSignupCodeVerificationPageState
   }
 
   ///Mobile UI
-  Widget mobile(
-      {required BuildContext context, required String verificationCode}) {
+  Widget mobile({required BuildContext context}) {
     return ChangeNotifierProvider<VerificationCodeProvider>(
         create: (context) => VerificationCodeProvider(),
         child: Stack(
@@ -68,7 +70,7 @@ class _SellerSignupCodeVerificationPageState
                       height: 20,
                     ),
                     Text(
-                      "Please enter the 6-digit code sent to;\n$verificationCode",
+                      "Please enter the 6-digit code sent to;\n${widget._verificationId}",
                       style:
                           TextStyle(fontSize: 15, fontFamily: 'Itim-Regular'),
                     ),
@@ -154,10 +156,32 @@ class _SellerSignupCodeVerificationPageState
 
                     MyButton(
                         onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      SellerSignupCreatePasswordPage()));
+                          if (_digitOneController.text.isEmpty ||
+                              _digitTwoController.text.isEmpty ||
+                              _digitThreeController.text.isEmpty ||
+                              _digitFourController.text.isEmpty ||
+                              _digitFiveController.text.isEmpty ||
+                              _digitSixController.text.isEmpty) {
+                            print("${_digitOneController.text}${_digitTwoController.text}${_digitThreeController.text}${_digitFourController.text}${_digitFiveController.text}${_digitSixController.text}");
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Please enter Code"),
+                                backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
+                              ),
+                            );
+                          } else {
+                            String smsCode =
+                                "${_digitOneController.text}${_digitTwoController.text}${_digitThreeController.text}${_digitFourController.text}${_digitFiveController.text}${_digitSixController.text}";
+                            PhoneAuthCredential credentials =
+                                PhoneAuthProvider.credential(
+                                    verificationId: widget._verificationId,
+                                    smsCode: smsCode);
+                            print("ProviderId : ${credentials.providerId}");
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        SellerSignupCreatePasswordPage()));
+                          }
                         },
                         title: "Next",
                         color: MyColors.MATERIAL_LIGHT_GREEN,

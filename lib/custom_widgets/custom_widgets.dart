@@ -159,12 +159,14 @@ Widget codeVerificationTextField(
       width: width == null ? MyAppSize.width! * 0.14 : width,
       height: 55,
       child: TextField(
+        controller: controller,
           decoration: textFieldDecorationWithOutIcon(
             hint: "-",
             borderRadius: 10,
           ),
           textAlign: TextAlign.center,
           maxLength: 1,
+
           showCursor: false,
           autofocus: true,
           keyboardType: TextInputType.number,

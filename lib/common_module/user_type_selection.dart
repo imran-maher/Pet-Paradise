@@ -150,6 +150,11 @@ class UserTypeSelectionPage extends StatelessWidget {
           ServiceProvider serviceProviders =
               ServiceProvider.fromJson(element.value);
           Navigator.pop(context);
+          goToServiceProviderDashboard(
+              context: context,
+              serviceProvider: serviceProviders,
+              generalAppUser: generalAppUser);
+
           print("Service Provider Login Success ${serviceProviders.id}");
         });
       } else {
@@ -205,6 +210,10 @@ class UserTypeSelectionPage extends StatelessWidget {
           ServiceProvider serviceProviders =
               ServiceProvider.fromJson(element.value);
           Navigator.pop(context);
+          goToServiceProviderDashboard(
+              context: context,
+              serviceProvider: serviceProviders,
+              generalAppUser: generalAppUser);
           print("Service Provider Login Success ${serviceProviders.id}");
         });
       } else {
@@ -260,7 +269,10 @@ class UserTypeSelectionPage extends StatelessWidget {
           ServiceProvider serviceProviders =
               ServiceProvider.fromJson(element.value);
           Navigator.pop(context);
-          goToServiceProviderDashboard(context: context, serviceProvider: serviceProviders, generalAppUser: generalAppUser);
+          goToServiceProviderDashboard(
+              context: context,
+              serviceProvider: serviceProviders,
+              generalAppUser: generalAppUser);
           print("Service Provider Login Success ${serviceProviders.id}");
         });
       } else {
@@ -311,6 +323,15 @@ class UserTypeSelectionPage extends StatelessWidget {
       required GeneralAppUser generalAppUser}) {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => ServiceProviderDashboard(
-            generalAppUser: generalAppUser, serviceProvider: serviceProvider ,pages: [HomePageServiceProvide(serviceProvider: serviceProvider,) , NotificationPageServiceProvider() , ProfilePageServiceProvider()],)));
+              generalAppUser: generalAppUser,
+              serviceProvider: serviceProvider,
+              pages: [
+                HomePageServiceProvide(
+                  serviceProvider: serviceProvider,
+                ),
+                NotificationPageServiceProvider(),
+                ProfilePageServiceProvider()
+              ],
+            )));
   }
 }

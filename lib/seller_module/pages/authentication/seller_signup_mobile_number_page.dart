@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:pet_paradise/custom_widgets/dailogs.dart';
+import 'package:pet_paradise/seller_module/pages/authentication/seller_signup_code_verification_page.dart';
 import 'package:pet_paradise/seller_module/pages/authentication/seller_signup_create_password_page.dart';
 import 'package:pet_paradise/utils/responsive_controller.dart';
 import 'package:pet_paradise/custom_widgets/custom_widgets.dart';
@@ -64,12 +67,14 @@ class _SellerSignUpMobileNumberPageState
                 ),
                 Container(
                     height: 55,
-                    child: TextField(
+                    child: TextFormField(
                       keyboardType: TextInputType.phone,
                       controller: _mobileNumberController,
                       decoration: textFieldDecorationWithOutIcon(
                         hint: "Enter Mobile Number",
                         borderRadius: 30,
+
+
                       ),
                     )),
                 SizedBox(
@@ -77,22 +82,44 @@ class _SellerSignUpMobileNumberPageState
                 ),
                 MyButton(
                     onPressed: () async {
-                      await FirebaseAuth.instance.verifyPhoneNumber(
-                        phoneNumber: _mobileNumberController.text,
-                        verificationCompleted:
-                            (PhoneAuthCredential credential) {},
-                        verificationFailed: (FirebaseAuthException e) {},
-                        codeSent: (String verificationId, int? resendToken) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(verificationId)));
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      SellerSignupCreatePasswordPage()));
-                        },
-                        codeAutoRetrievalTimeout: (String verificationId) {},
-                      );
+                      CustomProgressIndicatorDialog(context: context);
+                      if (_mobileNumberController.text.isNotEmpty) {
+                        await FirebaseAuth.instanceFor(app: Firebase.app()).verifyPhoneNumber(
+                          phoneNumber: _mobileNumberController.text.toString(),
+                          verificationCompleted:
+                              (PhoneAuthCredential credential) {
+                            Navigator.pop(context);
+                              },
+                          verificationFailed: (FirebaseAuthException e) {
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                "${e.code}",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
+                            ));
+                          },
+                          codeSent: (String verificationId, int? resendToken) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Code Sent To Your Mobile Number...")));
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        SellerSignupCodeVerificationPage(verificationId: verificationId, resendToken: resendToken,)));
+                          },
+                          codeAutoRetrievalTimeout: (String verificationId) {},
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            "Please Enter Mobile Number",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: MyColors.MATERIAL_LIGHT_GREEN,
+                        ));
+                      }
                     },
                     title: "Next",
                     fontFamily: 'Itim-Regular',
